@@ -27,7 +27,7 @@
                     <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">
                         Services
                     </a>
-                    <a href="#cases" class="hover:text-[#fe742b] transition-colors duration-300">Cases</a>
+                    <a href="{{ route('cases') }}" class="{{ request()->routeIs('cases') || request()->routeIs('case.show') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">Cases</a>
                     <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">About</a>
                     <a href="{{ route('contact') }}" class="bg-[#fe742b] px-6 py-2 rounded-full hover:bg-[#ff8c4d] transition-all duration-300 pulse-glow">
                         Get Started
@@ -48,7 +48,7 @@
                 <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">
                     Services
                 </a>
-                <a href="#cases" class="block hover:text-[#fe742b] transition-colors duration-300">Cases</a>
+                <a href="{{ route('cases') }}" class="{{ request()->routeIs('cases') || request()->routeIs('case.show') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">Cases</a>
                 <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">About</a>
                 <a href="{{ route('contact') }}" class="block bg-[#fe742b] px-6 py-2 rounded-full hover:bg-[#ff8c4d] transition-all duration-300 text-center">
                     Get Started
@@ -81,7 +81,7 @@
                     <ul class="space-y-2 text-sm text-gray-400">
                         <li><a href="{{ route('home') }}" class="hover:text-[#fe742b] transition-colors">Home</a></li>
                         <li><a href="{{ route('services') }}" class="hover:text-[#fe742b] transition-colors">Services</a></li>
-                        <li><a href="#cases" class="hover:text-[#fe742b] transition-colors">Cases</a></li>
+                        <li><a href="{{ route('cases') }}" class="hover:text-[#fe742b] transition-colors">Cases</a></li>
                         <li><a href="{{ route('about') }}" class="hover:text-[#fe742b] transition-colors">About Us</a></li>
                     </ul>
                 </div>

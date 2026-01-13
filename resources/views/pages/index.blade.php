@@ -35,7 +35,7 @@
                         Start Your Project
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
-                    <a href="#cases" class="glass-effect px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
+                    <a href="{{ route('cases') }}" class="glass-effect px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
                         View Our Work
                         <i class="fas fa-play ml-2"></i>
                     </a>
