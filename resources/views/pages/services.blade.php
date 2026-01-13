@@ -75,7 +75,7 @@
                 </div>
                 
                 <div class="mt-8">
-                    <a href="#contact" class="bg-[#fe742b] px-8 py-3 rounded-full font-semibold hover:bg-[#ff8c4d] transition-all duration-300 inline-flex items-center">
+                    <a href="{{ route('contact') }}" class="bg-[#fe742b] px-8 py-3 rounded-full font-semibold hover:bg-[#ff8c4d] transition-all duration-300 inline-flex items-center">
                         Get Started
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
@@ -221,7 +221,7 @@
                 </div>
                 
                 <div class="mt-8">
-                    <a href="#contact" class="bg-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-all duration-300 inline-flex items-center">
+                    <a href="{{ route('contact') }}" class="bg-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-all duration-300 inline-flex items-center">
                         Discuss Your App
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
@@ -395,7 +395,7 @@
             Ready to transform your ideas into reality? Our team is here to help.
         </p>
         <div class="flex flex-wrap justify-center gap-4 animate-on-scroll">
-            <a href="#contact" class="bg-white text-[#fe742b] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 inline-flex items-center">
+            <a href="{{ route('contact') }}" class="bg-white text-[#fe742b] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 inline-flex items-center">
                 <i class="fas fa-paper-plane mr-2"></i>
                 Start Your Project
             </a>

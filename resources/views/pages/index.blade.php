@@ -31,11 +31,11 @@
                 </p>
                 
                 <div class="flex flex-wrap gap-4 animate-on-scroll">
-                    <a href="#contact" class="bg-[#fe742b] px-8 py-4 rounded-full font-semibold hover:bg-[#ff8c4d] transition-all duration-300 pulse-glow inline-flex items-center">
+                    <a href="{{ route('contact') }}" class="bg-[#fe742b] px-8 py-4 rounded-full font-semibold hover:bg-[#ff8c4d] transition-all duration-300 pulse-glow inline-flex items-center">
                         Start Your Project
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
-                    <a href="#portfolio" class="glass-effect px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
+                    <a href="#cases" class="glass-effect px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
                         View Our Work
                         <i class="fas fa-play ml-2"></i>
                     </a>

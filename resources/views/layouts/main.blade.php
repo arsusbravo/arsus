@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'ARSUS IT Solutions - World-Class Application Development')</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -26,9 +27,9 @@
                     <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">
                         Services
                     </a>
-                    <a href="#portfolio" class="hover:text-[#fe742b] transition-colors duration-300">Portfolio</a>
-                    <a href="#about" class="hover:text-[#fe742b] transition-colors duration-300">About</a>
-                    <a href="#contact" class="bg-[#fe742b] px-6 py-2 rounded-full hover:bg-[#ff8c4d] transition-all duration-300 pulse-glow">
+                    <a href="#cases" class="hover:text-[#fe742b] transition-colors duration-300">Cases</a>
+                    <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">About</a>
+                    <a href="{{ route('contact') }}" class="bg-[#fe742b] px-6 py-2 rounded-full hover:bg-[#ff8c4d] transition-all duration-300 pulse-glow">
                         Get Started
                     </a>
                 </div>
@@ -47,9 +48,9 @@
                 <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">
                     Services
                 </a>
-                <a href="#portfolio" class="block hover:text-[#fe742b] transition-colors duration-300">Portfolio</a>
-                <a href="#about" class="block hover:text-[#fe742b] transition-colors duration-300">About</a>
-                <a href="#contact" class="block bg-[#fe742b] px-6 py-2 rounded-full hover:bg-[#ff8c4d] transition-all duration-300 text-center">
+                <a href="#cases" class="block hover:text-[#fe742b] transition-colors duration-300">Cases</a>
+                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">About</a>
+                <a href="{{ route('contact') }}" class="block bg-[#fe742b] px-6 py-2 rounded-full hover:bg-[#ff8c4d] transition-all duration-300 text-center">
                     Get Started
                 </a>
             </div>
@@ -78,10 +79,10 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4 text-[#fe742b]">Quick Links</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#home" class="hover:text-[#fe742b] transition-colors">Home</a></li>
-                        <li><a href="#services" class="hover:text-[#fe742b] transition-colors">Services</a></li>
-                        <li><a href="#portfolio" class="hover:text-[#fe742b] transition-colors">Portfolio</a></li>
-                        <li><a href="#about" class="hover:text-[#fe742b] transition-colors">About Us</a></li>
+                        <li><a href="{{ route('home') }}" class="hover:text-[#fe742b] transition-colors">Home</a></li>
+                        <li><a href="{{ route('services') }}" class="hover:text-[#fe742b] transition-colors">Services</a></li>
+                        <li><a href="#cases" class="hover:text-[#fe742b] transition-colors">Cases</a></li>
+                        <li><a href="{{ route('about') }}" class="hover:text-[#fe742b] transition-colors">About Us</a></li>
                     </ul>
                 </div>
                 
@@ -101,6 +102,7 @@
                     <h4 class="text-lg font-semibold mb-4 text-[#fe742b]">Get In Touch</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
                         <li><i class="fas fa-map-marker-alt mr-2"></i> Ravelstraat 29<br><span class="ml-6">2901 EH, Capelle aan den IJssel</span><br><span class="ml-6">The Netherlands</span></li>
+                        <li><i class="fas fa-envelope mr-2"></i> <a href="#" class="hover:text-[#fe742b] transition-colors" data-email="info" data-domain="arsus.nl" onclick="sendEmail(this); return false;">Click to reveal email</a></li>
                         <li class="flex space-x-4 mt-4">
                             <a href="#" class="hover:text-[#fe742b] transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
                             <a href="#" class="hover:text-[#fe742b] transition-colors"><i class="fab fa-github text-xl"></i></a>
@@ -117,6 +119,21 @@
     </footer>
 
     <script>
+        // Email obfuscation - protects from spam bots
+        function sendEmail(element) {
+            const email = element.getAttribute('data-email');
+            const domain = element.getAttribute('data-domain');
+            const fullEmail = email + '@' + domain;
+
+            // Update the link
+            element.href = 'mailto:' + fullEmail;
+            element.textContent = fullEmail;
+            element.onclick = null; // Remove the onclick after first click
+
+            // Optional: automatically open email client
+            window.location.href = element.href;
+        }
+
         // Mobile menu toggle
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
