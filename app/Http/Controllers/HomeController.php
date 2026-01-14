@@ -42,7 +42,71 @@ class HomeController extends Controller
 
     public function caseShow($slug)
     {
-        // Case data array
+        // Check if translation exists for this case
+        $caseKey = "cases.{$slug}";
+        if (!__("{$caseKey}.title")) {
+            abort(404);
+        }
+
+        // Get case data from translations
+        $case = [
+            'title' => __("{$caseKey}.title"),
+            'subtitle' => __("{$caseKey}.subtitle"),
+            'description' => __("{$caseKey}.description"),
+            'challenge' => __("{$caseKey}.challenge"),
+            'solution' => __("{$caseKey}.solution"),
+            'features' => __("{$caseKey}.features"),
+            'results' => __("{$caseKey}.results"),
+            'tech_stack' => $this->getCaseTechStack($slug),
+            'images' => $this->getCaseImageCount($slug),
+            'case_number' => $this->getCaseNumber($slug),
+        ];
+
+        return view('pages.case-detail', compact('case', 'slug'));
+    }
+
+    private function getCaseTechStack($slug)
+    {
+        $techStacks = [
+            'online-reservation-system' => ['Laravel', 'Vue.js', 'MySQL', 'Tailwind CSS'],
+            'online-order-system' => ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
+            'financial-calculators' => ['PHP', 'JavaScript', 'MySQL', 'CSS3'],
+            'digitalized-form' => ['Laravel', 'Vue.js', 'PostgreSQL', 'AWS S3'],
+            'document-signing' => ['Laravel', 'Node.js', 'MongoDB', 'Docker'],
+            'lead-generation' => ['React', 'Laravel API', 'Redis', 'Elasticsearch'],
+        ];
+        return $techStacks[$slug] ?? [];
+    }
+
+    private function getCaseImageCount($slug)
+    {
+        $imageCounts = [
+            'online-reservation-system' => 7,
+            'online-order-system' => 5,
+            'financial-calculators' => 3,
+            'digitalized-form' => 3,
+            'document-signing' => 3,
+            'lead-generation' => 3,
+        ];
+        return $imageCounts[$slug] ?? 3;
+    }
+
+    private function getCaseNumber($slug)
+    {
+        $caseNumbers = [
+            'online-reservation-system' => 1,
+            'online-order-system' => 2,
+            'financial-calculators' => 3,
+            'digitalized-form' => 4,
+            'document-signing' => 5,
+            'lead-generation' => 6,
+        ];
+        return $caseNumbers[$slug] ?? 1;
+    }
+
+    public function caseShowOld($slug)
+    {
+        // Old static case data - keeping for reference
         $cases = [
             'online-reservation-system' => [
                 'title' => 'Online Reservation System',

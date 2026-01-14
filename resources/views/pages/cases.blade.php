@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Cases - ARSUS IT Solutions')
+@section('title', __('cases_list.hero_title') . ' - ARSUS IT Solutions')
 
 @section('content')
 
@@ -15,15 +15,15 @@
     <div class="container mx-auto px-6 relative z-10">
         <div class="text-center max-w-4xl mx-auto">
             <div class="inline-block px-4 py-2 bg-[#fe742b]/20 rounded-full text-[#fe742b] text-sm font-medium mb-6 animate-on-scroll">
-                <i class="fas fa-briefcase mr-2"></i>Our Work
+                <i class="fas fa-briefcase mr-2"></i>{{ __('cases_list.badge') }}
             </div>
 
             <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6 animate-on-scroll">
-                Success <span class="text-[#fe742b]">Stories</span>
+                {{ __('cases_list.hero_title') }} <span class="text-[#fe742b]">{{ __('cases_list.hero_title_highlight') }}</span>
             </h1>
 
             <p class="text-xl text-gray-300 animate-on-scroll">
-                Learn how our team of experts has solved complex problems for businesses just like yours
+                {{ __('cases_list.hero_subtitle') }}
             </p>
         </div>
     </div>
@@ -50,8 +50,8 @@
                         <span class="text-xs px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full">Admin Dashboard</span>
                         <span class="text-xs px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full">Calendar Integration</span>
                     </div>
-                    <a href="{{ route('case.show', 'online-reservation-system') }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
-                        View Case Study
+                    <a href="{{ locale_route('case.show', ['online-reservation-system']) }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
+                        {{ __('cases_list.view_case_study') }}
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -73,8 +73,8 @@
                         <span class="text-xs px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full">Multi-location</span>
                         <span class="text-xs px-3 py-1 bg-pink-500/20 text-pink-400 rounded-full">Member Portal</span>
                     </div>
-                    <a href="{{ route('case.show', 'online-order-system') }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
-                        View Case Study
+                    <a href="{{ locale_route('case.show', ['online-order-system']) }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
+                        {{ __('cases_list.view_case_study') }}
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -96,8 +96,8 @@
                         <span class="text-xs px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full">Calculator</span>
                         <span class="text-xs px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full">Lead Generation</span>
                     </div>
-                    <a href="{{ route('case.show', 'financial-calculators') }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
-                        View Case Study
+                    <a href="{{ locale_route('case.show', ['financial-calculators']) }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
+                        {{ __('cases_list.view_case_study') }}
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -119,8 +119,8 @@
                         <span class="text-xs px-3 py-1 bg-teal-500/20 text-teal-400 rounded-full">Automation</span>
                         <span class="text-xs px-3 py-1 bg-violet-500/20 text-violet-400 rounded-full">Workflow</span>
                     </div>
-                    <a href="{{ route('case.show', 'digitalized-form') }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
-                        View Case Study
+                    <a href="{{ locale_route('case.show', ['digitalized-form']) }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
+                        {{ __('cases_list.view_case_study') }}
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -142,8 +142,8 @@
                         <span class="text-xs px-3 py-1 bg-amber-500/20 text-amber-400 rounded-full">Security</span>
                         <span class="text-xs px-3 py-1 bg-lime-500/20 text-lime-400 rounded-full">Compliance</span>
                     </div>
-                    <a href="{{ route('case.show', 'document-signing') }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
-                        View Case Study
+                    <a href="{{ locale_route('case.show', ['document-signing']) }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
+                        {{ __('cases_list.view_case_study') }}
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -165,8 +165,8 @@
                         <span class="text-xs px-3 py-1 bg-sky-500/20 text-sky-400 rounded-full">CRM</span>
                         <span class="text-xs px-3 py-1 bg-red-500/20 text-red-400 rounded-full">Analytics</span>
                     </div>
-                    <a href="{{ route('case.show', 'lead-generation') }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
-                        View Case Study
+                    <a href="{{ locale_route('case.show', ['lead-generation']) }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
+                        {{ __('cases_list.view_case_study') }}
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -180,19 +180,19 @@
 <section class="py-20 bg-gradient-to-r from-[#fe742b] to-orange-600">
     <div class="container mx-auto px-6 text-center">
         <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-on-scroll">
-            Ready to Start Your Project?
+            {{ __('cases_list.cta_title') }}
         </h2>
         <p class="text-xl mb-8 max-w-2xl mx-auto animate-on-scroll">
-            Let's create your success story together. Get in touch to discuss your project.
+            {{ __('cases_list.cta_subtitle') }}
         </p>
         <div class="flex flex-wrap justify-center gap-4 animate-on-scroll">
-            <a href="{{ route('contact') }}" class="bg-white text-[#fe742b] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 inline-flex items-center">
+            <a href="{{ locale_route('contact') }}" class="bg-white text-[#fe742b] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 inline-flex items-center">
                 <i class="fas fa-envelope mr-2"></i>
-                Contact Us
+                {{ __('cases_list.cta_contact') }}
             </a>
-            <a href="{{ route('services') }}" class="glass-effect border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
+            <a href="{{ locale_route('services') }}" class="glass-effect border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
                 <i class="fas fa-arrow-right mr-2"></i>
-                View Services
+                {{ __('cases_list.cta_services') }}
             </a>
         </div>
     </div>

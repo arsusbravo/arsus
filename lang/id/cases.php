@@ -1,0 +1,146 @@
+<?php
+
+return [
+    'online-reservation-system' => [
+        'title' => 'Sistem Reservasi Online',
+        'subtitle' => 'Platform Manajemen Rental Kendaraan',
+        'description' => 'Aplikasi khusus yang dikembangkan untuk perusahaan rental mobil terkemuka untuk merampingkan operasi. Platform ini memungkinkan pelanggan untuk menjelajahi kendaraan yang tersedia dan mengamankan reservasi untuk tanggal dan waktu tertentu, sambil menyediakan administrator dengan alat manajemen yang komprehensif.',
+        'challenge' => 'Perusahaan rental membutuhkan sistem modern dan efisien untuk menggantikan proses booking manual dan menyediakan manajemen inventaris real-time di berbagai lokasi.',
+        'solution' => 'Kami mengembangkan platform dual-interface dengan sistem booking yang intuitif untuk pelanggan dan dashboard administratif yang canggih. Solusinya mencakup pelacakan ketersediaan real-time, email konfirmasi otomatis, dan alat pelaporan komprehensif.',
+        'features' => [
+            'Tampilan inventaris kendaraan dengan gambar, harga, dan spesifikasi',
+            'Kemampuan pencarian dan penyaringan lanjutan',
+            'Ketersediaan real-time dan konfirmasi booking',
+            'Dashboard administrator yang aman dengan autentikasi',
+            'Tampilan kalender dan daftar untuk pelacakan reservasi',
+            'Statistik penjualan dan metrik kinerja',
+            'Sistem manajemen multi-lokasi',
+            'Notifikasi email otomatis',
+        ],
+        'results' => [
+            'Pengurangan 70% waktu pemrosesan booking',
+            'Peningkatan 45% reservasi online',
+            'Tingkat kepuasan pelanggan 95%',
+            'Akurasi inventaris real-time'
+        ],
+    ],
+    'online-order-system' => [
+        'title' => 'Sistem Pesanan Online',
+        'subtitle' => 'Platform Pemesanan Makanan Khusus Anggota',
+        'description' => 'Solusi canggih yang memfasilitasi penempatan pesanan makanan yang mulus oleh anggota terdaftar secara mingguan. Platform ini membatasi akses hanya untuk pengguna yang diotorisasi, menawarkan lingkungan pemesanan yang aman untuk perusahaan katering khusus.',
+        'challenge' => 'Perusahaan katering membutuhkan platform khusus anggota yang aman untuk mengelola pesanan makanan mingguan di berbagai lokasi dengan menu berbeda dan dukungan untuk klien internasional.',
+        'solution' => 'Kami menciptakan platform pemesanan komprehensif dengan autentikasi anggota, manajemen menu multi-lokasi, dan dukungan multibahasa. Sistem ini mencakup alat admin untuk pembaruan menu, manajemen pesanan, dan komunikasi pelanggan.',
+        'features' => [
+            'Menu mingguan yang beragam di berbagai lokasi',
+            'Autentikasi dan otorisasi anggota',
+            'Sistem penempatan dan konfirmasi pesanan',
+            'Manajemen menu administrasi (tambah, edit, hapus item)',
+            'Gambaran pesanan komprehensif dengan kemampuan modifikasi',
+            'Manajemen data klien',
+            'Manajemen konten email dan notifikasi',
+            'Pengawasan konten web',
+            'Manajemen grup pengguna',
+            'Dukungan bahasa Cina',
+        ],
+        'results' => [
+            'Pengurangan 80% kesalahan pemrosesan pesanan',
+            'Peningkatan 60% pesanan mingguan',
+            'Penyebaran multi-lokasi yang sukses',
+            'Peningkatan kepuasan pelanggan'
+        ],
+    ],
+    'financial-calculators' => [
+        'title' => 'Kalkulator Keuangan',
+        'subtitle' => 'Platform Kalkulator Hipotek & Pinjaman Interaktif',
+        'description' => 'Platform kalkulator online canggih yang dikembangkan untuk bisnis sektor keuangan. Solusinya mengintegrasikan rumus keuangan kompleks untuk memungkinkan perhitungan hipotek, kredit, dan pinjaman, meningkatkan keterlibatan pelanggan dan mendukung pengambilan keputusan keuangan yang tepat.',
+        'challenge' => 'Lembaga keuangan membutuhkan alat yang menarik untuk membantu calon pelanggan memahami kapasitas pinjaman mereka sambil menangkap prospek untuk tindak lanjut.',
+        'solution' => 'Kami mengembangkan platform kalkulator interaktif dengan perhitungan real-time, fungsionalitas penangkapan prospek, dan penyimpanan data yang aman. Sistem ini memberikan hasil instan sambil mengumpulkan informasi pelanggan berharga untuk membangun hubungan.',
+        'features' => [
+            'Formulir kalkulator interaktif tertanam di halaman depan',
+            'Pengumpulan data keuangan komprehensif (pendapatan tahunan, kemitraan, tabungan)',
+            'Perhitungan real-time kualifikasi pinjaman/hipotek/kredit maksimum',
+            'Hasil dikirim melalui antarmuka atau email',
+            'Penyimpanan profil pengunjung yang aman di database',
+            'Sistem pengiriman email otomatis',
+            'Alat komunikasi dan keterlibatan pelanggan',
+            'Desain responsif untuk mobile dan desktop',
+        ],
+        'results' => [
+            'Peningkatan 250% prospek berkualitas',
+            'Peningkatan 40% tingkat konversi',
+            'Peningkatan 3x keterlibatan pelanggan',
+            'Pengurangan 90% waktu perhitungan manual'
+        ],
+    ],
+    'digitalized-form' => [
+        'title' => 'Formulir Klaim Digital',
+        'subtitle' => 'Sistem Pemrosesan Klaim Tanpa Kertas',
+        'description' => 'Solusi digital modern yang mengubah pengajuan klaim berbasis kertas tradisional menjadi alur kerja otomatis yang efisien. Platform ini merampingkan seluruh proses klaim dari pengajuan hingga persetujuan dengan manajemen dokumen yang aman.',
+        'challenge' => 'Organisasi menghadapi inefisiensi dengan pemrosesan klaim berbasis kertas, yang menyebabkan penundaan, kesalahan, dan tantangan penyimpanan.',
+        'solution' => 'Kami mengimplementasikan sistem manajemen klaim digital penuh dengan alur kerja otomatis, pemindaian dokumen, penyimpanan aman, dan pelacakan status real-time untuk penuntut dan administrator.',
+        'features' => [
+            'Pengajuan formulir digital dengan validasi',
+            'Kemampuan unggah dan pemindaian dokumen',
+            'Routing alur kerja otomatis',
+            'Pelacakan status klaim real-time',
+            'Penyimpanan dan pengambilan dokumen yang aman',
+            'Alat persetujuan dan pemrosesan admin',
+            'Notifikasi email di setiap tahap',
+            'Pelaporan dan analitik komprehensif',
+        ],
+        'results' => [
+            'Pemrosesan klaim 85% lebih cepat',
+            'Pengurangan 95% penggunaan kertas',
+            'Penurunan 60% kesalahan pemrosesan',
+            'Peningkatan kepatuhan jejak audit'
+        ],
+    ],
+    'document-signing' => [
+        'title' => 'Penandatanganan Dokumen Tanpa Usaha',
+        'subtitle' => 'Platform Tanda Tangan Elektronik yang Aman',
+        'description' => 'Solusi tanda tangan elektronik komprehensif yang memungkinkan penandatanganan dokumen jarak jauh dengan keamanan tingkat enterprise, autentikasi, dan kepatuhan hukum. Platform ini menghilangkan kebutuhan kehadiran fisik dalam eksekusi dokumen.',
+        'challenge' => 'Organisasi membutuhkan solusi yang aman dan patuh secara hukum untuk penandatanganan dokumen jarak jauh yang akan menjaga integritas dan keaslian dokumen yang ditandatangani.',
+        'solution' => 'Kami membangun platform tanda tangan elektronik yang kuat dengan autentikasi multi-faktor, jejak audit, tanda tangan berbasis sertifikat, dan kepatuhan hukum penuh. Sistem ini mendukung beberapa penandatangan dan alur kerja dokumen yang kompleks.',
+        'features' => [
+            'Unggah dan persiapan dokumen yang aman',
+            'Autentikasi multi-faktor',
+            'Tanda tangan digital berbasis sertifikat',
+            'Dukungan multi-penandatangan dan alur kerja',
+            'Logging jejak audit lengkap',
+            'Verifikasi dan validasi dokumen',
+            'Kepatuhan hukum (eIDAS, ESIGN Act)',
+            'Antarmuka penandatanganan responsif mobile',
+            'Notifikasi pengingat otomatis',
+        ],
+        'results' => [
+            'Eksekusi dokumen 100% tanpa kertas',
+            'Pengurangan 75% waktu penandatanganan',
+            'Kepatuhan hukum penuh tercapai',
+            'Akurasi verifikasi tanda tangan 99,9%'
+        ],
+    ],
+    'lead-generation' => [
+        'title' => 'Platform Generasi Prospek',
+        'subtitle' => 'Otomasi Pemasaran & Integrasi CRM',
+        'description' => 'Sistem otomasi pemasaran komprehensif yang dirancang untuk menangkap, memelihara, dan mengonversi prospek melalui pembuat formulir cerdas, integrasi CRM, dan analitik canggih. Platform ini mengoptimalkan seluruh corong generasi prospek.',
+        'challenge' => 'Tim pemasaran berjuang dengan alat yang terputus, entri data manual, dan kurangnya visibilitas terhadap kinerja prospek dan metrik konversi.',
+        'solution' => 'Kami menciptakan platform generasi prospek all-in-one dengan pembuat formulir drag-and-drop, integrasi CRM yang mulus, kampanye pemeliharaan otomatis, dan dashboard analitik real-time untuk pengambilan keputusan berbasis data.',
+        'features' => [
+            'Pembuat formulir drag-and-drop',
+            'Pembuat landing page dengan template',
+            'Integrasi CRM (Salesforce, HubSpot, custom)',
+            'Kampanye email pemeliharaan otomatis',
+            'Penilaian dan kualifikasi prospek',
+            'Analitik dan pelaporan real-time',
+            'Kemampuan A/B testing',
+            'Pelacakan konversi dan atribusi',
+            'Alat kolaborasi tim',
+        ],
+        'results' => [
+            'Peningkatan 180% prospek berkualitas',
+            'Peningkatan 45% tingkat konversi',
+            'Pengurangan 60% biaya per prospek',
+            'Waktu respons prospek 10x lebih cepat'
+        ],
+    ],
+];

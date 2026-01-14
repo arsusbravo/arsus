@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'ARSUS IT Solutions - World-Class Application Development')</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-gray-900 text-white font-['Poppins']">
     
@@ -21,37 +23,43 @@
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">
-                        Home
+                    <a href="{{ locale_route('home') }}" class="{{ is_active_route('home') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">
+                        {{ __('messages.nav.home') }}
                     </a>
-                    <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">
-                        Services
+                    <a href="{{ locale_route('services') }}" class="{{ is_active_route('services') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">
+                        {{ __('messages.nav.services') }}
                     </a>
-                    <a href="{{ route('cases') }}" class="{{ request()->routeIs('cases') || request()->routeIs('case.show') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">Cases</a>
-                    <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">About</a>
-                    <a href="{{ route('contact') }}" class="bg-[#fe742b] px-6 py-2 rounded-full hover:bg-[#ff8c4d] transition-all duration-300 pulse-glow">
-                        Get Started
+                    <a href="{{ locale_route('cases') }}" class="{{ is_active_route('cases') || is_active_route('case.show') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">{{ __('messages.nav.cases') }}</a>
+                    <a href="{{ locale_route('about') }}" class="{{ is_active_route('about') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">{{ __('messages.nav.about') }}</a>
+                    <x-language-switcher />
+                    <a href="{{ locale_route('contact') }}" class="bg-[#fe742b] px-6 py-2 rounded-full hover:bg-[#ff8c4d] transition-all duration-300 pulse-glow">
+                        {{ __('messages.home.cta_primary') }}
                     </a>
                 </div>
-                
+
                 <!-- Mobile Menu Button -->
                 <button class="md:hidden text-2xl" id="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
-            
+
             <!-- Mobile Menu -->
             <div class="md:hidden hidden mt-4 space-y-4" id="mobile-menu">
-                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">
-                    Home
+                <a href="{{ locale_route('home') }}" class="{{ is_active_route('home') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">
+                    {{ __('messages.nav.home') }}
                 </a>
-                <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">
-                    Services
+                <a href="{{ locale_route('services') }}" class="{{ is_active_route('services') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">
+                    {{ __('messages.nav.services') }}
                 </a>
-                <a href="{{ route('cases') }}" class="{{ request()->routeIs('cases') || request()->routeIs('case.show') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">Cases</a>
-                <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">About</a>
-                <a href="{{ route('contact') }}" class="block bg-[#fe742b] px-6 py-2 rounded-full hover:bg-[#ff8c4d] transition-all duration-300 text-center">
-                    Get Started
+                <a href="{{ locale_route('cases') }}" class="{{ is_active_route('cases') || is_active_route('case.show') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">{{ __('messages.nav.cases') }}</a>
+                <a href="{{ locale_route('about') }}" class="{{ is_active_route('about') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">{{ __('messages.nav.about') }}</a>
+
+                <div class="py-2">
+                    <x-language-switcher />
+                </div>
+
+                <a href="{{ locale_route('contact') }}" class="block bg-[#fe742b] px-6 py-2 rounded-full hover:bg-[#ff8c4d] transition-all duration-300 text-center">
+                    {{ __('messages.home.cta_primary') }}
                 </a>
             </div>
         </div>
@@ -63,57 +71,97 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#050812] py-12">
+    <footer class="bg-[#050812] border-t border-gray-800/50 py-20">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <div>
-                    <div class="mb-4 inline-block">
-                        <span class="logo-text text-2xl block">&lt;arsus /&gt;</span>
-                        <span class="text-[10px] text-gray-400 font-['Montserrat'] tracking-wider block text-right">IT Solutions</span>
+            <!-- Top Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mb-12">
+                <!-- Company Info - Takes more space -->
+                <div class="lg:col-span-1">
+                    <div class="mb-2 inline-block">
+                        <span class="logo-text text-3xl block">&lt;arsus /&gt;</span>
+                        <span class="text-[10px] text-gray-400 font-['Montserrat'] tracking-wider block text-right mt-1">IT Solutions</span>
                     </div>
-                    <p class="text-gray-400 text-sm">Building world-class applications for businesses worldwide.</p>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-2 max-w-sm">
+                        Building world-class applications for businesses worldwide. Delivering excellence from our offices in the Netherlands and Indonesia.
+                    </p>
+
+                    <!-- Email -->
+                    <div class="mb-2">
+                        <a href="#" class="text-sm text-gray-400 hover:text-[#fe742b] transition-colors inline-flex items-center group"
+                            data-email="info" data-domain="arsus.nl" onclick="sendEmail(this); return false;">
+                            <i class="fas fa-envelope mr-2 text-[#fe742b] group-hover:scale-110 transition-transform"></i>
+                            Click to reveal email
+                        </a>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex space-x-4">
+                        <a href="https://linkedin.com/in/arsus" target="_blank" rel="noopener noreferrer"
+                           class="w-11 h-11 bg-white/5 hover:bg-[#fe742b] rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-linkedin text-lg"></i>
+                        </a>
+                        <a href="https://github.com/arsusbravo" target="_blank" rel="noopener noreferrer"
+                           class="w-11 h-11 bg-white/5 hover:bg-[#fe742b] rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-github text-lg"></i>
+                        </a>
+                    </div>
                 </div>
-                
-                <!-- Quick Links -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4 text-[#fe742b]">Quick Links</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="{{ route('home') }}" class="hover:text-[#fe742b] transition-colors">Home</a></li>
-                        <li><a href="{{ route('services') }}" class="hover:text-[#fe742b] transition-colors">Services</a></li>
-                        <li><a href="{{ route('cases') }}" class="hover:text-[#fe742b] transition-colors">Cases</a></li>
-                        <li><a href="{{ route('about') }}" class="hover:text-[#fe742b] transition-colors">About Us</a></li>
-                    </ul>
+
+                <!-- Navigation & Services -->
+                <div class="lg:col-span-1 grid grid-cols-2 gap-8">
+                    <!-- Quick Links -->
+                    <div>
+                        <h4 class="text-sm font-semibold mb-5 text-white uppercase tracking-wider">{{ __('messages.footer.quick_links') }}</h4>
+                        <ul class="space-y-3">
+                            <li><a href="{{ locale_route('home') }}" class="text-sm text-gray-400 hover:text-[#fe742b] transition-colors block">{{ __('messages.nav.home') }}</a></li>
+                            <li><a href="{{ locale_route('services') }}" class="text-sm text-gray-400 hover:text-[#fe742b] transition-colors block">{{ __('messages.nav.services') }}</a></li>
+                            <li><a href="{{ locale_route('cases') }}" class="text-sm text-gray-400 hover:text-[#fe742b] transition-colors block">{{ __('messages.nav.cases') }}</a></li>
+                            <li><a href="{{ locale_route('about') }}" class="text-sm text-gray-400 hover:text-[#fe742b] transition-colors block">{{ __('messages.nav.about') }}</a></li>
+                            <li><a href="{{ locale_route('contact') }}" class="text-sm text-gray-400 hover:text-[#fe742b] transition-colors block">{{ __('messages.nav.contact') }}</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Services -->
+                    <div>
+                        <h4 class="text-sm font-semibold mb-5 text-white uppercase tracking-wider">Services</h4>
+                        <ul class="space-y-3">
+                            <li class="text-sm text-gray-400">Web Development</li>
+                            <li class="text-sm text-gray-400">Mobile Apps</li>
+                            <li class="text-sm text-gray-400">Cloud Solutions</li>
+                            <li class="text-sm text-gray-400">API Integration</li>
+                        </ul>
+                    </div>
                 </div>
-                
-                <!-- Services -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4 text-[#fe742b]">Services</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>Web Development</li>
-                        <li>Mobile Apps</li>
-                        <li>Cloud Solutions</li>
-                        <li>API Integration</li>
-                    </ul>
-                </div>
-                
-                <!-- Contact -->
-                <div>
-                    <h4 class="text-lg font-semibold mb-4 text-[#fe742b]">Get In Touch</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><i class="fas fa-map-marker-alt mr-2"></i> Ravelstraat 29<br><span class="ml-6">2901 EH, Capelle aan den IJssel</span><br><span class="ml-6">The Netherlands</span></li>
-                        <li><i class="fas fa-envelope mr-2"></i> <a href="#" class="hover:text-[#fe742b] transition-colors" data-email="info" data-domain="arsus.nl" onclick="sendEmail(this); return false;">Click to reveal email</a></li>
-                        <li class="flex space-x-4 mt-4">
-                            <a href="#" class="hover:text-[#fe742b] transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
-                            <a href="#" class="hover:text-[#fe742b] transition-colors"><i class="fab fa-github text-xl"></i></a>
-                            <a href="#" class="hover:text-[#fe742b] transition-colors"><i class="fab fa-twitter text-xl"></i></a>
-                        </li>
-                    </ul>
+
+                <!-- Contact Info -->
+                <div class="lg:col-span-1">
+                    <h4 class="text-sm font-semibold mb-5 text-white uppercase tracking-wider">Get In Touch</h4>
+
+                    <div class="space-y-6">
+                        <!-- Netherlands HQ -->
+                        <div>
+                            <p class="text-xs font-bold text-[#fe742b] mb-2 uppercase tracking-wide">Netherlands HQ</p>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Ravelstraat 29<br>
+                                2901 EH Capelle aan den IJssel
+                            </p>
+                        </div>
+
+                        <!-- Indonesia Office -->
+                        <div>
+                            <p class="text-xs font-bold text-[#fe742b] mb-2 uppercase tracking-wide">Indonesia Office</p>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Jl. Dempo No.9<br>
+                                Jakarta Pusat 10320
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-                <p>&copy; {{ date('Y') }} ARSUS IT Solutions. All rights reserved.</p>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800/50 pt-8">
+                <p class="text-sm text-gray-500 text-center">&copy; {{ date('Y') }} ARSUS IT Solutions. All rights reserved.</p>
             </div>
         </div>
     </footer>

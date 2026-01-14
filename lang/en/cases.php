@@ -1,0 +1,146 @@
+<?php
+
+return [
+    'online-reservation-system' => [
+        'title' => 'Online Reservation System',
+        'subtitle' => 'Vehicle Rental Management Platform',
+        'description' => 'A bespoke application developed for a prominent rental car company to streamline operations. The platform enables customers to browse available vehicles and secure reservations for specific dates and times, while providing administrators with comprehensive management tools.',
+        'challenge' => 'The rental company needed a modern, efficient system to replace manual booking processes and provide real-time inventory management across multiple locations.',
+        'solution' => 'We developed a dual-interface platform with an intuitive customer-facing booking system and a powerful administrative dashboard. The solution includes real-time availability tracking, automated confirmation emails, and comprehensive reporting tools.',
+        'features' => [
+            'Vehicle inventory display with images, pricing, and specifications',
+            'Advanced search and filtering capabilities',
+            'Real-time availability and booking confirmation',
+            'Secure administrator dashboard with authentication',
+            'Calendar and list views for reservation tracking',
+            'Sales statistics and performance metrics',
+            'Multi-location management system',
+            'Automated email notifications',
+        ],
+        'results' => [
+            '70% reduction in booking processing time',
+            '45% increase in online reservations',
+            '95% customer satisfaction rate',
+            'Real-time inventory accuracy'
+        ],
+    ],
+    'online-order-system' => [
+        'title' => 'Online Order System',
+        'subtitle' => 'Members-Only Food Ordering Platform',
+        'description' => 'Sophisticated solution facilitates the seamless placement of food orders by registered members on a weekly basis. The platform restricts access to authorized users only, offering a secure ordering environment for a specialized catering company.',
+        'challenge' => 'The catering company needed a secure, members-only platform to manage weekly food orders across multiple locations with different menus and support for international clientele.',
+        'solution' => 'We created a comprehensive ordering platform with member authentication, multi-location menu management, and multilingual support. The system includes admin tools for menu updates, order management, and customer communication.',
+        'features' => [
+            'Weekly diverse menus across various locations',
+            'Member authentication and authorization',
+            'Order placement and confirmation system',
+            'Administration menu management (add, edit, remove items)',
+            'Comprehensive order overview with modification capabilities',
+            'Client data management',
+            'Email content management and notifications',
+            'Web content oversight',
+            'User group management',
+            'Chinese language support',
+        ],
+        'results' => [
+            '80% reduction in order processing errors',
+            '60% increase in weekly orders',
+            'Successful multi-location deployment',
+            'Enhanced customer satisfaction'
+        ],
+    ],
+    'financial-calculators' => [
+        'title' => 'Financial Calculators',
+        'subtitle' => 'Interactive Mortgage & Loan Calculator Platform',
+        'description' => 'A sophisticated online calculator platform developed for a financial sector business. The solution integrates complex financial formulas to enable mortgage, credit, and loan calculations, enhancing customer engagement and supporting informed financial decision-making.',
+        'challenge' => 'The financial institution needed an engaging tool to help potential customers understand their borrowing capacity while capturing leads for follow-up.',
+        'solution' => 'We developed an interactive calculator platform with real-time calculations, lead capture functionality, and secure data storage. The system provides instant results while collecting valuable customer information for relationship building.',
+        'features' => [
+            'Interactive calculator form embedded on front page',
+            'Comprehensive financial data collection (annual income, partnerships, savings)',
+            'Real-time calculation of maximum loan/mortgage/credit qualification',
+            'Results delivered via interface or email',
+            'Secure visitor profile storage in database',
+            'Automated email delivery system',
+            'Customer communication and engagement tools',
+            'Responsive design for mobile and desktop',
+        ],
+        'results' => [
+            '250% increase in qualified leads',
+            '40% conversion rate improvement',
+            '3x increase in customer engagement',
+            'Reduced manual calculation time by 90%'
+        ],
+    ],
+    'digitalized-form' => [
+        'title' => 'Digitalized Claim Form',
+        'subtitle' => 'Paperless Claims Processing System',
+        'description' => 'Modern digital solution transforming traditional paper-based claim submissions into an efficient, automated workflow. The platform streamlines the entire claims process from submission to approval with secure document management.',
+        'challenge' => 'The organization faced inefficiencies with paper-based claim processing, leading to delays, errors, and storage challenges.',
+        'solution' => 'We implemented a fully digital claims management system with automated workflows, document scanning, secure storage, and real-time status tracking for both claimants and administrators.',
+        'features' => [
+            'Digital form submission with validation',
+            'Document upload and scanning capabilities',
+            'Automated workflow routing',
+            'Real-time claim status tracking',
+            'Secure document storage and retrieval',
+            'Admin approval and processing tools',
+            'Email notifications at each stage',
+            'Comprehensive reporting and analytics',
+        ],
+        'results' => [
+            '85% faster claim processing',
+            '95% reduction in paper usage',
+            '60% decrease in processing errors',
+            'Improved audit trail compliance'
+        ],
+    ],
+    'document-signing' => [
+        'title' => 'Effortless Document Signing',
+        'subtitle' => 'Secure E-Signature Platform',
+        'description' => 'Comprehensive e-signature solution enabling remote document signing with enterprise-grade security, authentication, and legal compliance. The platform eliminates the need for physical presence in document execution.',
+        'challenge' => 'The organization needed a legally compliant, secure solution for remote document signing that would maintain the integrity and authenticity of signed documents.',
+        'solution' => 'We built a robust e-signature platform with multi-factor authentication, audit trails, certificate-based signatures, and full legal compliance. The system supports multiple signers and complex document workflows.',
+        'features' => [
+            'Secure document upload and preparation',
+            'Multi-factor authentication',
+            'Certificate-based digital signatures',
+            'Multiple signer support and workflows',
+            'Complete audit trail logging',
+            'Document verification and validation',
+            'Legal compliance (eIDAS, ESIGN Act)',
+            'Mobile-responsive signing interface',
+            'Automated reminder notifications',
+        ],
+        'results' => [
+            '100% paperless document execution',
+            '75% reduction in signing turnaround time',
+            'Full legal compliance achieved',
+            '99.9% signature verification accuracy'
+        ],
+    ],
+    'lead-generation' => [
+        'title' => 'Lead Generation Platform',
+        'subtitle' => 'Marketing Automation & CRM Integration',
+        'description' => 'Comprehensive marketing automation system designed to capture, nurture, and convert leads through intelligent form builders, CRM integration, and advanced analytics. The platform optimizes the entire lead generation funnel.',
+        'challenge' => 'The marketing team struggled with disconnected tools, manual data entry, and lack of visibility into lead performance and conversion metrics.',
+        'solution' => 'We created an all-in-one lead generation platform with drag-and-drop form builders, seamless CRM integration, automated nurture campaigns, and real-time analytics dashboard for data-driven decision making.',
+        'features' => [
+            'Drag-and-drop form builder',
+            'Landing page creator with templates',
+            'CRM integration (Salesforce, HubSpot, custom)',
+            'Automated email nurture campaigns',
+            'Lead scoring and qualification',
+            'Real-time analytics and reporting',
+            'A/B testing capabilities',
+            'Conversion tracking and attribution',
+            'Team collaboration tools',
+        ],
+        'results' => [
+            '180% increase in qualified leads',
+            '45% improvement in conversion rates',
+            '60% reduction in cost per lead',
+            '10x faster lead response time'
+        ],
+    ],
+];

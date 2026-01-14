@@ -19,14 +19,14 @@
         <div class="max-w-5xl mx-auto">
             <!-- Breadcrumb -->
             <div class="mb-8 animate-on-scroll">
-                <a href="{{ route('cases') }}" class="text-gray-400 hover:text-[#fe742b] transition-colors">
-                    <i class="fas fa-arrow-left mr-2"></i>Back to Cases
+                <a href="{{ locale_route('cases') }}" class="text-gray-400 hover:text-[#fe742b] transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>{{ __('case_detail.back_to_cases') }}
                 </a>
             </div>
 
             <!-- Case Number Badge -->
             <div class="inline-block px-4 py-2 bg-[#fe742b]/20 rounded-full text-[#fe742b] text-sm font-medium mb-6 animate-on-scroll">
-                <i class="fas fa-briefcase mr-2"></i>Case Study #{{ $case['case_number'] }}
+                <i class="fas fa-briefcase mr-2"></i>{{ __('case_detail.case_study') }} #{{ $case['case_number'] }}
             </div>
 
             <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6 animate-on-scroll">
@@ -72,7 +72,7 @@
                     <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-exclamation-triangle text-red-400 text-xl"></i>
                     </div>
-                    <h2 class="text-3xl font-bold leading-none">The Challenge</h2>
+                    <h2 class="text-3xl font-bold leading-none">{{ __('case_detail.the_challenge') }}</h2>
                 </div>
                 <p class="text-gray-300 text-lg leading-relaxed">
                     {{ $case['challenge'] }}
@@ -85,7 +85,7 @@
                     <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-lightbulb text-green-400 text-xl"></i>
                     </div>
-                    <h2 class="text-3xl font-bold leading-none">The Solution</h2>
+                    <h2 class="text-3xl font-bold leading-none">{{ __('case_detail.the_solution') }}</h2>
                 </div>
                 <p class="text-gray-300 text-lg leading-relaxed">
                     {{ $case['solution'] }}
@@ -101,10 +101,10 @@
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12 animate-on-scroll">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                    Key <span class="text-[#fe742b]">Features</span>
+                    {{ __('case_detail.key_features_title') }} <span class="text-[#fe742b]">{{ __('case_detail.key_features_highlight') }}</span>
                 </h2>
                 <p class="text-xl text-gray-400">
-                    Comprehensive functionality tailored to business needs
+                    {{ __('case_detail.key_features_subtitle') }}
                 </p>
             </div>
 
@@ -130,10 +130,10 @@
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12 animate-on-scroll">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                    Technology <span class="text-[#fe742b]">Stack</span>
+                    {{ __('case_detail.tech_stack_title') }} <span class="text-[#fe742b]">{{ __('case_detail.tech_stack_highlight') }}</span>
                 </h2>
                 <p class="text-xl text-gray-400">
-                    Built with modern, reliable technologies
+                    {{ __('case_detail.tech_stack_subtitle') }}
                 </p>
             </div>
 
@@ -154,10 +154,10 @@
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12 animate-on-scroll">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                    Results & <span class="text-[#fe742b]">Impact</span>
+                    {{ __('case_detail.results_title') }} <span class="text-[#fe742b]">{{ __('case_detail.results_highlight') }}</span>
                 </h2>
                 <p class="text-xl text-gray-400">
-                    Measurable improvements and business value delivered
+                    {{ __('case_detail.results_subtitle') }}
                 </p>
             </div>
 
@@ -181,10 +181,10 @@
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12 animate-on-scroll">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                    More <span class="text-[#fe742b]">Success Stories</span>
+                    {{ __('case_detail.more_cases_title') }} <span class="text-[#fe742b]">{{ __('case_detail.more_cases_highlight') }}</span>
                 </h2>
                 <p class="text-xl text-gray-400">
-                    Explore other projects we've delivered
+                    {{ __('case_detail.more_cases_subtitle') }}
                 </p>
             </div>
 
@@ -204,11 +204,11 @@
 
             <div class="grid md:grid-cols-3 gap-8">
                 @foreach($otherCases as $otherCase)
-                <a href="{{ route('case.show', $otherCase['slug']) }}" class="glass-effect rounded-xl p-6 hover:border-[#fe742b] border border-transparent transition-all duration-300 animate-on-scroll group">
+                <a href="{{ locale_route('case.show', [$otherCase['slug']]) }}" class="glass-effect rounded-xl p-6 hover:border-[#fe742b] border border-transparent transition-all duration-300 animate-on-scroll group">
                     <div class="text-sm text-[#fe742b] mb-2">{{ $otherCase['category'] }}</div>
                     <h3 class="text-xl font-bold mb-3 group-hover:text-[#fe742b] transition-colors">{{ $otherCase['title'] }}</h3>
                     <div class="flex items-center text-gray-400 group-hover:text-[#fe742b] transition-colors">
-                        <span>View Case Study</span>
+                        <span>{{ __('case_detail.view_case_study') }}</span>
                         <i class="fas fa-arrow-right ml-2"></i>
                     </div>
                 </a>
@@ -216,9 +216,9 @@
             </div>
 
             <div class="text-center mt-12 animate-on-scroll">
-                <a href="{{ route('cases') }}" class="inline-flex items-center text-lg text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
+                <a href="{{ locale_route('cases') }}" class="inline-flex items-center text-lg text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
                     <i class="fas fa-th mr-2"></i>
-                    View All Cases
+                    {{ __('case_detail.view_all_cases') }}
                 </a>
             </div>
         </div>
@@ -229,19 +229,19 @@
 <section class="py-20 bg-gradient-to-r from-[#fe742b] to-orange-600">
     <div class="container mx-auto px-6 text-center">
         <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-on-scroll">
-            Ready to Transform Your Business?
+            {{ __('case_detail.cta_title') }}
         </h2>
         <p class="text-xl mb-8 max-w-2xl mx-auto animate-on-scroll">
-            Let's discuss how we can create a custom solution for your unique needs.
+            {{ __('case_detail.cta_subtitle') }}
         </p>
         <div class="flex flex-wrap justify-center gap-4 animate-on-scroll">
-            <a href="{{ route('contact') }}" class="bg-white text-[#fe742b] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 inline-flex items-center">
+            <a href="{{ locale_route('contact') }}" class="bg-white text-[#fe742b] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 inline-flex items-center">
                 <i class="fas fa-envelope mr-2"></i>
-                Start Your Project
+                {{ __('case_detail.cta_start') }}
             </a>
-            <a href="{{ route('cases') }}" class="glass-effect border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
+            <a href="{{ locale_route('cases') }}" class="glass-effect border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
                 <i class="fas fa-arrow-left mr-2"></i>
-                View All Cases
+                {{ __('case_detail.cta_all_cases') }}
             </a>
         </div>
     </div>

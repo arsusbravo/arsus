@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Our Services - ARSUS IT Solutions')
+@section('title', __('services.hero_title') . ' - ARSUS IT Solutions')
 
 @section('content')
 
@@ -10,17 +10,17 @@
         <div class="absolute top-20 left-10 w-72 h-72 bg-[#fe742b] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
         <div class="absolute top-40 right-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
     </div>
-    
+
     <div class="container mx-auto px-6 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
             <div class="inline-block px-4 py-2 bg-[#fe742b]/20 rounded-full text-[#fe742b] text-sm font-medium mb-6 animate-on-scroll">
-                <i class="fas fa-cogs mr-2"></i>What We Offer
+                <i class="fas fa-cogs mr-2"></i>{{ __('services.badge') }}
             </div>
             <h1 class="text-5xl md:text-6xl font-bold mb-6 animate-on-scroll">
-                Our <span class="text-[#fe742b]">Services</span>
+                {{ __('services.hero_title') }} <span class="text-[#fe742b]">{{ __('services.hero_title_highlight') }}</span>
             </h1>
             <p class="text-xl text-gray-300 animate-on-scroll">
-                Comprehensive digital solutions tailored to accelerate your business growth and digital transformation
+                {{ __('services.hero_subtitle') }}
             </p>
         </div>
     </div>
@@ -35,48 +35,48 @@
             <div class="animate-on-scroll">
                 <div class="inline-flex items-center space-x-2 px-4 py-2 bg-[#fe742b]/10 rounded-full text-[#fe742b] text-sm font-medium mb-6">
                     <i class="fas fa-laptop-code"></i>
-                    <span>Web Development</span>
+                    <span>{{ __('services.web_badge') }}</span>
                 </div>
-                <h2 class="text-4xl font-bold mb-6">Build Powerful Web Applications</h2>
+                <h2 class="text-4xl font-bold mb-6">{{ __('services.web_title') }}</h2>
                 <p class="text-gray-400 mb-6">
-                    We craft high-performance web applications using modern frameworks like Laravel and Vue.js. Our solutions are scalable, secure, and optimized for exceptional user experiences.
+                    {{ __('services.web_description') }}
                 </p>
-                
+
                 <div class="space-y-4">
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-gradient-to-br from-[#fe742b] to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-shopping-cart text-white"></i>
                         </div>
                         <div>
-                            <h4 class="font-semibold mb-1">E-commerce Solutions</h4>
-                            <p class="text-sm text-gray-400">Custom online stores with secure payment integration and inventory management</p>
+                            <h4 class="font-semibold mb-1">{{ __('services.web_ecommerce_title') }}</h4>
+                            <p class="text-sm text-gray-400">{{ __('services.web_ecommerce_desc') }}</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-globe text-white"></i>
                         </div>
                         <div>
-                            <h4 class="font-semibold mb-1">Progressive Web Apps</h4>
-                            <p class="text-sm text-gray-400">Fast, reliable, and engaging apps that work offline and feel native</p>
+                            <h4 class="font-semibold mb-1">{{ __('services.web_pwa_title') }}</h4>
+                            <p class="text-sm text-gray-400">{{ __('services.web_pwa_desc') }}</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-edit text-white"></i>
                         </div>
                         <div>
-                            <h4 class="font-semibold mb-1">Content Management Systems</h4>
-                            <p class="text-sm text-gray-400">Custom CMS solutions that give you full control over your content</p>
+                            <h4 class="font-semibold mb-1">{{ __('services.web_cms_title') }}</h4>
+                            <p class="text-sm text-gray-400">{{ __('services.web_cms_desc') }}</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="mt-8">
-                    <a href="{{ route('contact') }}" class="bg-[#fe742b] px-8 py-3 rounded-full font-semibold hover:bg-[#ff8c4d] transition-all duration-300 inline-flex items-center">
-                        Get Started
+                    <a href="{{ locale_route('contact') }}" class="bg-[#fe742b] px-8 py-3 rounded-full font-semibold hover:bg-[#ff8c4d] transition-all duration-300 inline-flex items-center">
+                        {{ __('services.web_cta') }}
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -145,27 +145,27 @@
                                                 <i class="fas fa-bell"></i>
                                             </div>
                                         </div>
-                                        
-                                        <h3 class="text-2xl font-bold mb-2">Mobile First</h3>
-                                        <p class="text-sm opacity-80 mb-6">Beautiful native experiences</p>
-                                        
+
+                                        <h3 class="text-2xl font-bold mb-2">{{ __('services.mobile_screen_title') }}</h3>
+                                        <p class="text-sm opacity-80 mb-6">{{ __('services.mobile_screen_subtitle') }}</p>
+
                                         <div class="space-y-3">
                                             <div class="bg-white/10 backdrop-blur p-4 rounded-2xl">
                                                 <div class="flex items-center space-x-3">
                                                     <i class="fas fa-rocket text-yellow-400"></i>
-                                                    <span class="text-sm">Fast Performance</span>
+                                                    <span class="text-sm">{{ __('services.mobile_fast') }}</span>
                                                 </div>
                                             </div>
                                             <div class="bg-white/10 backdrop-blur p-4 rounded-2xl">
                                                 <div class="flex items-center space-x-3">
                                                     <i class="fas fa-shield-alt text-green-400"></i>
-                                                    <span class="text-sm">Secure & Reliable</span>
+                                                    <span class="text-sm">{{ __('services.mobile_secure') }}</span>
                                                 </div>
                                             </div>
                                             <div class="bg-white/10 backdrop-blur p-4 rounded-2xl">
                                                 <div class="flex items-center space-x-3">
                                                     <i class="fas fa-heart text-red-400"></i>
-                                                    <span class="text-sm">Loved by Users</span>
+                                                    <span class="text-sm">{{ __('services.mobile_loved') }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -181,48 +181,48 @@
             <div class="order-1 md:order-2 animate-on-scroll">
                 <div class="inline-flex items-center space-x-2 px-4 py-2 bg-purple-600/10 rounded-full text-purple-400 text-sm font-medium mb-6">
                     <i class="fas fa-mobile-alt"></i>
-                    <span>Mobile Development</span>
+                    <span>{{ __('services.mobile_badge') }}</span>
                 </div>
-                <h2 class="text-4xl font-bold mb-6">Native & Cross-Platform Apps</h2>
+                <h2 class="text-4xl font-bold mb-6">{{ __('services.mobile_title') }}</h2>
                 <p class="text-gray-400 mb-6">
-                    Create stunning mobile applications for iOS and Android. We build native apps and cross-platform solutions that deliver seamless experiences across all devices.
+                    {{ __('services.mobile_description') }}
                 </p>
-                
+
                 <div class="space-y-4">
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl flex items-center justify-center flex-shrink-0">
                             <i class="fab fa-apple text-white"></i>
                         </div>
                         <div>
-                            <h4 class="font-semibold mb-1">iOS Development</h4>
-                            <p class="text-sm text-gray-400">Native Swift apps optimized for iPhone and iPad</p>
+                            <h4 class="font-semibold mb-1">{{ __('services.mobile_ios_title') }}</h4>
+                            <p class="text-sm text-gray-400">{{ __('services.mobile_ios_desc') }}</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-gradient-to-br from-green-600 to-green-800 rounded-xl flex items-center justify-center flex-shrink-0">
                             <i class="fab fa-android text-white"></i>
                         </div>
                         <div>
-                            <h4 class="font-semibold mb-1">Android Development</h4>
-                            <p class="text-sm text-gray-400">High-performance Kotlin apps for Android devices</p>
+                            <h4 class="font-semibold mb-1">{{ __('services.mobile_android_title') }}</h4>
+                            <p class="text-sm text-gray-400">{{ __('services.mobile_android_desc') }}</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center flex-shrink-0">
                             <i class="fab fa-react text-white"></i>
                         </div>
                         <div>
-                            <h4 class="font-semibold mb-1">Cross-Platform Development</h4>
-                            <p class="text-sm text-gray-400">React Native apps that work everywhere with a single codebase</p>
+                            <h4 class="font-semibold mb-1">{{ __('services.mobile_cross_title') }}</h4>
+                            <p class="text-sm text-gray-400">{{ __('services.mobile_cross_desc') }}</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="mt-8">
-                    <a href="{{ route('contact') }}" class="bg-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-all duration-300 inline-flex items-center">
-                        Discuss Your App
+                    <a href="{{ locale_route('contact') }}" class="bg-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-all duration-300 inline-flex items-center">
+                        {{ __('services.mobile_cta') }}
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -236,10 +236,10 @@
     <div class="container mx-auto px-6">
         <div class="text-center mb-16 animate-on-scroll">
             <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                Cloud & <span class="text-[#fe742b]">Integration</span>
+                {{ __('services.cloud_section_title') }} <span class="text-[#fe742b]">{{ __('services.cloud_section_highlight') }}</span>
             </h2>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                Scale your infrastructure and connect your systems seamlessly
+                {{ __('services.cloud_section_subtitle') }}
             </p>
         </div>
         
@@ -251,34 +251,34 @@
                         <i class="fas fa-cloud text-3xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold mb-2">Cloud Solutions</h3>
-                        <p class="text-gray-400">Enterprise-grade cloud infrastructure</p>
+                        <h3 class="text-2xl font-bold mb-2">{{ __('services.cloud_title') }}</h3>
+                        <p class="text-gray-400">{{ __('services.cloud_subtitle') }}</p>
                     </div>
                 </div>
-                
+
                 <ul class="space-y-3 mb-6">
                     <li class="flex items-center text-gray-300">
                         <i class="fas fa-check-circle text-blue-400 mr-3"></i>
-                        AWS & Azure cloud deployment
+                        {{ __('services.cloud_feat1') }}
                     </li>
                     <li class="flex items-center text-gray-300">
                         <i class="fas fa-check-circle text-blue-400 mr-3"></i>
-                        Serverless architecture design
+                        {{ __('services.cloud_feat2') }}
                     </li>
                     <li class="flex items-center text-gray-300">
                         <i class="fas fa-check-circle text-blue-400 mr-3"></i>
-                        Auto-scaling & load balancing
+                        {{ __('services.cloud_feat3') }}
                     </li>
                     <li class="flex items-center text-gray-300">
                         <i class="fas fa-check-circle text-blue-400 mr-3"></i>
-                        Cloud migration services
+                        {{ __('services.cloud_feat4') }}
                     </li>
                     <li class="flex items-center text-gray-300">
                         <i class="fas fa-check-circle text-blue-400 mr-3"></i>
-                        DevOps & CI/CD pipelines
+                        {{ __('services.cloud_feat5') }}
                     </li>
                 </ul>
-                
+
                 <div class="flex flex-wrap gap-2">
                     <span class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs">AWS</span>
                     <span class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs">Azure</span>
@@ -294,34 +294,34 @@
                         <i class="fas fa-plug text-3xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold mb-2">API Integration</h3>
-                        <p class="text-gray-400">Connect your systems seamlessly</p>
+                        <h3 class="text-2xl font-bold mb-2">{{ __('services.api_title') }}</h3>
+                        <p class="text-gray-400">{{ __('services.api_subtitle') }}</p>
                     </div>
                 </div>
-                
+
                 <ul class="space-y-3 mb-6">
                     <li class="flex items-center text-gray-300">
                         <i class="fas fa-check-circle text-green-400 mr-3"></i>
-                        RESTful API development
+                        {{ __('services.api_feat1') }}
                     </li>
                     <li class="flex items-center text-gray-300">
                         <i class="fas fa-check-circle text-green-400 mr-3"></i>
-                        Third-party API integration
+                        {{ __('services.api_feat2') }}
                     </li>
                     <li class="flex items-center text-gray-300">
                         <i class="fas fa-check-circle text-green-400 mr-3"></i>
-                        Payment gateway integration
+                        {{ __('services.api_feat3') }}
                     </li>
                     <li class="flex items-center text-gray-300">
                         <i class="fas fa-check-circle text-green-400 mr-3"></i>
-                        CRM & ERP connectivity
+                        {{ __('services.api_feat4') }}
                     </li>
                     <li class="flex items-center text-gray-300">
                         <i class="fas fa-check-circle text-green-400 mr-3"></i>
-                        Webhook & real-time data sync
+                        {{ __('services.api_feat5') }}
                     </li>
                 </ul>
-                
+
                 <div class="flex flex-wrap gap-2">
                     <span class="px-3 py-1 bg-green-600/20 text-green-400 rounded-full text-xs">Stripe</span>
                     <span class="px-3 py-1 bg-green-600/20 text-green-400 rounded-full text-xs">Salesforce</span>
@@ -338,48 +338,48 @@
     <div class="container mx-auto px-6">
         <div class="text-center mb-16 animate-on-scroll">
             <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                Our <span class="text-[#fe742b]">Process</span>
+                {{ __('services.process_title') }} <span class="text-[#fe742b]">{{ __('services.process_title_highlight') }}</span>
             </h2>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                A proven methodology to deliver exceptional results
+                {{ __('services.process_subtitle') }}
             </p>
         </div>
-        
+
         <div class="grid md:grid-cols-4 gap-8">
             <div class="text-center animate-on-scroll">
                 <div class="w-20 h-20 bg-gradient-to-br from-[#fe742b] to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 relative">
                     <i class="fas fa-lightbulb text-3xl"></i>
                     <div class="absolute -top-2 -right-2 w-8 h-8 bg-[#fe742b] rounded-full flex items-center justify-center text-sm font-bold">1</div>
                 </div>
-                <h3 class="text-xl font-bold mb-2">Discovery</h3>
-                <p class="text-gray-400 text-sm">Understanding your business goals and requirements</p>
+                <h3 class="text-xl font-bold mb-2">{{ __('services.process_step1_title') }}</h3>
+                <p class="text-gray-400 text-sm">{{ __('services.process_step1_desc') }}</p>
             </div>
-            
+
             <div class="text-center animate-on-scroll">
                 <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-purple-800 rounded-full flex items-center justify-center mx-auto mb-4 relative">
                     <i class="fas fa-pencil-ruler text-3xl"></i>
                     <div class="absolute -top-2 -right-2 w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-sm font-bold">2</div>
                 </div>
-                <h3 class="text-xl font-bold mb-2">Design</h3>
-                <p class="text-gray-400 text-sm">Creating intuitive interfaces and user experiences</p>
+                <h3 class="text-xl font-bold mb-2">{{ __('services.process_step2_title') }}</h3>
+                <p class="text-gray-400 text-sm">{{ __('services.process_step2_desc') }}</p>
             </div>
-            
+
             <div class="text-center animate-on-scroll">
                 <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center mx-auto mb-4 relative">
                     <i class="fas fa-code text-3xl"></i>
                     <div class="absolute -top-2 -right-2 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-sm font-bold">3</div>
                 </div>
-                <h3 class="text-xl font-bold mb-2">Development</h3>
-                <p class="text-gray-400 text-sm">Building robust solutions with clean code</p>
+                <h3 class="text-xl font-bold mb-2">{{ __('services.process_step3_title') }}</h3>
+                <p class="text-gray-400 text-sm">{{ __('services.process_step3_desc') }}</p>
             </div>
-            
+
             <div class="text-center animate-on-scroll">
                 <div class="w-20 h-20 bg-gradient-to-br from-green-600 to-green-800 rounded-full flex items-center justify-center mx-auto mb-4 relative">
                     <i class="fas fa-rocket text-3xl"></i>
                     <div class="absolute -top-2 -right-2 w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-sm font-bold">4</div>
                 </div>
-                <h3 class="text-xl font-bold mb-2">Launch</h3>
-                <p class="text-gray-400 text-sm">Deploying and supporting your success</p>
+                <h3 class="text-xl font-bold mb-2">{{ __('services.process_step4_title') }}</h3>
+                <p class="text-gray-400 text-sm">{{ __('services.process_step4_desc') }}</p>
             </div>
         </div>
     </div>
@@ -389,19 +389,19 @@
 <section class="py-20 bg-gradient-to-r from-[#fe742b] to-orange-600">
     <div class="container mx-auto px-6 text-center">
         <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-on-scroll">
-            Let's Build Something Great Together
+            {{ __('services.cta_title') }}
         </h2>
         <p class="text-xl mb-8 max-w-2xl mx-auto animate-on-scroll">
-            Ready to transform your ideas into reality? Our team is here to help.
+            {{ __('services.cta_subtitle') }}
         </p>
         <div class="flex flex-wrap justify-center gap-4 animate-on-scroll">
-            <a href="{{ route('contact') }}" class="bg-white text-[#fe742b] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 inline-flex items-center">
+            <a href="{{ locale_route('contact') }}" class="bg-white text-[#fe742b] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 inline-flex items-center">
                 <i class="fas fa-paper-plane mr-2"></i>
-                Start Your Project
+                {{ __('services.cta_start') }}
             </a>
-            <a href="{{ route('home') }}" class="glass-effect border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
+            <a href="{{ locale_route('home') }}" class="glass-effect border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
                 <i class="fas fa-arrow-left mr-2"></i>
-                Back to Home
+                {{ __('services.cta_back') }}
             </a>
         </div>
     </div>

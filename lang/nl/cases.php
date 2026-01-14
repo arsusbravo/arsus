@@ -1,0 +1,146 @@
+<?php
+
+return [
+    'online-reservation-system' => [
+        'title' => 'Online Reserveringssysteem',
+        'subtitle' => 'Voertuigverhuur Beheerplatform',
+        'description' => 'Een op maat gemaakte applicatie ontwikkeld voor een prominente autoverhuurbedrijf om operaties te stroomlijnen. Het platform stelt klanten in staat om beschikbare voertuigen te bekijken en reserveringen te maken voor specifieke data en tijden, terwijl het beheerders voorziet van uitgebreide beheertools.',
+        'challenge' => 'Het verhuurbedrijf had een modern, efficiënt systeem nodig om handmatige boekingsprocessen te vervangen en realtime voorraadbeheer te bieden over meerdere locaties.',
+        'solution' => 'We ontwikkelden een dual-interface platform met een intuïtief klantgericht boekingssysteem en een krachtig administratief dashboard. De oplossing omvat realtime beschikbaarheidstracking, geautomatiseerde bevestigingsmails en uitgebreide rapportagetools.',
+        'features' => [
+            'Voertuigvoorraad weergave met afbeeldingen, prijzen en specificaties',
+            'Geavanceerde zoek- en filtermogelijkheden',
+            'Realtime beschikbaarheid en boekingsbevestiging',
+            'Beveiligd administratordashboard met authenticatie',
+            'Kalender- en lijstweergaven voor reserveringstracking',
+            'Verkoopstatistieken en prestatie-indicatoren',
+            'Multi-locatie beheersysteem',
+            'Geautomatiseerde e-mailnotificaties',
+        ],
+        'results' => [
+            '70% vermindering in boekingsverwerkingstijd',
+            '45% toename in online reserveringen',
+            '95% klanttevredenheid',
+            'Realtime voorraadnauwkeurigheid'
+        ],
+    ],
+    'online-order-system' => [
+        'title' => 'Online Bestelsysteem',
+        'subtitle' => 'Leden-Only Voedselbestelplatform',
+        'description' => 'Geavanceerde oplossing faciliteert naadloze plaatsing van voedselbestellingen door geregistreerde leden op wekelijkse basis. Het platform beperkt toegang tot alleen geautoriseerde gebruikers en biedt een veilige bestelomgeving voor een gespecialiseerd cateringbedrijf.',
+        'challenge' => 'Het cateringbedrijf had een beveiligd, alleen-voor-leden platform nodig om wekelijkse voedselbestellingen te beheren over meerdere locaties met verschillende menu\'s en ondersteuning voor internationale klanten.',
+        'solution' => 'We creëerden een uitgebreid bestelplatform met ledenauth authenticatie, multi-locatie menubeheer en meertalige ondersteuning. Het systeem omvat beheertools voor menu-updates, orderbeheer en klantcommunicatie.',
+        'features' => [
+            'Wekelijkse gevarieerde menu\'s over verschillende locaties',
+            'Leden authenticatie en autorisatie',
+            'Orderplaatsing en bevestigingssysteem',
+            'Administratie menubeheer (toevoegen, bewerken, verwijderen van items)',
+            'Uitgebreid orderoverzicht met wijzigingsmogelijkheden',
+            'Klantgegevensbeheer',
+            'E-mail contentbeheer en notificaties',
+            'Webinhoud toezicht',
+            'Gebruikersgroepbeheer',
+            'Chinese taalondersteuning',
+        ],
+        'results' => [
+            '80% vermindering in orderverwerkingsfouten',
+            '60% toename in wekelijkse bestellingen',
+            'Succesvolle multi-locatie implementatie',
+            'Verbeterde klanttevredenheid'
+        ],
+    ],
+    'financial-calculators' => [
+        'title' => 'Financiële Rekenmachines',
+        'subtitle' => 'Interactief Hypotheek & Lening Calculator Platform',
+        'description' => 'Een geavanceerd online rekenmachine platform ontwikkeld voor een financiële sector bedrijf. De oplossing integreert complexe financiële formules om hypotheek-, krediet- en leningberekeningen mogelijk te maken, wat klantbetrokkenheid vergroot en geïnformeerde financiële besluitvorming ondersteunt.',
+        'challenge' => 'De financiële instelling had een boeiende tool nodig om potentiële klanten te helpen hun leencapaciteit te begrijpen terwijl leads werden vastgelegd voor opvolging.',
+        'solution' => 'We ontwikkelden een interactief calculator platform met realtime berekeningen, lead capture functionaliteit en veilige gegevensopslag. Het systeem biedt onmiddellijke resultaten terwijl waardevolle klantinformatie wordt verzameld voor relatieopbouw.',
+        'features' => [
+            'Interactief calculator formulier ingebed op voorpagina',
+            'Uitgebreide financiële gegevensverzameling (jaarinkomen, partnerschappen, besparingen)',
+            'Realtime berekening van maximale lening/hypotheek/kredietkwalificatie',
+            'Resultaten geleverd via interface of e-mail',
+            'Veilige bezoekersprofielopslag in database',
+            'Geautomatiseerd e-mail leveringssysteem',
+            'Klantcommunicatie en betrokkenheidstools',
+            'Responsive design voor mobiel en desktop',
+        ],
+        'results' => [
+            '250% toename in gekwalificeerde leads',
+            '40% verbetering in conversieratio',
+            '3x toename in klantbetrokkenheid',
+            '90% vermindering in handmatige berekeningstijd'
+        ],
+    ],
+    'digitalized-form' => [
+        'title' => 'Gedigitaliseerd Claimformulier',
+        'subtitle' => 'Papierloos Claimverwerkingssysteem',
+        'description' => 'Moderne digitale oplossing die traditionele papiergebaseerde claimindieningen transformeert in een efficiënte, geautomatiseerde workflow. Het platform stroomlijnt het hele claimproces van indiening tot goedkeuring met veilig documentbeheer.',
+        'challenge' => 'De organisatie had te maken met inefficiënties bij papiergebaseerde claimverwerking, wat leidde tot vertragingen, fouten en opslagproblemen.',
+        'solution' => 'We implementeerden een volledig digitaal claimbeheersysteem met geautomatiseerde workflows, documentscannen, veilige opslag en realtime statustracking voor zowel claimanten als beheerders.',
+        'features' => [
+            'Digitale formulierindiening met validatie',
+            'Document upload en scan mogelijkheden',
+            'Geautomatiseerde workflow routing',
+            'Realtime claim statustracking',
+            'Veilige documentopslag en ophalen',
+            'Beheergoedkeurings- en verwerkingstools',
+            'E-mailnotificaties in elke fase',
+            'Uitgebreide rapportage en analytics',
+        ],
+        'results' => [
+            '85% snellere claimverwerking',
+            '95% vermindering in papiergebruik',
+            '60% afname in verwerkingsfouten',
+            'Verbeterde audit trail naleving'
+        ],
+    ],
+    'document-signing' => [
+        'title' => 'Moeiteloze Documentondertekening',
+        'subtitle' => 'Veilig E-Handtekening Platform',
+        'description' => 'Uitgebreide e-handtekening oplossing die externe documentondertekening mogelijk maakt met enterprise-grade beveiliging, authenticatie en wettelijke naleving. Het platform elimineert de noodzaak voor fysieke aanwezigheid bij documentuitvoering.',
+        'challenge' => 'De organisatie had een wettelijk conforme, veilige oplossing nodig voor externe documentondertekening die de integriteit en authenticiteit van ondertekende documenten zou behouden.',
+        'solution' => 'We bouwden een robuust e-handtekening platform met multi-factor authenticatie, audit trails, certificaat-gebaseerde handtekeningen en volledige wettelijke naleving. Het systeem ondersteunt meerdere ondertekenaars en complexe documentworkflows.',
+        'features' => [
+            'Veilige document upload en voorbereiding',
+            'Multi-factor authenticatie',
+            'Certificaat-gebaseerde digitale handtekeningen',
+            'Meerdere ondertekenaar ondersteuning en workflows',
+            'Volledige audit trail logging',
+            'Document verificatie en validatie',
+            'Wettelijke naleving (eIDAS, ESIGN Act)',
+            'Mobiel-responsive ondertekeningsinterface',
+            'Geautomatiseerde herinneringsnotificaties',
+        ],
+        'results' => [
+            '100% papierloze documentuitvoering',
+            '75% vermindering in ondertekeningsdoorlooptijd',
+            'Volledige wettelijke naleving bereikt',
+            '99,9% handtekening verificatienauwkeurigheid'
+        ],
+    ],
+    'lead-generation' => [
+        'title' => 'Lead Generatie Platform',
+        'subtitle' => 'Marketing Automatisering & CRM Integratie',
+        'description' => 'Uitgebreid marketing automatiseringssysteem ontworpen om leads vast te leggen, te koesteren en te converteren door intelligente formulierbouwers, CRM-integratie en geavanceerde analytics. Het platform optimaliseert de gehele lead generatie funnel.',
+        'challenge' => 'Het marketingteam had moeite met ontkoppelde tools, handmatige gegevensinvoer en gebrek aan zichtbaarheid in leadprestaties en conversiestatistieken.',
+        'solution' => 'We creëerden een alles-in-één lead generatie platform met drag-and-drop formulierbouwers, naadloze CRM-integratie, geautomatiseerde koestercampagnes en realtime analytics dashboard voor datagestuurde besluitvorming.',
+        'features' => [
+            'Drag-and-drop formulierbouwer',
+            'Landingspagina maker met sjablonen',
+            'CRM integratie (Salesforce, HubSpot, custom)',
+            'Geautomatiseerde e-mail koestercampagnes',
+            'Lead scoring en kwalificatie',
+            'Realtime analytics en rapportage',
+            'A/B test mogelijkheden',
+            'Conversie tracking en attributie',
+            'Team samenwerkingstools',
+        ],
+        'results' => [
+            '180% toename in gekwalificeerde leads',
+            '45% verbetering in conversieratio\'s',
+            '60% vermindering in kosten per lead',
+            '10x snellere lead responstijd'
+        ],
+    ],
+];

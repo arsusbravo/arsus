@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Contact Us - ARSUS IT Solutions')
+@section('title', __('contact.hero_title') . ' - ARSUS IT Solutions')
 
 @section('content')
 
@@ -15,16 +15,16 @@
     <div class="container mx-auto px-6 relative z-10">
         <div class="text-center max-w-4xl mx-auto">
             <div class="inline-block px-4 py-2 bg-[#fe742b]/20 rounded-full text-[#fe742b] text-sm font-medium mb-6 animate-on-scroll">
-                <i class="fas fa-envelope mr-2"></i>Get In Touch
+                <i class="fas fa-envelope mr-2"></i>{{ __('contact.badge') }}
             </div>
 
             <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6 animate-on-scroll">
-                Let's Build Something
-                <span class="text-[#fe742b]">Amazing Together</span>
+                {{ __('contact.hero_title') }}
+                <span class="text-[#fe742b]">{{ __('contact.hero_title_highlight') }}</span>
             </h1>
 
             <p class="text-xl text-gray-300 animate-on-scroll">
-                Have a project in mind? We'd love to hear about it. Send us a message and we'll respond within 24 hours.
+                {{ __('contact.hero_subtitle') }}
             </p>
         </div>
     </div>
@@ -36,24 +36,35 @@
         <div class="grid md:grid-cols-2 gap-12">
             <!-- Contact Information -->
             <div class="animate-on-scroll">
-                <h2 class="text-3xl font-bold mb-6">Contact Information</h2>
+                <h2 class="text-3xl font-bold mb-6">{{ __('contact.info_title') }}</h2>
                 <p class="text-gray-400 mb-8">
-                    We're here to help and answer any questions you might have. We look forward to hearing from you.
+                    {{ __('contact.info_subtitle') }}
                 </p>
 
                 <div class="space-y-6">
-                    <!-- Address -->
+                    <!-- Addresses -->
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-gradient-to-br from-[#fe742b] to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-map-marker-alt text-xl"></i>
                         </div>
-                        <div>
-                            <h3 class="text-lg font-semibold mb-1">Visit Us</h3>
-                            <p class="text-gray-400">
-                                Ravelstraat 29<br>
-                                2901 EH, Capelle aan den IJssel<br>
-                                The Netherlands
-                            </p>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold mb-3">{{ __('contact.visit_us_title') }}</h3>
+
+                            <!-- Netherlands Headquarters -->
+                            <div class="mb-4">
+                                <p class="text-sm font-semibold text-[#fe742b] mb-1">{{ __('contact.visit_us_netherlands') }}</p>
+                                <p class="text-gray-400 text-sm">
+                                    {!! __('contact.visit_us_address_nl') !!}
+                                </p>
+                            </div>
+
+                            <!-- Indonesia Representation Office -->
+                            <div>
+                                <p class="text-sm font-semibold text-[#fe742b] mb-1">{{ __('contact.visit_us_indonesia') }}</p>
+                                <p class="text-gray-400 text-sm">
+                                    {!! __('contact.visit_us_address_id') !!}
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -63,9 +74,9 @@
                             <i class="fas fa-envelope text-xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold mb-1">Email Us</h3>
+                            <h3 class="text-lg font-semibold mb-1">{{ __('contact.email_us_title') }}</h3>
                             <a href="#" class="text-gray-400 hover:text-[#fe742b] transition-colors" data-email="info" data-domain="arsus.nl" onclick="revealEmail(this); return false;">
-                                Click to reveal email
+                                {{ __('contact.email_reveal') }}
                             </a>
                         </div>
                     </div>
@@ -76,10 +87,10 @@
                             <i class="fas fa-clock text-xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold mb-1">Business Hours</h3>
+                            <h3 class="text-lg font-semibold mb-1">{{ __('contact.business_hours_title') }}</h3>
                             <p class="text-gray-400">
-                                Monday - Friday: 9:00 AM - 6:00 PM CET<br>
-                                Saturday - Sunday: Closed
+                                {{ __('contact.business_hours_weekday') }}<br>
+                                {{ __('contact.business_hours_weekend') }}
                             </p>
                         </div>
                     </div>
@@ -87,7 +98,7 @@
 
                 <!-- Social Links -->
                 <div class="mt-8 pt-8 border-t border-gray-800">
-                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <h3 class="text-lg font-semibold mb-4">{{ __('contact.follow_us') }}</h3>
                     <div class="flex space-x-4">
                         <a href="#" class="w-10 h-10 glass-effect rounded-lg flex items-center justify-center hover:bg-[#fe742b] transition-all duration-300">
                             <i class="fab fa-linkedin"></i>
@@ -105,18 +116,18 @@
             <!-- Contact Form -->
             <div class="animate-on-scroll">
                 <div class="glass-effect p-8 rounded-2xl">
-                    <h2 class="text-3xl font-bold mb-6">Send Us a Message</h2>
+                    <h2 class="text-3xl font-bold mb-6">{{ __('contact.form_title') }}</h2>
 
                     <!-- Success Message -->
                     <div id="successMessage" class="hidden bg-green-500/20 border border-green-500 text-green-400 px-6 py-4 rounded-lg mb-6">
                         <i class="fas fa-check-circle mr-2"></i>
-                        <span>Thank you! Your message has been sent successfully. We'll get back to you soon.</span>
+                        <span>{{ __('contact.success_message') }}</span>
                     </div>
 
                     <!-- Error Message -->
                     <div id="errorMessage" class="hidden bg-red-500/20 border border-red-500 text-red-400 px-6 py-4 rounded-lg mb-6">
                         <i class="fas fa-exclamation-circle mr-2"></i>
-                        <span id="errorText">Something went wrong. Please try again.</span>
+                        <span id="errorText">{{ __('contact.error_message') }}</span>
                     </div>
 
                     <form id="contactForm" class="space-y-6">
@@ -126,7 +137,7 @@
                         <!-- Name -->
                         <div>
                             <label for="name" class="block text-sm font-medium mb-2">
-                                Full Name <span class="text-[#fe742b]">*</span>
+                                {{ __('contact.label_name') }} <span class="text-[#fe742b]">{{ __('contact.required') }}</span>
                             </label>
                             <input
                                 type="text"
@@ -134,15 +145,15 @@
                                 name="name"
                                 required
                                 class="w-full bg-[#050812] border border-gray-700 rounded-lg px-4 py-3 focus:border-[#fe742b] focus:outline-none focus:ring-2 focus:ring-[#fe742b]/20 transition-all"
-                                placeholder="John Doe"
+                                placeholder="{{ __('contact.placeholder_name') }}"
                             >
-                            <p class="text-red-400 text-sm mt-1 hidden" id="nameError">Please enter your full name</p>
+                            <p class="text-red-400 text-sm mt-1 hidden" id="nameError">{{ __('contact.error_name') }}</p>
                         </div>
 
                         <!-- Email -->
                         <div>
                             <label for="email" class="block text-sm font-medium mb-2">
-                                Email Address <span class="text-[#fe742b]">*</span>
+                                {{ __('contact.label_email') }} <span class="text-[#fe742b]">{{ __('contact.required') }}</span>
                             </label>
                             <input
                                 type="email"
@@ -150,29 +161,29 @@
                                 name="email"
                                 required
                                 class="w-full bg-[#050812] border border-gray-700 rounded-lg px-4 py-3 focus:border-[#fe742b] focus:outline-none focus:ring-2 focus:ring-[#fe742b]/20 transition-all"
-                                placeholder="john@example.com"
+                                placeholder="{{ __('contact.placeholder_email') }}"
                             >
-                            <p class="text-red-400 text-sm mt-1 hidden" id="emailError">Please enter a valid email address</p>
+                            <p class="text-red-400 text-sm mt-1 hidden" id="emailError">{{ __('contact.error_email') }}</p>
                         </div>
 
                         <!-- Company (Optional) -->
                         <div>
                             <label for="company" class="block text-sm font-medium mb-2">
-                                Company Name <span class="text-gray-500 text-xs">(Optional)</span>
+                                {{ __('contact.label_company') }} <span class="text-gray-500 text-xs">({{ __('contact.optional') }})</span>
                             </label>
                             <input
                                 type="text"
                                 id="company"
                                 name="company"
                                 class="w-full bg-[#050812] border border-gray-700 rounded-lg px-4 py-3 focus:border-[#fe742b] focus:outline-none focus:ring-2 focus:ring-[#fe742b]/20 transition-all"
-                                placeholder="Your Company"
+                                placeholder="{{ __('contact.placeholder_company') }}"
                             >
                         </div>
 
                         <!-- Subject -->
                         <div>
                             <label for="subject" class="block text-sm font-medium mb-2">
-                                Subject <span class="text-[#fe742b]">*</span>
+                                {{ __('contact.label_subject') }} <span class="text-[#fe742b]">{{ __('contact.required') }}</span>
                             </label>
                             <select
                                 id="subject"
@@ -180,22 +191,22 @@
                                 required
                                 class="w-full bg-[#050812] border border-gray-700 rounded-lg px-4 py-3 focus:border-[#fe742b] focus:outline-none focus:ring-2 focus:ring-[#fe742b]/20 transition-all"
                             >
-                                <option value="">Select a subject</option>
-                                <option value="general">General Inquiry</option>
-                                <option value="quote">Request a Quote</option>
-                                <option value="web">Web Development</option>
-                                <option value="mobile">Mobile Development</option>
-                                <option value="cloud">Cloud Solutions</option>
-                                <option value="support">Technical Support</option>
-                                <option value="other">Other</option>
+                                <option value="">{{ __('contact.subject_select') }}</option>
+                                <option value="general">{{ __('contact.subject_general') }}</option>
+                                <option value="quote">{{ __('contact.subject_quote') }}</option>
+                                <option value="web">{{ __('contact.subject_web') }}</option>
+                                <option value="mobile">{{ __('contact.subject_mobile') }}</option>
+                                <option value="cloud">{{ __('contact.subject_cloud') }}</option>
+                                <option value="support">{{ __('contact.subject_support') }}</option>
+                                <option value="other">{{ __('contact.subject_other') }}</option>
                             </select>
-                            <p class="text-red-400 text-sm mt-1 hidden" id="subjectError">Please select a subject</p>
+                            <p class="text-red-400 text-sm mt-1 hidden" id="subjectError">{{ __('contact.error_subject') }}</p>
                         </div>
 
                         <!-- Message -->
                         <div>
                             <label for="message" class="block text-sm font-medium mb-2">
-                                Message <span class="text-[#fe742b]">*</span>
+                                {{ __('contact.label_message') }} <span class="text-[#fe742b]">{{ __('contact.required') }}</span>
                             </label>
                             <textarea
                                 id="message"
@@ -203,9 +214,9 @@
                                 required
                                 rows="5"
                                 class="w-full bg-[#050812] border border-gray-700 rounded-lg px-4 py-3 focus:border-[#fe742b] focus:outline-none focus:ring-2 focus:ring-[#fe742b]/20 transition-all resize-none"
-                                placeholder="Tell us about your project..."
+                                placeholder="{{ __('contact.placeholder_message') }}"
                             ></textarea>
-                            <p class="text-red-400 text-sm mt-1 hidden" id="messageError">Please enter a message (minimum 10 characters)</p>
+                            <p class="text-red-400 text-sm mt-1 hidden" id="messageError">{{ __('contact.error_message') }}</p>
                         </div>
 
                         <!-- Privacy Policy -->
@@ -218,10 +229,10 @@
                                 class="mt-1 w-4 h-4 bg-[#050812] border border-gray-700 rounded focus:ring-[#fe742b] focus:ring-2 text-[#fe742b]"
                             >
                             <label for="privacy" class="text-sm text-gray-400">
-                                I agree to the privacy policy and consent to ARSUS IT Solutions storing my submitted information. <span class="text-[#fe742b]">*</span>
+                                {{ __('contact.privacy_text') }} <span class="text-[#fe742b]">{{ __('contact.required') }}</span>
                             </label>
                         </div>
-                        <p class="text-red-400 text-sm mt-1 hidden" id="privacyError">Please accept the privacy policy</p>
+                        <p class="text-red-400 text-sm mt-1 hidden" id="privacyError">{{ __('contact.error_privacy') }}</p>
 
                         <!-- Submit Button -->
                         <button
@@ -230,7 +241,7 @@
                             class="w-full bg-gradient-to-r from-[#fe742b] to-orange-600 px-8 py-4 rounded-full font-semibold hover:from-[#ff8c4d] hover:to-orange-700 transition-all duration-300 pulse-glow inline-flex items-center justify-center"
                         >
                             <i class="fas fa-paper-plane mr-2"></i>
-                            <span id="btnText">Send Message</span>
+                            <span id="btnText">{{ __('contact.submit_button') }}</span>
                             <svg id="spinner" class="hidden animate-spin ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -239,7 +250,7 @@
 
                         <p class="text-sm text-gray-400 text-center">
                             <i class="fas fa-lock mr-1"></i>
-                            Your information is secure and will never be shared with third parties.
+                            {{ __('contact.security_note') }}
                         </p>
                     </form>
                 </div>
@@ -253,36 +264,36 @@
     <div class="container mx-auto px-6">
         <div class="text-center mb-16 animate-on-scroll">
             <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                Frequently Asked <span class="text-[#fe742b]">Questions</span>
+                {{ __('contact.faq_title') }} <span class="text-[#fe742b]">{{ __('contact.faq_title_highlight') }}</span>
             </h2>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                Quick answers to common questions
+                {{ __('contact.faq_subtitle') }}
             </p>
         </div>
 
         <div class="max-w-3xl mx-auto space-y-4">
             <!-- FAQ 1 -->
             <div class="glass-effect p-6 rounded-xl animate-on-scroll">
-                <h3 class="text-lg font-semibold mb-2">How quickly will you respond to my inquiry?</h3>
-                <p class="text-gray-400">We typically respond within 24 hours during business days. For urgent matters, please mention it in your message.</p>
+                <h3 class="text-lg font-semibold mb-2">{{ __('contact.faq1_question') }}</h3>
+                <p class="text-gray-400">{{ __('contact.faq1_answer') }}</p>
             </div>
 
             <!-- FAQ 2 -->
             <div class="glass-effect p-6 rounded-xl animate-on-scroll">
-                <h3 class="text-lg font-semibold mb-2">Do you offer free consultations?</h3>
-                <p class="text-gray-400">Yes! We offer a free initial consultation to discuss your project requirements and provide recommendations.</p>
+                <h3 class="text-lg font-semibold mb-2">{{ __('contact.faq2_question') }}</h3>
+                <p class="text-gray-400">{{ __('contact.faq2_answer') }}</p>
             </div>
 
             <!-- FAQ 3 -->
             <div class="glass-effect p-6 rounded-xl animate-on-scroll">
-                <h3 class="text-lg font-semibold mb-2">What information should I include in my message?</h3>
-                <p class="text-gray-400">Please include details about your project goals, timeline, budget range, and any specific requirements you may have.</p>
+                <h3 class="text-lg font-semibold mb-2">{{ __('contact.faq3_question') }}</h3>
+                <p class="text-gray-400">{{ __('contact.faq3_answer') }}</p>
             </div>
 
             <!-- FAQ 4 -->
             <div class="glass-effect p-6 rounded-xl animate-on-scroll">
-                <h3 class="text-lg font-semibold mb-2">Do you work with clients internationally?</h3>
-                <p class="text-gray-400">Absolutely! We work with clients from over 50 countries and have experience with remote collaboration.</p>
+                <h3 class="text-lg font-semibold mb-2">{{ __('contact.faq4_question') }}</h3>
+                <p class="text-gray-400">{{ __('contact.faq4_answer') }}</p>
             </div>
         </div>
     </div>
