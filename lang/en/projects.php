@@ -20,7 +20,7 @@ return [
         ],
         'kitchenlog' => [
             'title' => 'KitchenLog',
-            'description' => 'Smart food waste tracking for commercial kitchens, built for EU compliance. Staff log waste by category and weight or snap a photo and let AI identify the food, then export FLW Protocol reports as CSV or PDF. Works offline in eight languages.',
+            'description' => 'Smart food waste tracking for commercial kitchens, built for EU compliance. Staff log waste by category and weight or snap a photo and let AI identify the food, then export FLW Protocol reports as CSV or PDF. Works in eight languages.',
         ],
         'amyshouse' => [
             'title' => 'Online store',
@@ -35,7 +35,7 @@ return [
             'description' => 'AI-driven matchmaking that understands you. Chat with compatible AI partners matched on deep personality insights, built for a Dutch-speaking audience.',
         ],
         'games' => [
-            'title' => 'Game Vault',
+            'title' => 'Games',
             'description' => 'A collection of fast-paced 3D first-person shooters that run in the browser: aerial dogfighting and tactical hostage defense. Pick your frontline and jump straight in.',
         ],
     ],

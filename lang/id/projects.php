@@ -20,7 +20,7 @@ return [
         ],
         'kitchenlog' => [
             'title' => 'KitchenLog',
-            'description' => 'Pelacakan limbah makanan cerdas untuk dapur komersial, dibuat sesuai regulasi UE. Staf mencatat limbah berdasarkan kategori dan berat, atau memotret dan biarkan AI mengenali makanannya. Ekspor laporan FLW Protocol sebagai CSV atau PDF. Bisa offline dalam delapan bahasa.',
+            'description' => 'Pelacakan limbah makanan cerdas untuk dapur komersial, dibuat sesuai regulasi UE. Staf mencatat limbah berdasarkan kategori dan berat, atau memotret dan biarkan AI mengenali makanannya. Ekspor laporan FLW Protocol sebagai CSV atau PDF. Bisa digunakan dalam delapan bahasa.',
         ],
         'amyshouse' => [
             'title' => 'Toko Online',

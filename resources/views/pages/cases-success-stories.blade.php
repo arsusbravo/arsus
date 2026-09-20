@@ -40,6 +40,29 @@
     <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
+            <!-- Case 9: AI Integration -->
+            <div class="glass-effect rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 animate-on-scroll group">
+                <div class="relative overflow-hidden">
+                    <img src="{{ asset('images/cases/thumb-9.jpg') }}" alt="AI Integration" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0e27] via-transparent to-transparent opacity-60"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-3 group-hover:text-[#fe742b] transition-colors">AI Integration</h3>
+                    <p class="text-gray-400 mb-4">
+                        AI-powered automation through API integration via OpenRouter: recognizing products and food waste from a photo, drafting product listings and powering natural AI conversations.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full">AI</span>
+                        <span class="text-xs px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full">Automation</span>
+                        <span class="text-xs px-3 py-1 bg-violet-500/20 text-violet-400 rounded-full">OpenRouter API</span>
+                    </div>
+                    <a href="{{ locale_route('case.show', ['ai-integration']) }}" class="inline-flex items-center text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
+                        {{ __('cases_list.view_case_study') }}
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
             <!-- Case 1: Online Reservation System -->
             <div class="glass-effect rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 animate-on-scroll group">
                 <div class="relative overflow-hidden">

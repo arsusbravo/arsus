@@ -190,6 +190,7 @@
 
             @php
                 $allCases = [
+                    ['slug' => 'ai-integration', 'title' => 'AI Integration', 'category' => 'Artificial Intelligence'],
                     ['slug' => 'online-reservation-system', 'title' => 'Online Reservation System', 'category' => 'Booking System'],
                     ['slug' => 'online-order-system', 'title' => 'Online Order System', 'category' => 'E-commerce'],
                     ['slug' => 'financial-calculators', 'title' => 'Financial Calculators', 'category' => 'FinTech'],

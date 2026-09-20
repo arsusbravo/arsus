@@ -84,6 +84,7 @@ class HomeController extends Controller
             'digitalized-form' => ['Laravel', 'Vue.js', 'PostgreSQL', 'AWS S3'],
             'document-signing' => ['Laravel', 'Node.js', 'MongoDB', 'Docker'],
             'lead-generation' => ['React', 'Laravel API', 'Redis', 'Elasticsearch'],
+            'ai-integration' => ['Laravel', 'OpenRouter API', 'Large Language Models', 'Vision AI'],
         ];
         return $techStacks[$slug] ?? [];
     }
@@ -97,6 +98,7 @@ class HomeController extends Controller
             'digitalized-form' => 3,
             'document-signing' => 3,
             'lead-generation' => 3,
+            'ai-integration' => 4,
         ];
         return $imageCounts[$slug] ?? 3;
     }
@@ -110,6 +112,7 @@ class HomeController extends Controller
             'digitalized-form' => 4,
             'document-signing' => 5,
             'lead-generation' => 6,
+            'ai-integration' => 9,
         ];
         return $caseNumbers[$slug] ?? 1;
     }

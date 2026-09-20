@@ -20,7 +20,7 @@ return [
         ],
         'kitchenlog' => [
             'title' => 'KitchenLog',
-            'description' => 'Slim voedselverspilling bijhouden voor professionele keukens, gebouwd voor EU-naleving. Medewerkers registreren afval per categorie en gewicht of maken een foto waarna AI het eten herkent. Exporteer FLW Protocol-rapporten als CSV of PDF. Werkt offline in acht talen.',
+            'description' => 'Slim voedselverspilling bijhouden voor professionele keukens, gebouwd voor EU-naleving. Medewerkers registreren afval per categorie en gewicht of maken een foto waarna AI het eten herkent. Exporteer FLW Protocol-rapporten als CSV of PDF. Werkt in acht talen.',
         ],
         'amyshouse' => [
             'title' => 'Webwinkel',

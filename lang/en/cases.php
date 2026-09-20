@@ -143,4 +143,27 @@ return [
             '10x faster lead response time'
         ],
     ],
+    'ai-integration' => [
+        'title' => 'AI Integration',
+        'subtitle' => 'Intelligent Automation via OpenRouter API',
+        'description' => 'A set of AI-powered features we integrated into our own web products through the OpenRouter API. From recognizing food waste and products from a single photo, to writing complete product listings and holding natural conversations with AI personas, the AI does the heavy lifting while users stay in control.',
+        'challenge' => 'Everyday tasks such as logging food waste, writing product listings and keeping conversations engaging demanded a lot of manual input. Users had to type out details, pick categories and fill in forms by hand, which was slow, inconsistent and error-prone.',
+        'solution' => 'We integrated AI directly into each workflow using API integration via OpenRouter. One connection gives access to multiple leading AI models, so we can use vision models to identify items and estimate quantities from a photo, language models to draft titles, descriptions, categories and specifications, and conversational models for AI partners matched to the user. Every AI result lands in an editable form, so users can review and correct it before saving.',
+        'features' => [
+            'API integration via OpenRouter: one integration, access to multiple AI models',
+            'Photo recognition that identifies food items and estimates quantities',
+            'Barcode and product scanning with instant product identification',
+            'Automatic product titles, descriptions, categories and specifications from a single photo',
+            'Pre-filled, editable forms to review and correct AI suggestions',
+            'Conversational AI partners matched on personality insights',
+            'Flexible model choice: switch or upgrade AI models without rebuilding the integration',
+            'Multilingual experience, including Dutch and Indonesian',
+        ],
+        'results' => [
+            'Product listings drafted in seconds from a single photo',
+            'Waste logging reduced from manual entry to one photo',
+            'Consistent categories and complete data across entries',
+            'Natural, personality-driven AI conversations'
+        ],
+    ],
 ];
