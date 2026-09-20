@@ -40,6 +40,16 @@ class HomeController extends Controller
         return view('pages.cases');
     }
 
+    public function successStories()
+    {
+        return view('pages.cases-success-stories');
+    }
+
+    public function projects()
+    {
+        return view('pages.cases-projects', ['projects' => config('projects')]);
+    }
+
     public function caseShow($slug)
     {
         // Check if translation exists for this case

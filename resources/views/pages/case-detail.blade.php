@@ -19,7 +19,7 @@
         <div class="max-w-5xl mx-auto">
             <!-- Breadcrumb -->
             <div class="mb-8 animate-on-scroll">
-                <a href="{{ locale_route('cases') }}" class="text-gray-400 hover:text-[#fe742b] transition-colors">
+                <a href="{{ locale_route('cases.success-stories') }}" class="text-gray-400 hover:text-[#fe742b] transition-colors">
                     <i class="fas fa-arrow-left mr-2"></i>{{ __('case_detail.back_to_cases') }}
                 </a>
             </div>
@@ -216,7 +216,7 @@
             </div>
 
             <div class="text-center mt-12 animate-on-scroll">
-                <a href="{{ locale_route('cases') }}" class="inline-flex items-center text-lg text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
+                <a href="{{ locale_route('cases.success-stories') }}" class="inline-flex items-center text-lg text-[#fe742b] hover:text-[#ff8c4d] transition-colors font-semibold">
                     <i class="fas fa-th mr-2"></i>
                     {{ __('case_detail.view_all_cases') }}
                 </a>
@@ -239,7 +239,7 @@
                 <i class="fas fa-envelope mr-2"></i>
                 {{ __('case_detail.cta_start') }}
             </a>
-            <a href="{{ locale_route('cases') }}" class="glass-effect border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
+            <a href="{{ locale_route('cases.success-stories') }}" class="glass-effect border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center">
                 <i class="fas fa-arrow-left mr-2"></i>
                 {{ __('case_detail.cta_all_cases') }}
             </a>

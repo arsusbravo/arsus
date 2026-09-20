@@ -14,6 +14,12 @@
 
     <div class="container mx-auto px-6 relative z-10">
         <div class="text-center max-w-4xl mx-auto">
+            <div class="mb-8 animate-on-scroll">
+                <a href="{{ locale_route('cases') }}" class="text-gray-400 hover:text-[#fe742b] transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>{{ __('cases_landing.back_to_cases') }}
+                </a>
+            </div>
+
             <div class="inline-block px-4 py-2 bg-[#fe742b]/20 rounded-full text-[#fe742b] text-sm font-medium mb-6 animate-on-scroll">
                 <i class="fas fa-briefcase mr-2"></i>{{ __('cases_list.badge') }}
             </div>
@@ -198,8 +204,6 @@
     </div>
 </section>
 
-@endsection
-
 <style>
 @keyframes blob {
     0%, 100% {
@@ -221,3 +225,5 @@
     animation-delay: 2s;
 }
 </style>
+
+@endsection

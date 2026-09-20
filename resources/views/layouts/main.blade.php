@@ -29,7 +29,7 @@
                     <a href="{{ locale_route('services') }}" class="{{ is_active_route('services') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">
                         {{ __('messages.nav.services') }}
                     </a>
-                    <a href="{{ locale_route('cases') }}" class="{{ is_active_route('cases') || is_active_route('case.show') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">{{ __('messages.nav.cases') }}</a>
+                    <a href="{{ locale_route('cases') }}" class="{{ is_active_route('cases') || is_active_route('cases.success-stories') || is_active_route('cases.projects') || is_active_route('case.show') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">{{ __('messages.nav.cases') }}</a>
                     <a href="{{ locale_route('about') }}" class="{{ is_active_route('about') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} transition-colors duration-300">{{ __('messages.nav.about') }}</a>
                     <x-language-switcher />
                     <a href="{{ locale_route('contact') }}" class="bg-[#fe742b] px-6 py-2 rounded-full hover:bg-[#ff8c4d] transition-all duration-300 pulse-glow">
@@ -51,7 +51,7 @@
                 <a href="{{ locale_route('services') }}" class="{{ is_active_route('services') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">
                     {{ __('messages.nav.services') }}
                 </a>
-                <a href="{{ locale_route('cases') }}" class="{{ is_active_route('cases') || is_active_route('case.show') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">{{ __('messages.nav.cases') }}</a>
+                <a href="{{ locale_route('cases') }}" class="{{ is_active_route('cases') || is_active_route('cases.success-stories') || is_active_route('cases.projects') || is_active_route('case.show') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">{{ __('messages.nav.cases') }}</a>
                 <a href="{{ locale_route('about') }}" class="{{ is_active_route('about') ? 'text-[#fe742b] font-semibold' : 'hover:text-[#fe742b]' }} block transition-colors duration-300">{{ __('messages.nav.about') }}</a>
 
                 <div class="py-2">

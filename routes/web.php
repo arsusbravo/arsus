@@ -10,6 +10,8 @@ Route::get('about-us', [HomeController::class, 'about'])->name('about');
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('contact', [HomeController::class, 'submitContact'])->name('contact.submit');
 Route::get('cases', [HomeController::class, 'cases'])->name('cases');
+Route::get('cases/success-stories', [HomeController::class, 'successStories'])->name('cases.success-stories');
+Route::get('cases/projects', [HomeController::class, 'projects'])->name('cases.projects');
 Route::get('cases/{slug}', [HomeController::class, 'caseShow'])->name('case.show');
 
 // Dutch routes (nl prefix)
@@ -20,6 +22,8 @@ Route::prefix('nl')->group(function () {
     Route::get('contact', [HomeController::class, 'contact'])->name('nl.contact');
     Route::post('contact', [HomeController::class, 'submitContact'])->name('nl.contact.submit');
     Route::get('cases', [HomeController::class, 'cases'])->name('nl.cases');
+    Route::get('cases/success-stories', [HomeController::class, 'successStories'])->name('nl.cases.success-stories');
+    Route::get('cases/projects', [HomeController::class, 'projects'])->name('nl.cases.projects');
     Route::get('cases/{slug}', [HomeController::class, 'caseShow'])->name('nl.case.show');
 });
 
@@ -31,5 +35,7 @@ Route::prefix('id')->group(function () {
     Route::get('contact', [HomeController::class, 'contact'])->name('id.contact');
     Route::post('contact', [HomeController::class, 'submitContact'])->name('id.contact.submit');
     Route::get('cases', [HomeController::class, 'cases'])->name('id.cases');
+    Route::get('cases/success-stories', [HomeController::class, 'successStories'])->name('id.cases.success-stories');
+    Route::get('cases/projects', [HomeController::class, 'projects'])->name('id.cases.projects');
     Route::get('cases/{slug}', [HomeController::class, 'caseShow'])->name('id.case.show');
 });
