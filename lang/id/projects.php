@@ -38,5 +38,9 @@ return [
             'title' => 'Permainan',
             'description' => 'Kumpulan game tembak-menembak 3D orang pertama yang seru dan berjalan di browser: pertempuran udara dan pertahanan sandera taktis. Pilih garis depan Anda dan langsung main.',
         ],
+        'woocommerce' => [
+            'title' => 'Demo tema WooCommerce',
+            'description' => 'Demo tema WordPress dan WooCommerce buatan sendiri yang menunjukkan bahwa kami juga membuat toko online dan tema. Tampilan toko gelap yang modern dengan showcase produk, tambah ke keranjang, dan penanda kepercayaan seperti gratis ongkir, retur mudah, dan dukungan.',
+        ],
     ],
 ];

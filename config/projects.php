@@ -49,4 +49,11 @@ return [
         'image' => 'images/projects/games.png',
         'tags' => ['3D', 'Browser Games', 'Three.js'],
     ],
+    'woocommerce' => [
+        'url' => 'https://woocommerce.arsus.it/',
+        'icon' => 'fa-cart-shopping',
+        'gradient' => 'from-blue-600/40 to-indigo-900/60',
+        'image' => 'images/projects/woocommerce.png',
+        'tags' => ['WordPress', 'WooCommerce', 'E-commerce', 'Theme'],
+    ],
 ];

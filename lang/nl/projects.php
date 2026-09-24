@@ -38,5 +38,9 @@ return [
             'title' => 'Speletjes',
             'description' => 'Een collectie razendsnelle 3D first-person shooters die in de browser draaien: luchtgevechten en tactische gijzelaarsverdediging. Kies je frontlinie en spring erin.',
         ],
+        'woocommerce' => [
+            'title' => 'WooCommerce-thema demo',
+            'description' => 'Een demo van een eigen WordPress- en WooCommerce-thema, die laat zien dat we ook webshops en thema\'s bouwen. Een moderne, donkere winkel met productpresentatie, winkelwagenfunctie en duidelijke vertrouwenssignalen zoals gratis verzending, eenvoudig retourneren en support.',
+        ],
     ],
 ];

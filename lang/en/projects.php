@@ -38,5 +38,9 @@ return [
             'title' => 'Games',
             'description' => 'A collection of fast-paced 3D first-person shooters that run in the browser: aerial dogfighting and tactical hostage defense. Pick your frontline and jump straight in.',
         ],
+        'woocommerce' => [
+            'title' => 'WooCommerce theme demo',
+            'description' => 'A custom WordPress and WooCommerce theme demo, showing that we build e-commerce websites and themes too. A modern dark storefront with a product showcase, add-to-cart and clear trust signals such as free shipping, easy returns and support.',
+        ],
     ],
 ];
