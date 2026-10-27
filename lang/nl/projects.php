@@ -42,5 +42,9 @@ return [
             'title' => 'WooCommerce-thema demo',
             'description' => 'Een demo van een eigen WordPress- en WooCommerce-thema, die laat zien dat we ook webshops en thema\'s bouwen. Een moderne, donkere winkel met productpresentatie, winkelwagenfunctie en duidelijke vertrouwenssignalen zoals gratis verzending, eenvoudig retourneren en support.',
         ],
+        'java-sunrise' => [
+            'title' => 'Java Sunrise',
+            'description' => 'Een reisgids en tripplanner voor Java, Indonesië. Blader door bestemmingsgidsen voor Borobudur, Bromo, Yogyakarta en meer, vergelijk hotels bij elke bezienswaardigheid met actuele prijzen, en stel een gratis dag-tot-dag reisschema samen.',
+        ],
     ],
 ];

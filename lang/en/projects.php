@@ -42,5 +42,9 @@ return [
             'title' => 'WooCommerce theme demo',
             'description' => 'A custom WordPress and WooCommerce theme demo, showing that we build e-commerce websites and themes too. A modern dark storefront with a product showcase, add-to-cart and clear trust signals such as free shipping, easy returns and support.',
         ],
+        'java-sunrise' => [
+            'title' => 'Java Sunrise',
+            'description' => 'A travel guide and trip planner for Java, Indonesia. Browse destination guides to Borobudur, Bromo, Yogyakarta and more, compare hotels near every sight with live prices, and build a free day-by-day itinerary.',
+        ],
     ],
 ];

@@ -56,4 +56,11 @@ return [
         'image' => 'images/projects/woocommerce.png',
         'tags' => ['WordPress', 'WooCommerce', 'E-commerce', 'Theme'],
     ],
+    'java-sunrise' => [
+        'url' => 'https://javasunrise.com/',
+        'icon' => 'fa-mountain-sun',
+        'gradient' => 'from-amber-600/40 to-emerald-900/60',
+        'image' => 'images/projects/javasunrise.png',
+        'tags' => ['Travel', 'Trip Planner', 'Guides'],
+    ],
 ];

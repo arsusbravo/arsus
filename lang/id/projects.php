@@ -42,5 +42,9 @@ return [
             'title' => 'Demo tema WooCommerce',
             'description' => 'Demo tema WordPress dan WooCommerce buatan sendiri yang menunjukkan bahwa kami juga membuat toko online dan tema. Tampilan toko gelap yang modern dengan showcase produk, tambah ke keranjang, dan penanda kepercayaan seperti gratis ongkir, retur mudah, dan dukungan.',
         ],
+        'java-sunrise' => [
+            'title' => 'Java Sunrise',
+            'description' => 'Panduan wisata dan perencana perjalanan untuk Jawa, Indonesia. Jelajahi panduan destinasi seperti Borobudur, Bromo, Yogyakarta dan lainnya, bandingkan hotel di dekat setiap lokasi dengan harga langsung, dan susun itinerary harian secara gratis.',
+        ],
     ],
 ];
