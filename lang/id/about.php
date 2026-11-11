@@ -11,12 +11,16 @@ return [
     'story_title' => 'Kisah',
     'story_title_highlight' => 'Kami',
     'story_paragraph1' => 'Dengan kantor pusat kami di Belanda dan kantor perwakilan kami di Jakarta, Indonesia, ARSUS IT Solutions didirikan dengan misi yang jelas: memberdayakan bisnis dengan solusi digital kelas dunia yang mendorong pertumbuhan dan inovasi.',
-    'story_paragraph2' => 'Apa yang dimulai sebagai tim kecil pengembang yang bersemangat telah berkembang menjadi agensi pengembangan layanan lengkap dengan kehadiran di dua benua, melayani klien di lebih dari 50 negara. Kami telah berhasil menyelesaikan lebih dari 500 proyek, mulai dari website sederhana hingga aplikasi enterprise yang kompleks.',
-    'story_paragraph3' => 'Lokasi strategis kami di Belanda dan Jakarta memungkinkan kami untuk menyediakan layanan seamless di berbagai zona waktu. Komitmen kami terhadap kualitas, inovasi, dan kepuasan klien telah menghasilkan tingkat kepuasan klien 98% dan kemitraan jangka panjang dengan bisnis di seluruh dunia.',
-    'stat_projects' => 'Proyek Diselesaikan',
-    'stat_countries' => 'Negara Dilayani',
-    'stat_satisfaction' => 'Tingkat Kepuasan',
-    'stat_support' => 'Dukungan Tersedia',
+    'story_paragraph2' => 'Apa yang dimulai sebagai tim kecil pengembang yang bersemangat telah berkembang menjadi agensi pengembangan layanan lengkap dengan kehadiran di dua benua. Kami mengerjakan proyek mulai dari website sederhana hingga aplikasi kompleks bertenaga AI.',
+    'story_paragraph3' => 'Lokasi strategis kami di Belanda dan Jakarta memungkinkan kami untuk menyediakan layanan seamless di berbagai zona waktu. Komitmen kami terhadap kualitas, inovasi, dan kepuasan klien telah menghasilkan kemitraan jangka panjang dengan bisnis yang terus kembali untuk proyek berikutnya.',
+    'highlight1_title' => 'Pengiriman Full-Stack',
+    'highlight1_desc' => 'Laravel hingga frontend modern',
+    'highlight2_title' => 'Multibahasa Secara Default',
+    'highlight2_desc' => 'Inggris, Belanda & Indonesia',
+    'highlight3_title' => 'Dibangun dengan AI',
+    'highlight3_desc' => 'Integrasi AI yang praktis',
+    'highlight4_title' => 'Komunikasi Langsung',
+    'highlight4_desc' => 'Tanpa perantara account manager',
 
     // Our Values Section
     'values_title' => 'Nilai-Nilai',
@@ -64,7 +68,7 @@ return [
     'why_choose_subtitle' => 'Kami bukan hanya agensi pengembangan biasa',
 
     'reason1_title' => 'Track Record Terbukti',
-    'reason1_desc' => 'Dengan 500+ proyek sukses di berbagai industri, kami telah mendemonstrasikan kemampuan kami untuk memberikan hasil yang luar biasa secara konsisten.',
+    'reason1_desc' => 'Di berbagai industri, kami telah mendemonstrasikan kemampuan kami untuk memberikan hasil yang luar biasa secara konsisten.',
 
     'reason2_title' => 'Komunikasi Transparan',
     'reason2_desc' => 'Kami memberi tahu Anda di setiap langkah. Tidak ada kejutan, tidak ada biaya tersembunyi—hanya komunikasi yang jujur dan terbuka.',

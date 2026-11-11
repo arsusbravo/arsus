@@ -11,12 +11,16 @@ return [
     'story_title' => 'Ons',
     'story_title_highlight' => 'Verhaal',
     'story_paragraph1' => 'Met ons hoofdkantoor in Nederland en ons representatiekantoor in Jakarta, Indonesië, werd ARSUS IT Solutions opgericht met een duidelijke missie: bedrijven empoweren met digitale oplossingen van wereldklasse die groei en innovatie stimuleren.',
-    'story_paragraph2' => 'Wat begon als een klein team van gepassioneerde ontwikkelaars is uitgegroeid tot een full-service ontwikkelbureau met een aanwezigheid over twee continenten, dat klanten bedient in meer dan 50 landen. We hebben met succes meer dan 500 projecten opgeleverd, variërend van eenvoudige websites tot complexe enterprise-applicaties.',
-    'story_paragraph3' => 'Onze strategische locaties in Nederland en Jakarta stellen ons in staat naadloze service te bieden over verschillende tijdzones. Onze toewijding aan kwaliteit, innovatie en klanttevredenheid heeft ons een klanttevredenheidspercentage van 98% opgeleverd en langetermijnpartnerschappen met bedrijven wereldwijd.',
-    'stat_projects' => 'Projecten Opgeleverd',
-    'stat_countries' => 'Landen Bediend',
-    'stat_satisfaction' => 'Tevredenheidspercentage',
-    'stat_support' => 'Ondersteuning Beschikbaar',
+    'story_paragraph2' => 'Wat begon als een klein team van gepassioneerde ontwikkelaars is uitgegroeid tot een full-service ontwikkelbureau met een aanwezigheid over twee continenten. We pakken projecten aan variërend van eenvoudige websites tot complexe, AI-gedreven applicaties.',
+    'story_paragraph3' => 'Onze strategische locaties in Nederland en Jakarta stellen ons in staat naadloze service te bieden over verschillende tijdzones. Onze toewijding aan kwaliteit, innovatie en klanttevredenheid heeft ons langetermijnpartnerschappen opgeleverd met bedrijven die telkens terugkomen voor hun volgende project.',
+    'highlight1_title' => 'Full-Stack Oplevering',
+    'highlight1_desc' => 'Laravel tot moderne frontends',
+    'highlight2_title' => 'Standaard Meertalig',
+    'highlight2_desc' => 'Engels, Nederlands & Indonesisch',
+    'highlight3_title' => 'AI-Gedreven Oplossingen',
+    'highlight3_desc' => 'Praktische AI-integraties',
+    'highlight4_title' => 'Directe Communicatie',
+    'highlight4_desc' => 'Geen accountmanagers ertussen',
 
     // Our Values Section
     'values_title' => 'Onze',
@@ -64,7 +68,7 @@ return [
     'why_choose_subtitle' => 'We zijn niet zomaar een ontwikkelbureau',
 
     'reason1_title' => 'Bewezen Track Record',
-    'reason1_desc' => 'Met 500+ succesvolle projecten in diverse industrieën hebben we consistent ons vermogen aangetoond om uitzonderlijke resultaten te leveren.',
+    'reason1_desc' => 'In diverse industrieën hebben we consistent ons vermogen aangetoond om uitzonderlijke resultaten te leveren.',
 
     'reason2_title' => 'Transparante Communicatie',
     'reason2_desc' => 'We houden u bij elke stap op de hoogte. Geen verrassingen, geen verborgen kosten—alleen eerlijke, open communicatie.',

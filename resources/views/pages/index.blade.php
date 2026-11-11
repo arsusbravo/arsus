@@ -40,22 +40,6 @@
                         <i class="fas fa-play ml-2"></i>
                     </a>
                 </div>
-
-                <!-- Stats -->
-                <div class="grid grid-cols-3 gap-6 pt-8 animate-on-scroll">
-                    <div>
-                        <h3 class="text-3xl font-bold text-[#fe742b]">500+</h3>
-                        <p class="text-gray-400 text-sm">{{ __('home.stats_projects') }}</p>
-                    </div>
-                    <div>
-                        <h3 class="text-3xl font-bold text-[#fe742b]">50+</h3>
-                        <p class="text-gray-400 text-sm">{{ __('home.stats_countries') }}</p>
-                    </div>
-                    <div>
-                        <h3 class="text-3xl font-bold text-[#fe742b]">98%</h3>
-                        <p class="text-gray-400 text-sm">{{ __('home.stats_satisfaction') }}</p>
-                    </div>
-                </div>
             </div>
 
             <!-- Illustration -->

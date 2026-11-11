@@ -11,12 +11,16 @@ return [
     'story_title' => 'Our',
     'story_title_highlight' => 'Story',
     'story_paragraph1' => 'With our headquarters in the Netherlands and our representation office in Jakarta, Indonesia, ARSUS IT Solutions was founded with a clear mission: to empower businesses with world-class digital solutions that drive growth and innovation.',
-    'story_paragraph2' => 'What started as a small team of passionate developers has grown into a full-service development agency with a presence across two continents, serving clients in 50+ countries. We\'ve successfully delivered over 500 projects, ranging from simple websites to complex enterprise applications.',
-    'story_paragraph3' => 'Our strategic locations in the Netherlands and Jakarta allow us to provide seamless service across different time zones. Our commitment to quality, innovation, and client satisfaction has earned us a 98% client satisfaction rate and long-term partnerships with businesses worldwide.',
-    'stat_projects' => 'Projects Delivered',
-    'stat_countries' => 'Countries Served',
-    'stat_satisfaction' => 'Satisfaction Rate',
-    'stat_support' => 'Support Available',
+    'story_paragraph2' => 'What started as a small team of passionate developers has grown into a full-service development agency with a presence across two continents. We take on projects ranging from simple websites to complex, AI-powered applications.',
+    'story_paragraph3' => 'Our strategic locations in the Netherlands and Jakarta allow us to provide seamless service across different time zones. Our commitment to quality, innovation, and client satisfaction has earned us long-term partnerships with businesses that keep coming back for their next project.',
+    'highlight1_title' => 'Full-Stack Delivery',
+    'highlight1_desc' => 'Laravel to modern frontends',
+    'highlight2_title' => 'Multilingual by Default',
+    'highlight2_desc' => 'English, Dutch & Indonesian',
+    'highlight3_title' => 'AI-Powered Builds',
+    'highlight3_desc' => 'Practical AI integrations',
+    'highlight4_title' => 'Direct Communication',
+    'highlight4_desc' => 'No account managers in between',
 
     // Our Values Section
     'values_title' => 'Our',
@@ -64,7 +68,7 @@ return [
     'why_choose_subtitle' => 'We\'re not just another development agency',
 
     'reason1_title' => 'Proven Track Record',
-    'reason1_desc' => 'With 500+ successful projects across diverse industries, we\'ve demonstrated our ability to deliver exceptional results consistently.',
+    'reason1_desc' => 'Across diverse industries, we\'ve demonstrated our ability to deliver exceptional results consistently.',
 
     'reason2_title' => 'Transparent Communication',
     'reason2_desc' => 'We keep you informed every step of the way. No surprises, no hidden costs—just honest, open communication.',

@@ -53,20 +53,32 @@
                 <div class="glass-effect p-8 rounded-3xl">
                     <div class="grid grid-cols-2 gap-6">
                         <div class="text-center p-6 bg-gradient-to-br from-[#fe742b]/20 to-transparent rounded-2xl">
-                            <h3 class="text-4xl font-bold text-[#fe742b] mb-2">500+</h3>
-                            <p class="text-gray-400">{{ __('about.stat_projects') }}</p>
+                            <div class="w-12 h-12 mx-auto bg-[#fe742b]/20 rounded-xl flex items-center justify-center mb-3">
+                                <i class="fas fa-layer-group text-[#fe742b] text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-1">{{ __('about.highlight1_title') }}</h3>
+                            <p class="text-gray-400 text-sm">{{ __('about.highlight1_desc') }}</p>
                         </div>
                         <div class="text-center p-6 bg-gradient-to-br from-purple-600/20 to-transparent rounded-2xl">
-                            <h3 class="text-4xl font-bold text-purple-400 mb-2">50+</h3>
-                            <p class="text-gray-400">{{ __('about.stat_countries') }}</p>
+                            <div class="w-12 h-12 mx-auto bg-purple-500/20 rounded-xl flex items-center justify-center mb-3">
+                                <i class="fas fa-language text-purple-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-1">{{ __('about.highlight2_title') }}</h3>
+                            <p class="text-gray-400 text-sm">{{ __('about.highlight2_desc') }}</p>
                         </div>
                         <div class="text-center p-6 bg-gradient-to-br from-blue-600/20 to-transparent rounded-2xl">
-                            <h3 class="text-4xl font-bold text-blue-400 mb-2">98%</h3>
-                            <p class="text-gray-400">{{ __('about.stat_satisfaction') }}</p>
+                            <div class="w-12 h-12 mx-auto bg-blue-500/20 rounded-xl flex items-center justify-center mb-3">
+                                <i class="fas fa-robot text-blue-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-1">{{ __('about.highlight3_title') }}</h3>
+                            <p class="text-gray-400 text-sm">{{ __('about.highlight3_desc') }}</p>
                         </div>
                         <div class="text-center p-6 bg-gradient-to-br from-green-600/20 to-transparent rounded-2xl">
-                            <h3 class="text-4xl font-bold text-green-400 mb-2">24/7</h3>
-                            <p class="text-gray-400">{{ __('about.stat_support') }}</p>
+                            <div class="w-12 h-12 mx-auto bg-green-500/20 rounded-xl flex items-center justify-center mb-3">
+                                <i class="fas fa-comments text-green-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-1">{{ __('about.highlight4_title') }}</h3>
+                            <p class="text-gray-400 text-sm">{{ __('about.highlight4_desc') }}</p>
                         </div>
                     </div>
                 </div>
