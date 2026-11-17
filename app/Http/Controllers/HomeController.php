@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DOMDocument;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormMail;
 use Illuminate\Support\Facades\RateLimiter;
@@ -73,6 +75,95 @@ class HomeController extends Controller
         ];
 
         return view('pages.case-detail', compact('case', 'slug'));
+    }
+
+    /**
+     * Build sitemap.xml with every public page, in every locale, with
+     * hreflang alternate links so search engines don't treat the three
+     * language versions of a page as duplicate content.
+     */
+    public function sitemap(): Response
+    {
+        $locales = ['en' => '', 'nl' => 'nl.', 'id' => 'id.'];
+
+        $staticRoutes = [
+            'home',
+            'services',
+            'about',
+            'contact',
+            'cases',
+            'cases.success-stories',
+            'cases.projects',
+        ];
+
+        $entries = [];
+
+        foreach ($staticRoutes as $routeName) {
+            $entries[] = $this->sitemapAlternates($locales, $routeName);
+        }
+
+        foreach ($this->caseSlugs() as $slug) {
+            $entries[] = $this->sitemapAlternates($locales, 'case.show', ['slug' => $slug]);
+        }
+
+        $xml = new DOMDocument('1.0', 'UTF-8');
+        $xml->formatOutput = true;
+
+        $urlset = $xml->createElementNS('http://www.sitemaps.org/schemas/sitemap/0.9', 'urlset');
+        $urlset->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xhtml', 'http://www.w3.org/1999/xhtml');
+        $xml->appendChild($urlset);
+
+        foreach ($entries as $alternates) {
+            $url = $xml->createElement('url');
+
+            $loc = $xml->createElement('loc');
+            $loc->appendChild($xml->createTextNode($alternates['en']));
+            $url->appendChild($loc);
+
+            foreach ($alternates + ['x-default' => $alternates['en']] as $hreflang => $href) {
+                $link = $xml->createElement('xhtml:link');
+                $link->setAttribute('rel', 'alternate');
+                $link->setAttribute('hreflang', $hreflang);
+                $link->setAttribute('href', $href);
+                $url->appendChild($link);
+            }
+
+            $urlset->appendChild($url);
+        }
+
+        return response($xml->saveXML(), 200)->header('Content-Type', 'application/xml; charset=UTF-8');
+    }
+
+    /**
+     * Resolve the same named route in every locale, keyed by hreflang code.
+     */
+    private function sitemapAlternates(array $locales, string $routeName, array $parameters = []): array
+    {
+        $alternates = [];
+
+        foreach ($locales as $hreflang => $prefix) {
+            $alternates[$hreflang] = route($prefix . $routeName, $parameters);
+        }
+
+        return $alternates;
+    }
+
+    /**
+     * Single source of valid case slugs, used by the sitemap. Mirrors the
+     * keys in getCaseTechStack()/getCaseImageCount()/getCaseNumber() and in
+     * lang/*\/cases.php.
+     */
+    private function caseSlugs(): array
+    {
+        return [
+            'online-reservation-system',
+            'online-order-system',
+            'financial-calculators',
+            'digitalized-form',
+            'document-signing',
+            'lead-generation',
+            'ai-integration',
+        ];
     }
 
     private function getCaseTechStack($slug)

@@ -39,3 +39,6 @@ Route::prefix('id')->group(function () {
     Route::get('cases/projects', [HomeController::class, 'projects'])->name('id.cases.projects');
     Route::get('cases/{slug}', [HomeController::class, 'caseShow'])->name('id.case.show');
 });
+
+// Sitemap (locale-independent: lists every page in every locale)
+Route::get('sitemap.xml', [HomeController::class, 'sitemap'])->name('sitemap');
