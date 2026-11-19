@@ -7,6 +7,13 @@
  | to the gradient + icon panel.
  */
 return [
+    'rentacar' => [
+        'url' => 'https://rentacar.arsus.it/',
+        'icon' => 'fa-car',
+        'gradient' => 'from-slate-600/40 to-cyan-900/60',
+        'image' => 'images/projects/rentacar.png',
+        'tags' => ['Laravel', 'Vue.js', 'Car Rental'],
+    ],
     'housecheck' => [
         'url' => 'https://housecheck.arsus.it/',
         'icon' => 'fa-house-circle-check',

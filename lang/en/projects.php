@@ -14,6 +14,10 @@ return [
     'cta_success_stories' => 'Success Stories',
 
     'items' => [
+        'rentacar' => [
+            'title' => 'RentACar',
+            'description' => 'A car rental booking platform. Customers pick a pickup and return branch, choose dates, compare vehicle categories with live pricing, and add extras like winter tires or a navigation system. A staff back office manages branches, vehicles, extras and bookings.',
+        ],
         'housecheck' => [
             'title' => 'HouseCheck',
             'description' => 'Find out the status of your house. HouseCheck retrieves its data directly from official government APIs, such as the Kadaster, so the status you see comes from an official source.',

@@ -14,6 +14,10 @@ return [
     'cta_success_stories' => 'Kisah Sukses',
 
     'items' => [
+        'rentacar' => [
+            'title' => 'RentACar',
+            'description' => 'Platform pemesanan sewa mobil. Pelanggan memilih lokasi pengambilan dan pengembalian, menentukan tanggal, membandingkan kategori kendaraan dengan harga langsung, dan menambahkan opsi seperti ban musim dingin atau sistem navigasi. Back office staf mengelola cabang, kendaraan, opsi tambahan, dan pemesanan.',
+        ],
         'housecheck' => [
             'title' => 'HouseCheck',
             'description' => 'Cari tahu status rumah Anda. HouseCheck mengambil datanya langsung dari API resmi pemerintah, seperti Kadaster (lembaga pendaftaran tanah Belanda), sehingga status yang Anda lihat berasal dari sumber resmi.',

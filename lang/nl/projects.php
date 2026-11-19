@@ -14,6 +14,10 @@ return [
     'cta_success_stories' => 'Succesverhalen',
 
     'items' => [
+        'rentacar' => [
+            'title' => 'RentACar',
+            'description' => 'Een boekingsplatform voor autoverhuur. Klanten kiezen een ophaal- en retourlocatie, selecteren data, vergelijken voertuigcategorieën met actuele prijzen en voegen extra\'s toe zoals winterbanden of een navigatiesysteem. Een backoffice voor medewerkers beheert vestigingen, voertuigen, extra\'s en boekingen.',
+        ],
         'housecheck' => [
             'title' => 'HouseCheck',
             'description' => 'Ontdek de status van jouw woning. HouseCheck haalt de gegevens rechtstreeks op via officiële API\'s van de overheid, zoals het Kadaster, zodat de status die je ziet uit een officiële bron komt.',
