@@ -189,6 +189,14 @@ export function createAudio() {
       tone('sine', 1320, 1320, 0.12, 0.08, 0.08);
     },
 
+    // asteroid glancing off the hull: a low thump + a short metallic knock
+    bump(vol = 1) {
+      if (!enabled || !ctx || vol <= 0.02) return;
+      tone('sine', 120, 42, 0.2, 0.55 * vol);
+      tone('triangle', 210, 75, 0.1, 0.18 * vol, 0.01);
+      hiss(2400, 500, 0.12, 0.22 * vol, 1.1, 0.005);
+    },
+
     whoosh(dur) {
       if (!enabled || !ctx) return;
       const t0 = ctx.currentTime;

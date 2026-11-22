@@ -1172,7 +1172,11 @@ animated.push((t, dt) => {
       const r = Math.hypot(m.position.x, m.position.y);
       const safeR = HULL_R * 1.2 + m.scale.x;
       if (r < safeR) {
-        if (!u.hit) { u.hit = true; triggerShake(0.05 + m.scale.x * 0.045); }
+        if (!u.hit) {
+          u.hit = true;
+          triggerShake(0.05 + m.scale.x * 0.045);
+          sfx.bump(Math.min(1, 0.35 + m.scale.x * 0.18));
+        }
         const nx = r > 0.001 ? m.position.x / r : 1, ny = r > 0.001 ? m.position.y / r : 0;
         const vDotN = u.vel.x * nx + u.vel.y * ny;
         if (vDotN < 0) { u.vel.x -= 2 * vDotN * nx; u.vel.y -= 2 * vDotN * ny; }
