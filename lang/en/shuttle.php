@@ -236,6 +236,7 @@ return [
         'error_email' => 'Please enter a valid email address',
         'error_subject' => 'Please select a mission type',
         'error_message' => 'Please write at least 10 characters',
+        'error_too_fast' => 'Please take your time filling out the form.',
         // server responses
         'server_sent' => 'Message received on the bridge. I\'ll get back to you soon.',
         'server_too_many' => 'Too many transmissions. Please try again in :minutes minutes.',

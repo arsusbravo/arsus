@@ -9,6 +9,11 @@ initMonitor('contact');
 const CONTACT_EMAIL = 'info@arsus.nl';
 const csrf = document.querySelector('meta[name="csrf-token"]')?.content || '';
 
+// Time-based spam check: a human needs at least a few seconds to fill the form.
+// Reset whenever the form becomes fillable again (first load, or after "Send another").
+const MIN_FILL_TIME = 3000;
+let formLoadTime = Date.now();
+
 const form = document.querySelector('#comms-form');
 const sent = document.querySelector('#sent');
 const sentText = document.querySelector('#sent-text');
@@ -60,6 +65,11 @@ form.addEventListener('submit', async (e) => {
   const invalid = fields.filter((el) => !validateField(el));
   if (invalid.length) { invalid[0].focus(); return; }
 
+  if (Date.now() - formLoadTime < MIN_FILL_TIME) {
+    showError(t('comms.error_too_fast', 'Please take your time filling out the form.'));
+    return;
+  }
+
   const data = Object.fromEntries(new FormData(form).entries());
   Object.keys(data).forEach((k) => (data[k] = String(data[k]).trim()));
 
@@ -109,6 +119,7 @@ function showSent(text) {
   pingAt = performance.now();
 }
 document.querySelector('#again').addEventListener('click', () => {
+  formLoadTime = Date.now();
   form.reset();
   form.querySelectorAll('.err').forEach((o) => (o.textContent = ''));
   sent.hidden = true;

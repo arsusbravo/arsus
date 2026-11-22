@@ -234,6 +234,7 @@ return [
         'error_email' => 'Masukkan alamat email yang valid',
         'error_subject' => 'Pilih jenis misi',
         'error_message' => 'Tulis minimal 10 karakter',
+        'error_too_fast' => 'Luangkan waktu untuk mengisi formulir ini.',
         'server_sent' => 'Pesan diterima di anjungan. Saya akan segera menghubungi Anda.',
         'server_too_many' => 'Terlalu banyak transmisi. Silakan coba lagi dalam :minutes menit.',
         'server_failed' => 'Terjadi kesalahan saat mengirim. Silakan coba lagi atau kirim email langsung ke info@arsus.nl.',

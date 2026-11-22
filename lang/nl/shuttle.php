@@ -234,6 +234,7 @@ return [
         'error_email' => 'Vul een geldig e-mailadres in',
         'error_subject' => 'Kies een type missie',
         'error_message' => 'Schrijf minimaal 10 tekens',
+        'error_too_fast' => 'Neem de tijd om het formulier in te vullen.',
         'server_sent' => 'Bericht ontvangen op de brug. Ik neem snel contact met je op.',
         'server_too_many' => 'Te veel transmissies. Probeer het over :minutes minuten opnieuw.',
         'server_failed' => 'Er ging iets mis bij het verzenden. Probeer het opnieuw of mail direct naar info@arsus.nl.',
