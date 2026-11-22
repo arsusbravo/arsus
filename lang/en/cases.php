@@ -2,6 +2,7 @@
 
 return [
     'online-reservation-system' => [
+        'summary' => 'Streamlined vehicle rental operations with real-time booking system, inventory management, and comprehensive admin dashboard.',
         'title' => 'Online Reservation System',
         'subtitle' => 'Vehicle Rental Management Platform',
         'description' => 'A bespoke application developed for a prominent rental car company to streamline operations. The platform enables customers to browse available vehicles and secure reservations for specific dates and times, while providing administrators with comprehensive management tools.',
@@ -25,6 +26,7 @@ return [
         ],
     ],
     'online-order-system' => [
+        'summary' => 'Members-only platform for weekly food ordering across multiple locations with menu management and multilingual support.',
         'title' => 'Online Order System',
         'subtitle' => 'Members-Only Food Ordering Platform',
         'description' => 'Sophisticated solution facilitates the seamless placement of food orders by registered members on a weekly basis. The platform restricts access to authorized users only, offering a secure ordering environment for a specialized catering company.',
@@ -50,6 +52,7 @@ return [
         ],
     ],
     'financial-calculators' => [
+        'summary' => 'Interactive mortgage and loan calculators with real-time calculations, lead capture, and secure data storage.',
         'title' => 'Financial Calculators',
         'subtitle' => 'Interactive Mortgage & Loan Calculator Platform',
         'description' => 'A sophisticated online calculator platform developed for a financial sector business. The solution integrates complex financial formulas to enable mortgage, credit, and loan calculations, enhancing customer engagement and supporting informed financial decision-making.',
@@ -73,6 +76,7 @@ return [
         ],
     ],
     'digitalized-form' => [
+        'summary' => 'Paperless claim submission system with digital workflows, automated processing, and secure document management.',
         'title' => 'Digitalized Claim Form',
         'subtitle' => 'Paperless Claims Processing System',
         'description' => 'Modern digital solution transforming traditional paper-based claim submissions into an efficient, automated workflow. The platform streamlines the entire claims process from submission to approval with secure document management.',
@@ -96,6 +100,7 @@ return [
         ],
     ],
     'document-signing' => [
+        'summary' => 'Secure e-signature platform enabling remote document signing with authentication, audit trails, and legal compliance.',
         'title' => 'Effortless Document Signing',
         'subtitle' => 'Secure E-Signature Platform',
         'description' => 'Comprehensive e-signature solution enabling remote document signing with enterprise-grade security, authentication, and legal compliance. The platform eliminates the need for physical presence in document execution.',
@@ -120,6 +125,7 @@ return [
         ],
     ],
     'lead-generation' => [
+        'summary' => 'Marketing automation system with form builders, CRM integration, analytics tracking, and conversion optimization tools.',
         'title' => 'Lead Generation Platform',
         'subtitle' => 'Marketing Automation & CRM Integration',
         'description' => 'Comprehensive marketing automation system designed to capture, nurture, and convert leads through intelligent form builders, CRM integration, and advanced analytics. The platform optimizes the entire lead generation funnel.',
@@ -144,6 +150,7 @@ return [
         ],
     ],
     'ai-integration' => [
+        'summary' => 'AI-powered automation through API integration via OpenRouter: recognizing products and food waste from a photo, drafting product listings and powering natural AI conversations.',
         'title' => 'AI Integration',
         'subtitle' => 'Intelligent Automation via OpenRouter API',
         'description' => 'A set of AI-powered features we integrated into our own web products through the OpenRouter API. From recognizing food waste and products from a single photo, to writing complete product listings and holding natural conversations with AI personas, the AI does the heavy lifting while users stay in control.',

@@ -2,6 +2,7 @@
 
 return [
     'online-reservation-system' => [
+        'summary' => 'Operasional rental kendaraan yang efisien dengan sistem pemesanan real-time, manajemen inventaris, dan dasbor admin yang lengkap.',
         'title' => 'Sistem Reservasi Online',
         'subtitle' => 'Platform Manajemen Rental Kendaraan',
         'description' => 'Aplikasi khusus yang dikembangkan untuk perusahaan rental mobil terkemuka untuk merampingkan operasi. Platform ini memungkinkan pelanggan untuk menjelajahi kendaraan yang tersedia dan mengamankan reservasi untuk tanggal dan waktu tertentu, sambil menyediakan administrator dengan alat manajemen yang komprehensif.',
@@ -25,6 +26,7 @@ return [
         ],
     ],
     'online-order-system' => [
+        'summary' => 'Platform khusus anggota untuk pemesanan makanan mingguan di berbagai lokasi, dengan manajemen menu dan dukungan multibahasa.',
         'title' => 'Sistem Pesanan Online',
         'subtitle' => 'Platform Pemesanan Makanan Khusus Anggota',
         'description' => 'Solusi canggih yang memfasilitasi penempatan pesanan makanan yang mulus oleh anggota terdaftar secara mingguan. Platform ini membatasi akses hanya untuk pengguna yang diotorisasi, menawarkan lingkungan pemesanan yang aman untuk perusahaan katering khusus.',
@@ -50,6 +52,7 @@ return [
         ],
     ],
     'financial-calculators' => [
+        'summary' => 'Kalkulator KPR dan pinjaman interaktif dengan perhitungan real-time, penjaringan prospek, dan penyimpanan data yang aman.',
         'title' => 'Kalkulator Keuangan',
         'subtitle' => 'Platform Kalkulator Hipotek & Pinjaman Interaktif',
         'description' => 'Platform kalkulator online canggih yang dikembangkan untuk bisnis sektor keuangan. Solusinya mengintegrasikan rumus keuangan kompleks untuk memungkinkan perhitungan hipotek, kredit, dan pinjaman, meningkatkan keterlibatan pelanggan dan mendukung pengambilan keputusan keuangan yang tepat.',
@@ -73,6 +76,7 @@ return [
         ],
     ],
     'digitalized-form' => [
+        'summary' => 'Sistem pengajuan klaim tanpa kertas dengan alur kerja digital, pemrosesan otomatis, dan manajemen dokumen yang aman.',
         'title' => 'Formulir Klaim Digital',
         'subtitle' => 'Sistem Pemrosesan Klaim Tanpa Kertas',
         'description' => 'Solusi digital modern yang mengubah pengajuan klaim berbasis kertas tradisional menjadi alur kerja otomatis yang efisien. Platform ini merampingkan seluruh proses klaim dari pengajuan hingga persetujuan dengan manajemen dokumen yang aman.',
@@ -96,6 +100,7 @@ return [
         ],
     ],
     'document-signing' => [
+        'summary' => 'Platform tanda tangan elektronik yang aman untuk menandatangani dokumen dari jarak jauh, dengan autentikasi, jejak audit, dan kepatuhan hukum.',
         'title' => 'Penandatanganan Dokumen Tanpa Usaha',
         'subtitle' => 'Platform Tanda Tangan Elektronik yang Aman',
         'description' => 'Solusi tanda tangan elektronik komprehensif yang memungkinkan penandatanganan dokumen jarak jauh dengan keamanan tingkat enterprise, autentikasi, dan kepatuhan hukum. Platform ini menghilangkan kebutuhan kehadiran fisik dalam eksekusi dokumen.',
@@ -120,6 +125,7 @@ return [
         ],
     ],
     'lead-generation' => [
+        'summary' => 'Sistem otomatisasi pemasaran dengan pembuat formulir, integrasi CRM, analitik, dan alat optimasi konversi.',
         'title' => 'Platform Generasi Prospek',
         'subtitle' => 'Otomasi Pemasaran & Integrasi CRM',
         'description' => 'Sistem otomasi pemasaran komprehensif yang dirancang untuk menangkap, memelihara, dan mengonversi prospek melalui pembuat formulir cerdas, integrasi CRM, dan analitik canggih. Platform ini mengoptimalkan seluruh corong generasi prospek.',

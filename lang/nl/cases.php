@@ -2,6 +2,7 @@
 
 return [
     'online-reservation-system' => [
+        'summary' => 'Gestroomlijnde autoverhuur met een realtime boekingssysteem, voorraadbeheer en een uitgebreid beheerdashboard.',
         'title' => 'Online Reserveringssysteem',
         'subtitle' => 'Voertuigverhuur Beheerplatform',
         'description' => 'Een op maat gemaakte applicatie ontwikkeld voor een prominente autoverhuurbedrijf om operaties te stroomlijnen. Het platform stelt klanten in staat om beschikbare voertuigen te bekijken en reserveringen te maken voor specifieke data en tijden, terwijl het beheerders voorziet van uitgebreide beheertools.',
@@ -25,6 +26,7 @@ return [
         ],
     ],
     'online-order-system' => [
+        'summary' => 'Besloten platform voor wekelijkse maaltijdbestellingen op meerdere locaties, met menubeheer en meertalige ondersteuning.',
         'title' => 'Online Bestelsysteem',
         'subtitle' => 'Leden-Only Voedselbestelplatform',
         'description' => 'Geavanceerde oplossing faciliteert naadloze plaatsing van voedselbestellingen door geregistreerde leden op wekelijkse basis. Het platform beperkt toegang tot alleen geautoriseerde gebruikers en biedt een veilige bestelomgeving voor een gespecialiseerd cateringbedrijf.',
@@ -50,6 +52,7 @@ return [
         ],
     ],
     'financial-calculators' => [
+        'summary' => 'Interactieve hypotheek- en leningcalculators met realtime berekeningen, leadgeneratie en veilige gegevensopslag.',
         'title' => 'Financiële Rekenmachines',
         'subtitle' => 'Interactief Hypotheek & Lening Calculator Platform',
         'description' => 'Een geavanceerd online rekenmachine platform ontwikkeld voor een financiële sector bedrijf. De oplossing integreert complexe financiële formules om hypotheek-, krediet- en leningberekeningen mogelijk te maken, wat klantbetrokkenheid vergroot en geïnformeerde financiële besluitvorming ondersteunt.',
@@ -73,6 +76,7 @@ return [
         ],
     ],
     'digitalized-form' => [
+        'summary' => 'Papierloos declaratiesysteem met digitale workflows, geautomatiseerde verwerking en veilig documentbeheer.',
         'title' => 'Gedigitaliseerd Claimformulier',
         'subtitle' => 'Papierloos Claimverwerkingssysteem',
         'description' => 'Moderne digitale oplossing die traditionele papiergebaseerde claimindieningen transformeert in een efficiënte, geautomatiseerde workflow. Het platform stroomlijnt het hele claimproces van indiening tot goedkeuring met veilig documentbeheer.',
@@ -96,6 +100,7 @@ return [
         ],
     ],
     'document-signing' => [
+        'summary' => 'Veilig e-signatureplatform voor het op afstand ondertekenen van documenten, met authenticatie, audittrails en wettelijke compliance.',
         'title' => 'Moeiteloze Documentondertekening',
         'subtitle' => 'Veilig E-Handtekening Platform',
         'description' => 'Uitgebreide e-handtekening oplossing die externe documentondertekening mogelijk maakt met enterprise-grade beveiliging, authenticatie en wettelijke naleving. Het platform elimineert de noodzaak voor fysieke aanwezigheid bij documentuitvoering.',
@@ -120,6 +125,7 @@ return [
         ],
     ],
     'lead-generation' => [
+        'summary' => 'Marketingautomatisering met formulierbouwers, CRM-koppeling, analytics en tools voor conversie-optimalisatie.',
         'title' => 'Lead Generatie Platform',
         'subtitle' => 'Marketing Automatisering & CRM Integratie',
         'description' => 'Uitgebreid marketing automatiseringssysteem ontworpen om leads vast te leggen, te koesteren en te converteren door intelligente formulierbouwers, CRM-integratie en geavanceerde analytics. Het platform optimaliseert de gehele lead generatie funnel.',

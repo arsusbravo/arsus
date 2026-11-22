@@ -1,17 +1,82 @@
 {
-  "resources/js/app.js": {
-    "file": "assets/app-CAiCLEjY.js",
-    "name": "app",
-    "src": "resources/js/app.js",
-    "isEntry": true
+  "_OutputPass-BIXVRVBT.js": {
+    "file": "assets/OutputPass-BIXVRVBT.js",
+    "name": "OutputPass"
   },
-  "resources/sass/app.scss": {
-    "file": "assets/app-Byqyp2V1.css",
-    "src": "resources/sass/app.scss",
+  "_monitor-BqDalkrT.js": {
+    "file": "assets/monitor-BqDalkrT.js",
+    "name": "monitor"
+  },
+  "_nav-0FYYIBlH.js": {
+    "file": "assets/nav-0FYYIBlH.js",
+    "name": "nav",
+    "imports": [
+      "_ui-sound-6vNRWnT3.js"
+    ]
+  },
+  "_ui-sound-6vNRWnT3.js": {
+    "file": "assets/ui-sound-6vNRWnT3.js",
+    "name": "ui-sound"
+  },
+  "resources/css/shuttle.css": {
+    "file": "assets/shuttle-DhtwVdQ1.css",
+    "src": "resources/css/shuttle.css",
     "isEntry": true,
-    "name": "app",
+    "name": "shuttle",
     "names": [
-      "app.css"
+      "shuttle.css"
+    ]
+  },
+  "resources/js/shuttle/about.js": {
+    "file": "assets/about-Bsr_CqUh.js",
+    "name": "about",
+    "src": "resources/js/shuttle/about.js",
+    "isEntry": true,
+    "imports": [
+      "_ui-sound-6vNRWnT3.js",
+      "_monitor-BqDalkrT.js"
+    ]
+  },
+  "resources/js/shuttle/cases.js": {
+    "file": "assets/cases-B30JbX21.js",
+    "name": "cases",
+    "src": "resources/js/shuttle/cases.js",
+    "isEntry": true,
+    "imports": [
+      "_ui-sound-6vNRWnT3.js",
+      "_nav-0FYYIBlH.js"
+    ]
+  },
+  "resources/js/shuttle/contact.js": {
+    "file": "assets/contact-sZ4v9FUB.js",
+    "name": "contact",
+    "src": "resources/js/shuttle/contact.js",
+    "isEntry": true,
+    "imports": [
+      "_ui-sound-6vNRWnT3.js",
+      "_monitor-BqDalkrT.js"
+    ]
+  },
+  "resources/js/shuttle/main.js": {
+    "file": "assets/main-DvKzuTg4.js",
+    "name": "main",
+    "src": "resources/js/shuttle/main.js",
+    "isEntry": true,
+    "imports": [
+      "_OutputPass-BIXVRVBT.js",
+      "_ui-sound-6vNRWnT3.js",
+      "_nav-0FYYIBlH.js"
+    ]
+  },
+  "resources/js/shuttle/services.js": {
+    "file": "assets/services-DtwKHkf7.js",
+    "name": "services",
+    "src": "resources/js/shuttle/services.js",
+    "isEntry": true,
+    "imports": [
+      "_ui-sound-6vNRWnT3.js",
+      "_nav-0FYYIBlH.js",
+      "_OutputPass-BIXVRVBT.js"
     ]
   }
 }

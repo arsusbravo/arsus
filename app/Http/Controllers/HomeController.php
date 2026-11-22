@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormMail;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Lang;
 
 class HomeController extends Controller
 {
@@ -39,12 +40,15 @@ class HomeController extends Controller
 
     public function cases()
     {
-        return view('pages.cases');
+        return view('pages.cases', [
+            'cases' => $this->caseCards(),
+            'projects' => config('projects'),
+        ]);
     }
 
     public function successStories()
     {
-        return view('pages.cases-success-stories');
+        return view('pages.cases-success-stories', ['cases' => $this->caseCards()]);
     }
 
     public function projects()
@@ -54,9 +58,9 @@ class HomeController extends Controller
 
     public function caseShow($slug)
     {
-        // Check if translation exists for this case
+        // Check if translation exists for this case (falls back to English for untranslated cases)
         $caseKey = "cases.{$slug}";
-        if (!__("{$caseKey}.title")) {
+        if (!Lang::has("{$caseKey}.title")) {
             abort(404);
         }
 
@@ -72,9 +76,64 @@ class HomeController extends Controller
             'tech_stack' => $this->getCaseTechStack($slug),
             'images' => $this->getCaseImageCount($slug),
             'case_number' => $this->getCaseNumber($slug),
+            'tags' => $this->getCaseTags($slug),
         ];
 
-        return view('pages.case-detail', compact('case', 'slug'));
+        // previous / next mission in display order
+        $order = $this->caseOrder();
+        $i = array_search($slug, $order, true);
+        $i = $i === false ? 0 : $i;
+        $prevSlug = $order[($i - 1 + count($order)) % count($order)];
+        $nextSlug = $order[($i + 1) % count($order)];
+        $prev = ['slug' => $prevSlug, 'title' => __("cases.{$prevSlug}.title")];
+        $next = ['slug' => $nextSlug, 'title' => __("cases.{$nextSlug}.title")];
+        $index = $i + 1;
+
+        return view('pages.case-detail', compact('case', 'slug', 'prev', 'next', 'index'));
+    }
+
+    /**
+     * Display order of the case studies (newest highlight first).
+     */
+    private function caseOrder(): array
+    {
+        return [
+            'ai-integration',
+            'online-reservation-system',
+            'online-order-system',
+            'financial-calculators',
+            'digitalized-form',
+            'document-signing',
+            'lead-generation',
+        ];
+    }
+
+    /**
+     * Card data for the mission log pages, in display order.
+     */
+    private function caseCards(): array
+    {
+        return array_map(fn ($slug) => [
+            'slug' => $slug,
+            'title' => __("cases.{$slug}.title"),
+            'subtitle' => __("cases.{$slug}.subtitle"),
+            'summary' => __("cases.{$slug}.summary"),
+            'tags' => $this->getCaseTags($slug),
+            'thumb' => 'images/cases/thumb-' . $this->getCaseNumber($slug) . '.jpg',
+        ], $this->caseOrder());
+    }
+
+    private function getCaseTags($slug): array
+    {
+        return [
+            'ai-integration' => ['AI', 'Automation', 'OpenRouter API'],
+            'online-reservation-system' => ['Booking System', 'Admin Dashboard', 'Calendar Integration'],
+            'online-order-system' => ['E-commerce', 'Multi-location', 'Member Portal'],
+            'financial-calculators' => ['FinTech', 'Calculator', 'Lead Generation'],
+            'digitalized-form' => ['Digital Forms', 'Automation', 'Workflow'],
+            'document-signing' => ['E-Signature', 'Security', 'Compliance'],
+            'lead-generation' => ['Marketing', 'CRM', 'Analytics'],
+        ][$slug] ?? [];
     }
 
     /**
@@ -393,7 +452,7 @@ class HomeController extends Controller
             $seconds = RateLimiter::availableIn($key);
             return response()->json([
                 'success' => false,
-                'message' => 'Too many submission attempts. Please try again in ' . ceil($seconds / 60) . ' minutes.'
+                'message' => __('shuttle.comms.server_too_many', ['minutes' => ceil($seconds / 60)])
             ], 429);
         }
 
@@ -415,7 +474,7 @@ class HomeController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Thank you for your message. We will get back to you soon.'
+                'message' => __('shuttle.comms.server_sent')
             ]);
         }
 
@@ -445,7 +504,7 @@ class HomeController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Thank you for your message. We will get back to you within 24 hours.'
+                'message' => __('shuttle.comms.server_sent')
             ]);
 
         } catch (\Exception $e) {
@@ -456,7 +515,7 @@ class HomeController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'Something went wrong. Please try again or use the email link on this page to contact us directly.'
+                'message' => __('shuttle.comms.server_failed')
             ], 500);
         }
     }
