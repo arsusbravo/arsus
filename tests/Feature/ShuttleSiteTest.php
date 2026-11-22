@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\RateLimiter;
 $locales = ['' => 'en', '/nl' => 'nl', '/id' => 'id'];
 
 // a missing translation renders its key, e.g. "shuttle.home.hero_title"
-const RAW_KEY = '/\bshuttle\.(meta|nav|rooms|signs|sound|home|about|services|log|comms|return_shuttle|open_comms)\b/';
+const RAW_KEY = '/\bshuttle\.(meta|boot|nav|rooms|signs|sound|home|about|services|log|comms|return_shuttle|open_comms|game)\b/';
 
 foreach ($locales as $prefix => $locale) {
     it("renders the shuttle pages ({$locale})", function () use ($prefix, $locale) {
@@ -29,6 +29,21 @@ foreach ($locales as $prefix => $locale) {
         }
     });
 }
+
+it('renders the cockpit minigame HUD skeleton on the home page without raw translation keys', function () {
+    $html = $this->get('/')->getContent();
+
+    expect($html)->toContain('id="cockpit-hint"')
+        ->toContain('id="game-crosshair"')
+        ->toContain('id="cockpit-game"')
+        ->toContain('id="game-alert"')
+        ->toContain('id="game-stats"')
+        ->toContain('id="game-score"')
+        ->toContain('id="game-time"')
+        ->toContain('id="game-complete"')
+        ->toContain('id="game-exit"')
+        ->not->toMatch(RAW_KEY);
+});
 
 it('lists every case on the accomplished page, linking to its report', function () {
     $html = $this->get('/cases/success-stories')->getContent();

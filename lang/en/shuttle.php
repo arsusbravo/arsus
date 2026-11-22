@@ -247,4 +247,16 @@ return [
         'server_too_many' => 'Too many transmissions. Please try again in :minutes minutes.',
         'server_failed' => 'Something went wrong while sending. Please try again.',
     ],
+
+    'game' => [
+        'hint' => 'Take the controls',
+        'alert_title' => 'Asteroid alert',
+        'alert_sub' => 'Incoming — man the guns!',
+        'score_label' => 'Score',
+        'time_label' => 'Time',
+        'exit' => 'Return to helm',
+        'round_complete_title' => 'ALL CLEAR',
+        'round_complete_text' => 'Nice shooting, pilot.',
+        'destroyed_label' => 'Destroyed',
+    ],
 ];

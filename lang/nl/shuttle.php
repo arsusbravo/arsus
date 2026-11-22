@@ -244,4 +244,16 @@ return [
         'server_too_many' => 'Te veel transmissies. Probeer het over :minutes minuten opnieuw.',
         'server_failed' => 'Er ging iets mis bij het verzenden. Probeer het opnieuw.',
     ],
+
+    'game' => [
+        'hint' => 'Neem de besturing over',
+        'alert_title' => 'Meteorietalarm',
+        'alert_sub' => 'Ze komen eraan — beman de kanonnen!',
+        'score_label' => 'Score',
+        'time_label' => 'Tijd',
+        'exit' => 'Terug naar de stuurstoel',
+        'round_complete_title' => 'ALLES VEILIG',
+        'round_complete_text' => 'Goed geschoten, piloot.',
+        'destroyed_label' => 'Vernietigd',
+    ],
 ];

@@ -275,6 +275,146 @@ body::after { content: ''; position: fixed; inset: 0; background: #050812; opaci
 @keyframes boot-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .boot-ring { animation: none; border-top-color: rgba(254, 116, 43, 0.25); } }
 
+/* ---------- Cockpit minigame (asteroid attack) ---------- */
+.cockpit-hint {
+  position: fixed;
+  z-index: 70;
+  left: 0; top: 0;
+  transform: translate(-50%, -100%);
+  padding: 0.4rem 0.7rem;
+  border: 1px solid rgba(254, 116, 43, 0.5);
+  border-radius: 6px;
+  background: rgba(5, 8, 18, 0.85);
+  color: #ffe9db;
+  font: 600 0.7rem ui-monospace, Menlo, monospace;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.cockpit-hint.show { opacity: 1; }
+
+.game-crosshair[hidden] { display: none; }
+.game-crosshair {
+  position: fixed;
+  z-index: 75; /* above .cockpit-hud (70) so it's never hidden behind the stat tiles */
+  left: 0; top: 0;
+  width: 0; height: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.game-crosshair::before {
+  content: '';
+  position: absolute;
+  left: -3px; top: -3px; width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.game-crosshair span {
+  position: absolute;
+  background: rgba(254, 116, 43, 0.85);
+  box-shadow: 0 0 6px rgba(254, 116, 43, 0.6);
+}
+.game-crosshair span:nth-child(1) { left: -1px; top: -22px; width: 2px; height: 12px; }   /* top tick */
+.game-crosshair span:nth-child(2) { left: 10px; top: -1px; width: 12px; height: 2px; }    /* right tick */
+.game-crosshair span:nth-child(3) { left: -1px; top: 10px; width: 2px; height: 12px; }    /* bottom tick */
+.game-crosshair span:nth-child(4) { left: -22px; top: -1px; width: 12px; height: 2px; }   /* left tick */
+
+.emergency-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 65; /* above the 3D canvas, below the HUD (70) */
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse at center, rgba(255, 59, 48, 0) 35%, rgba(255, 59, 48, 0.35) 100%);
+}
+.emergency-flash.on { opacity: 1; }
+
+.cockpit-hud[hidden] { display: none; }
+.cockpit-hud {
+  position: fixed;
+  inset: 0;
+  z-index: 70; /* above .nav/.sound-toggle (10-60), below .lightbox/body::after/.boot-loader (90-200) */
+  /* click-through by default: the window-shooting raycast must still receive clicks through
+     the HUD's screen area. Only .hud-exit opts back in below. */
+  pointer-events: none;
+}
+.hud-alert[hidden], .hud-stats[hidden], .hud-complete[hidden] { display: none; }
+
+.hud-alert {
+  position: absolute;
+  top: 18px; left: 50%;
+  transform: translateX(-50%);
+  max-width: min(90vw, 420px);
+  text-align: center;
+  padding: 0.7rem 1.2rem;
+  border: 1px solid #ff5a4d;
+  border-radius: 8px;
+  background: rgba(255, 90, 77, 0.14);
+  color: #ffb3ab;
+  animation: alert-flash 0.9s ease-in-out infinite;
+}
+.hud-alert strong {
+  display: block;
+  font: 800 1.1rem 'Orbitron', system-ui, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff8c7e;
+  text-shadow: 0 0 14px rgba(255, 90, 77, 0.6);
+}
+.hud-alert span {
+  display: block;
+  margin-top: 0.2rem;
+  font: 600 0.75rem ui-monospace, Menlo, monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+@keyframes alert-flash {
+  0%, 100% { box-shadow: 0 0 18px rgba(255, 90, 77, 0.25); }
+  50% { box-shadow: 0 0 34px rgba(255, 90, 77, 0.55); }
+}
+
+.hud-stats {
+  position: absolute;
+  top: 18px; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+}
+.hud-tile { min-width: 92px; padding: 0.6rem 0.9rem; text-align: center; }
+.hud-tile b { font-size: 1.5rem; }
+.hud-tile span {
+  font: 600 0.65rem ui-monospace, Menlo, monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hud-complete {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+}
+.hud-complete-text { color: #d7d9e8; font-size: 0.9rem; }
+
+.hud-exit {
+  position: absolute;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: auto; /* the one interactive element inside the otherwise click-through HUD */
+  padding: 0.6rem 1.4rem;
+}
+
+@media (prefers-reduced-motion: reduce) { .hud-alert { animation: none; } }
+
 /* ---------- Comms page ---------- */
 .comms { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: clamp(1.5rem, 4vw, 3.5rem); padding: clamp(1rem, 3vw, 2.5rem); max-width: 1200px; margin: 0 auto; align-items: start; }
 .tx h1 { font-family: 'Orbitron', system-ui, sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; color: #fff; margin: 0; }

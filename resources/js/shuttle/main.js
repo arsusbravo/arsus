@@ -83,6 +83,12 @@ const animated = []; // functions (t) => void
 let shakeMag = 0;
 function triggerShake(mag) { shakeMag = Math.max(shakeMag, mag); }
 
+// Set inside the cockpit room block below (which is otherwise block-scoped); used by the
+// cockpit minigame's hit-testing, which lives much further down the file.
+let cockpitWindowMesh = null;
+let cockpitHudMesh = null; // the decorative baked-in reticle on the glass; hidden during the
+                            // minigame so it doesn't double up with the real interactive crosshair
+
 // Deterministic pseudo-random so the ship looks the same on every load
 let seed = 7;
 const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
@@ -800,10 +806,12 @@ ROOMS.forEach((room) => {
   const WIN_W = 4.4, WIN_H = 2.5;
   const win = new THREE.Mesh(new THREE.PlaneGeometry(WIN_W, WIN_H), new THREE.MeshBasicMaterial({ map: portalRT.texture, toneMapped: false }));
   win.position.set(0, 0.5, INT_REAR + 0.05);
+  cockpitWindowMesh = win; // reachable outside this block for the cockpit minigame's hit-testing
   const sheen = new THREE.Mesh(new THREE.PlaneGeometry(WIN_W, WIN_H), new THREE.MeshBasicMaterial({ map: TX.glassSheen(), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
   sheen.position.set(0, 0.5, INT_REAR + 0.07);
   const hud = new THREE.Mesh(new THREE.PlaneGeometry(WIN_W, WIN_H), new THREE.MeshBasicMaterial({ map: TX.viewportHud(), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
   hud.position.set(0, 0.5, INT_REAR + 0.08);
+  cockpitHudMesh = hud; // reachable outside this block: hidden during the minigame (see below)
   ship.add(win, sheen, hud);
 
   // Thick beveled cockpit bezel around the glass (no center mullion: that read as a house window)
@@ -917,6 +925,16 @@ ROOMS.forEach((room) => {
       grip.position.set(s * 0.24, 0, 0);
       wheel.add(grip);
     }
+    // Clickable hit-target for the cockpit minigame. A dedicated (non-shared) material is
+    // required: the generic hover loop below mutates b.material.color, which would otherwise
+    // visibly tint every other mesh sharing hullDarkMat/glowMat.
+    const hit = new THREE.Mesh(
+      new THREE.SphereGeometry(0.32, 10, 10),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0, depthWrite: false })
+    );
+    hit.userData = { isGame: true, group: wheel }; // group: reuses the existing hover scale-pulse
+    wheel.add(hit);
+    buttons.push(hit);
     ship.add(col, wheel);
     yokes.push([wheel, x]);
   }
@@ -1356,18 +1374,400 @@ animated.push((t, dt) => {
 });
 
 const portalDir = new THREE.Vector3();
-function renderWindowView() {
+// Shared by renderWindowView() and the minigame's hit-testing (handleGameShot), so the view the
+// player sees and the view the shot is tested against are always the exact same aim.
+function aimPortalCam() {
   // look out along the line from the viewer's eye through the window (parallax), tilted slightly down towards Earth
   portalDir.copy(WINDOW_CENTER).sub(camera.position).normalize();
   portalDir.y -= 0.12;
+  if (GAME.active) {
+    // while manning the guns, the view pans with the mouse like aiming a turret
+    portalDir.x += mouse.x * 0.22;
+    portalDir.y += -mouse.y * 0.16;
+  }
   const dist = Math.max(1.2, camera.position.z - WINDOW_CENTER.z);
   portalCam.fov = THREE.MathUtils.clamp(THREE.MathUtils.radToDeg(2 * Math.atan(1.25 / dist)), 24, 75);
   portalCam.updateProjectionMatrix();
   portalCam.lookAt(tmpV.copy(PORTAL_POS).add(portalDir));
+}
+function renderWindowView() {
+  aimPortalCam();
   renderer.setRenderTarget(portalRT);
   renderer.render(scene, portalCam);
   renderer.setRenderTarget(null);
 }
+
+// ---------- Cockpit minigame: asteroid attack ----------
+// A scored shooting-gallery round seen through the bridge window. Reuses the rock geometry/
+// material, the hull-bounce feedback (triggerShake + sfx.bump) for "missed" asteroids, and the
+// window's layer-1-only visibility trick (see "Window view" above) so these rocks never appear
+// anywhere except inside the portal-camera render target.
+
+const GAME_POOL_SIZE = 8;
+const GAME_SPREAD_X = 20, GAME_SPREAD_Y = 12; // lateral spawn spread around PORTAL_POS
+const GAME_SPAWN_DEPTH_MIN = 80, GAME_SPAWN_DEPTH_RANGE = 70; // spawn 80-150 units behind PORTAL_POS
+const GAME_SPEED_MIN = 20, GAME_SPEED_RANGE = 12; // 20-32 u/s -> ~2.5-7.5s to arrive
+const GAME_MISS_RADIUS = 8; // distance to PORTAL_POS at which an un-shot rock is "missed"
+const ALERT_DURATION = 1.4; // seconds the "ASTEROID ALERT" banner shows before spawns start
+const ROUND_DURATION = 50; // seconds of active shooting per round
+const SPAWN_INTERVAL = 1.8; // seconds between spawns
+const COMPLETE_HOLD = 2.5; // seconds the "round complete" banner stays before auto-exit
+const LASER_LIFE = 0.12; // seconds the tracer line stays visible
+const EXPLOSION_LIFE = 0.35; // seconds the explosion sprite stays visible
+
+const GAME = { active: false, phase: 'idle', score: 0, timeLeft: 0, spawnTimer: 0, phaseTimer: 0 };
+
+const gameAsteroids = Array.from({ length: GAME_POOL_SIZE }, (_, k) => {
+  const m = new THREE.Mesh(rockGeos[k % rockGeos.length], rockMat);
+  m.layers.set(1); // window-only, exactly like winRocks
+  m.visible = false;
+  m.userData = { vel: new THREE.Vector3(), spin: new THREE.Vector3(), alive: false };
+  scene.add(m);
+  return m;
+});
+
+function spawnGameAsteroid(m) {
+  const depth = GAME_SPAWN_DEPTH_MIN + Math.random() * GAME_SPAWN_DEPTH_RANGE;
+  m.position.set(
+    PORTAL_POS.x + (Math.random() * 2 - 1) * GAME_SPREAD_X,
+    PORTAL_POS.y + (Math.random() * 2 - 1) * GAME_SPREAD_Y,
+    PORTAL_POS.z - depth
+  );
+  const speed = GAME_SPEED_MIN + Math.random() * GAME_SPEED_RANGE;
+  m.userData.vel.copy(tmpV.copy(PORTAL_POS).sub(m.position).normalize()).multiplyScalar(speed);
+  m.userData.spin.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).multiplyScalar(1.1);
+  m.scale.setScalar(0.8 + Math.random() * 1.4); // smaller than winRocks: fill the frame as they close in
+  m.rotation.set(Math.random() * 6.28, Math.random() * 6.28, Math.random() * 6.28);
+  m.userData.alive = true;
+  m.userData.bounced = false;
+  m.visible = true;
+}
+
+function updateOneAsteroid(m, dt) {
+  const u = m.userData;
+  if (!u.alive) return;
+  m.position.addScaledVector(u.vel, dt);
+  m.rotation.x += u.spin.x * dt; m.rotation.y += u.spin.y * dt; m.rotation.z += u.spin.z * dt;
+  const distToPortal = m.position.distanceTo(PORTAL_POS);
+  if (!u.bounced && distToPortal < GAME_MISS_RADIUS) {
+    // Missed: bounce it off instead of vanishing, reusing the exact same feedback as a real
+    // hull bounce (bump/shake), for continuity with the ambient flybys system, even though this
+    // mesh never actually touches the hull geometry itself.
+    u.bounced = true;
+    triggerShake(0.04 + m.scale.x * 0.03);
+    sfx.bump(Math.min(1, 0.3 + m.scale.x * 0.15));
+    GAME.score = Math.max(0, GAME.score - 1); // it hit the shuttle: a point off instead of on
+    updateHudScore();
+    const normal = tmpV.copy(m.position).sub(PORTAL_POS);
+    if (normal.lengthSq() < 0.0001) normal.set(0, 1, 0); else normal.normalize();
+    const vDotN = u.vel.dot(normal);
+    if (vDotN < 0) u.vel.addScaledVector(normal, -2 * vDotN);
+    u.vel.multiplyScalar(0.6); // glances off, doesn't keep its full approach speed
+  }
+  if (u.bounced && distToPortal > GAME_MISS_RADIUS * 6) {
+    // far enough away now: recycle quietly, no more feedback
+    u.alive = false;
+    m.visible = false;
+  }
+}
+
+// Reusable across the dedicated minigame pool AND the pre-existing ambient asteroids (flybys,
+// winRocks) that happen to be visible through the window at the same time — "any asteroid you
+// can see, you can shoot," per feedback, with the UFO deliberately left alone (see handleGameShot).
+function destroyAsteroid(mesh) {
+  if (!mesh.visible) return;
+  mesh.visible = false;
+  spawnExplosion(mesh.position, mesh.scale.x);
+  spawnFragments(mesh.position, mesh.scale.x);
+  sfx.explosion(Math.min(1, 0.5 + mesh.scale.x * 0.2));
+  GAME.score += 1;
+  updateHudScore();
+
+  const u = mesh.userData;
+  if (gameAsteroids.includes(mesh)) {
+    u.alive = false;
+  } else if (flybys.includes(mesh)) {
+    u.hit = false;
+    u.next = clock.getElapsedTime() + 6 + Math.random() * 14; // same cadence as its natural despawn
+  } else if (winRocks.includes(mesh)) {
+    u.next = clock.getElapsedTime() + 1.5 + Math.random() * 4.5; // same cadence as its natural despawn
+  }
+}
+
+// --- laser tracer: short additive line, reusing the meteorLines/wmLines pattern ---
+const laserGeo = new THREE.BufferGeometry();
+laserGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(6), 3));
+const laserMat = new THREE.LineBasicMaterial({ color: 0x9cffcf, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false });
+const laserLine = new THREE.LineSegments(laserGeo, laserMat);
+laserLine.layers.set(1); // window-only
+laserLine.visible = false;
+laserLine.frustumCulled = false;
+scene.add(laserLine);
+let laserT0 = -1;
+
+function spawnLaserTracer(from, to) {
+  const p = laserGeo.attributes.position.array;
+  p[0] = from.x; p[1] = from.y; p[2] = from.z;
+  p[3] = to.x; p[4] = to.y; p[5] = to.z;
+  laserGeo.attributes.position.needsUpdate = true;
+  laserLine.visible = true;
+  laserMat.opacity = 1;
+  laserT0 = clock.getElapsedTime();
+}
+
+// --- interior beam: a visible bolt fired from the shuttle itself, from a gun mount on the
+// console out to the exact spot hit on the window glass, on the DEFAULT layer so the main camera
+// (sitting right there in the cockpit) sees it leave the ship — the window-only tracer above then
+// carries the same shot visually onward into the space beyond the glass. ---
+const GUN_EMITTER = new THREE.Vector3(0, 0.75, INT_REAR + 2.3); // just above the console, between the yokes
+const beamGeo = new THREE.BufferGeometry();
+beamGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(6), 3));
+const beamMat = new THREE.LineBasicMaterial({ color: 0x9cffcf, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false, linewidth: 2 });
+const interiorBeam = new THREE.LineSegments(beamGeo, beamMat);
+interiorBeam.visible = false;
+interiorBeam.frustumCulled = false;
+scene.add(interiorBeam); // default layer 0: visible to the main camera
+let beamT0 = -1;
+
+const muzzleFlash = new THREE.Sprite(new THREE.SpriteMaterial({ map: TX.glowTexture('rgba(220,255,245,1)', 'rgba(156,255,207,0.5)'), blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false, transparent: true, opacity: 0 }));
+muzzleFlash.position.copy(GUN_EMITTER);
+muzzleFlash.scale.setScalar(0.4);
+muzzleFlash.visible = false;
+scene.add(muzzleFlash); // default layer 0: visible to the main camera
+
+function spawnInteriorBeam(to) {
+  const p = beamGeo.attributes.position.array;
+  p[0] = GUN_EMITTER.x; p[1] = GUN_EMITTER.y; p[2] = GUN_EMITTER.z;
+  p[3] = to.x; p[4] = to.y; p[5] = to.z;
+  beamGeo.attributes.position.needsUpdate = true;
+  interiorBeam.visible = true;
+  beamMat.opacity = 1;
+  beamT0 = clock.getElapsedTime();
+  muzzleFlash.visible = true;
+  muzzleFlash.material.opacity = 1;
+}
+
+// --- explosion flash: pooled additive sprites, scale-up-then-fade ---
+const EXPLOSION_POOL = 4;
+const explosionTex = TX.glowTexture('rgba(255,255,255,1)', 'rgba(255,140,60,0.5)');
+const explosions = Array.from({ length: EXPLOSION_POOL }, () => {
+  const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: explosionTex, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false, transparent: true, opacity: 0 }));
+  spr.layers.set(1); // window-only
+  spr.visible = false;
+  scene.add(spr);
+  return spr;
+});
+let explosionCursor = 0;
+
+function spawnExplosion(position, scale) {
+  const spr = explosions[explosionCursor];
+  explosionCursor = (explosionCursor + 1) % EXPLOSION_POOL;
+  spr.position.copy(position);
+  spr.userData.t0 = clock.getElapsedTime();
+  spr.userData.maxScale = scale * 3.2;
+  spr.scale.setScalar(scale * 0.6);
+  spr.material.opacity = 1;
+  spr.visible = true;
+}
+
+// --- debris: a destroyed asteroid breaks into a few smaller tumbling fragments, reusing the
+// same rock geometry/material (just scaled down), instead of just a glow flash ---
+const FRAGMENT_POOL = 18; // up to 6 simultaneous bursts of 3
+const FRAGMENTS_PER_HIT = 3;
+const fragments = Array.from({ length: FRAGMENT_POOL }, (_, k) => {
+  const m = new THREE.Mesh(rockGeos[k % rockGeos.length], rockMat);
+  m.layers.set(1); // window-only
+  m.visible = false;
+  m.userData = { vel: new THREE.Vector3(), spin: new THREE.Vector3(), life: 0, maxLife: 0, baseScale: 0 };
+  scene.add(m);
+  return m;
+});
+let fragmentCursor = 0;
+
+function spawnFragments(position, scale) {
+  for (let i = 0; i < FRAGMENTS_PER_HIT; i++) {
+    const f = fragments[fragmentCursor];
+    fragmentCursor = (fragmentCursor + 1) % FRAGMENT_POOL;
+    const u = f.userData;
+    f.position.copy(position);
+    u.baseScale = scale * (0.22 + Math.random() * 0.22);
+    f.scale.setScalar(u.baseScale);
+    f.rotation.set(Math.random() * 6.28, Math.random() * 6.28, Math.random() * 6.28);
+    const dir = tmpV.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+    u.vel.copy(dir).multiplyScalar(4 + Math.random() * 7);
+    u.spin.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).multiplyScalar(3.5);
+    u.life = 0;
+    u.maxLife = 0.7 + Math.random() * 0.5;
+    f.visible = true;
+  }
+}
+
+// --- emergency lighting: flickers red during the alert, settles to a tense pulse while shooting ---
+const alertLight = new THREE.PointLight(0xff3b30, 0, 14, 1.6);
+alertLight.position.set(0, CEIL - 0.3, INT_REAR + 1.8);
+ship.add(alertLight);
+const alertLight2 = new THREE.PointLight(0xff3b30, 0, 14, 1.6);
+alertLight2.position.set(0, FLOOR + 0.4, INT_REAR + 2.6);
+ship.add(alertLight2); // low, near the yokes, so the strobe catches the pilot's hands/console too
+
+// --- two-stage raycast hit-testing: a single raycast from the main camera cannot work here,
+// since portalCam's orientation/FOV are recomputed every frame from the main camera's position
+// (see renderWindowView() above) and bear no fixed geometric relationship to the main camera's
+// own projection. Instead: raycast the window plane to get a UV, convert that UV to portalCam's
+// NDC space, then raycast again from portalCam. ---
+const windowRaycaster = new THREE.Raycaster();
+const portalRaycaster = new THREE.Raycaster();
+portalRaycaster.layers.set(1); // CRITICAL: a fresh Raycaster only tests layer 0 by default; the
+                                // game asteroids/laser/explosions are layer-1-only, so without
+                                // this every shot would silently find nothing.
+
+function handleGameShot(clientX, clientY) {
+  const ndc = new THREE.Vector2((clientX / window.innerWidth) * 2 - 1, -(clientY / window.innerHeight) * 2 + 1);
+  windowRaycaster.setFromCamera(ndc, camera);
+  const winHit = windowRaycaster.intersectObject(cockpitWindowMesh)[0];
+  if (!winHit || !winHit.uv) return; // the click missed the window entirely: no shot fired
+
+  // Recompute portalCam's current orientation/FOV/pan exactly as renderWindowView() does, so the
+  // hit-test matches what the player is actually looking at right now (cheap, deterministic
+  // from camera.position + mouse, since the camera is essentially static while mode === 'hold').
+  aimPortalCam();
+  portalCam.updateMatrixWorld(true); // lookAt only sets rotation; raycasting needs matrixWorld current
+
+  const px = winHit.uv.x * 2 - 1, py = winHit.uv.y * 2 - 1; // RT textures aren't Y-flipped: no extra flip needed
+  portalRaycaster.setFromCamera(new THREE.Vector2(px, py), portalCam);
+  const shotDir = portalRaycaster.ray.direction.clone();
+  // Shootable: the dedicated minigame rocks plus any ambient asteroid also visible through the
+  // window right now (flybys, winRocks) — everything "seen" except the UFO, left alone on purpose.
+  const shootable = gameAsteroids.concat(flybys, winRocks);
+  const hit = portalRaycaster.intersectObjects(shootable, false)[0];
+
+  sfx.laser();
+  spawnInteriorBeam(winHit.point); // the visible bolt leaving the shuttle, seen from inside the cockpit
+  spawnLaserTracer(portalCam.position, hit ? hit.point : tmpV.copy(portalCam.position).addScaledVector(shotDir, 120));
+  if (hit) destroyAsteroid(hit.object);
+}
+
+// --- HUD DOM wiring (elements rendered hidden in index.blade.php) ---
+const hudRoot = document.getElementById('cockpit-game');
+const hudAlert = document.getElementById('game-alert');
+const hudStats = document.getElementById('game-stats');
+const hudComplete = document.getElementById('game-complete');
+const hudScoreEl = document.getElementById('game-score');
+const hudTimeEl = document.getElementById('game-time');
+const hudCompleteScoreEl = document.getElementById('game-complete-score');
+const hudExitBtn = document.getElementById('game-exit');
+const hintEl = document.getElementById('cockpit-hint');
+const crosshairEl = document.getElementById('game-crosshair');
+const emergencyFlashEl = document.getElementById('emergency-flash');
+
+function updateHudScore() { if (hudScoreEl) hudScoreEl.textContent = String(GAME.score); }
+function updateHudTimer() { if (hudTimeEl) hudTimeEl.textContent = String(Math.max(0, Math.ceil(GAME.timeLeft))); }
+function hudSetAlert() { if (!hudRoot) return; hudRoot.hidden = false; hudAlert.hidden = false; hudStats.hidden = true; hudComplete.hidden = true; if (crosshairEl) crosshairEl.hidden = true; }
+function hudSetPlaying() { if (!hudRoot) return; hudAlert.hidden = true; hudStats.hidden = false; updateHudScore(); updateHudTimer(); if (crosshairEl) crosshairEl.hidden = false; }
+function hudSetComplete() { if (!hudRoot) return; hudStats.hidden = true; hudComplete.hidden = false; if (hudCompleteScoreEl) hudCompleteScoreEl.textContent = String(GAME.score); if (crosshairEl) crosshairEl.hidden = true; }
+function hudHideAll() { if (!hudRoot) return; hudRoot.hidden = true; hudAlert.hidden = true; hudStats.hidden = true; hudComplete.hidden = true; if (crosshairEl) crosshairEl.hidden = true; document.body.style.cursor = ''; }
+
+if (hudExitBtn) hudExitBtn.addEventListener('click', (e) => { e.stopPropagation(); exitCockpitGame(); });
+
+// --- round state machine ---
+function startAsteroidAttack() {
+  GAME.active = true;
+  GAME.score = 0;
+  GAME.phase = 'alert';
+  GAME.phaseTimer = ALERT_DURATION;
+  gameAsteroids.forEach((m) => { m.visible = false; m.userData.alive = false; });
+  updateHudScore();
+  hudSetAlert();
+  if (cockpitHudMesh) cockpitHudMesh.visible = false; // avoid doubling up with the real crosshair
+}
+
+function stopAsteroidAttack() {
+  GAME.active = false;
+  GAME.phase = 'idle';
+  gameAsteroids.forEach((m) => { m.visible = false; m.userData.alive = false; });
+  laserLine.visible = false; laserT0 = -1;
+  interiorBeam.visible = false; muzzleFlash.visible = false; beamT0 = -1;
+  explosions.forEach((s) => (s.visible = false));
+  fragments.forEach((f) => (f.visible = false));
+  alertLight.intensity = alertLight2.intensity = 0;
+  if (emergencyFlashEl) emergencyFlashEl.classList.remove('on');
+  hudHideAll();
+  if (cockpitHudMesh) cockpitHudMesh.visible = true;
+}
+
+function updateCockpitGame(t, dt) {
+  if (laserT0 >= 0) {
+    const k = (t - laserT0) / LASER_LIFE;
+    if (k >= 1) { laserLine.visible = false; laserT0 = -1; } else { laserMat.opacity = 1 - k; }
+  }
+  if (beamT0 >= 0) {
+    const k = (t - beamT0) / LASER_LIFE;
+    if (k >= 1) { interiorBeam.visible = false; muzzleFlash.visible = false; beamT0 = -1; } else {
+      beamMat.opacity = 1 - k;
+      muzzleFlash.material.opacity = (1 - k) * 0.8;
+      muzzleFlash.scale.setScalar(0.4 + k * 0.5);
+    }
+  }
+  explosions.forEach((spr) => {
+    if (!spr.visible) return;
+    const k = (t - spr.userData.t0) / EXPLOSION_LIFE;
+    if (k >= 1) { spr.visible = false; return; }
+    const ease = 1 - (1 - k) * (1 - k);
+    spr.scale.setScalar(THREE.MathUtils.lerp(spr.userData.maxScale * 0.3, spr.userData.maxScale, ease));
+    spr.material.opacity = 1 - k;
+  });
+  fragments.forEach((f) => {
+    const u = f.userData;
+    if (!f.visible) return;
+    u.life += dt;
+    if (u.life >= u.maxLife) { f.visible = false; return; }
+    f.position.addScaledVector(u.vel, dt);
+    u.vel.multiplyScalar(0.98);
+    f.rotation.x += u.spin.x * dt; f.rotation.y += u.spin.y * dt; f.rotation.z += u.spin.z * dt;
+    f.scale.setScalar(u.baseScale * (1 - (u.life / u.maxLife) * 0.7));
+  });
+
+  // Emergency lighting: a true on/off strobe (not a smooth pulse) during the alert, settling to
+  // an irregular tense flicker while shooting, off otherwise. Synced with a full-screen red
+  // overlay (see index.blade.php/.emergency-flash) for drama beyond just the 3D light.
+  if (GAME.phase === 'alert') {
+    const strobeOn = Math.sin(t * 22) > -0.35;
+    alertLight.intensity = alertLight2.intensity = strobeOn ? 14 + Math.random() * 4 : 0;
+    if (emergencyFlashEl) emergencyFlashEl.classList.toggle('on', strobeOn);
+  } else if (GAME.phase === 'playing') {
+    const flickerOn = Math.sin(t * 6.5) > -0.55 && Math.random() > 0.04;
+    alertLight.intensity = alertLight2.intensity = flickerOn ? 2 + Math.random() * 1.5 : 0.1;
+    if (emergencyFlashEl) emergencyFlashEl.classList.remove('on');
+  } else {
+    alertLight.intensity = alertLight2.intensity = 0;
+    if (emergencyFlashEl) emergencyFlashEl.classList.remove('on');
+  }
+
+  if (GAME.phase === 'alert') {
+    GAME.phaseTimer -= dt;
+    if (GAME.phaseTimer <= 0) { GAME.phase = 'playing'; GAME.timeLeft = ROUND_DURATION; GAME.spawnTimer = 0; hudSetPlaying(); }
+    return;
+  }
+  if (GAME.phase === 'playing') {
+    GAME.timeLeft -= dt;
+    updateHudTimer();
+    GAME.spawnTimer -= dt;
+    if (GAME.spawnTimer <= 0) {
+      GAME.spawnTimer = SPAWN_INTERVAL;
+      const free = gameAsteroids.find((m) => !m.userData.alive);
+      if (free) spawnGameAsteroid(free);
+    }
+    gameAsteroids.forEach((m) => updateOneAsteroid(m, dt));
+    if (GAME.timeLeft <= 0) { GAME.phase = 'complete'; GAME.phaseTimer = COMPLETE_HOLD; hudSetComplete(); }
+    return;
+  }
+  if (GAME.phase === 'complete') {
+    GAME.phaseTimer -= dt;
+    gameAsteroids.forEach((m) => updateOneAsteroid(m, dt)); // let any still-visible rocks finish their pass or recycle
+    if (GAME.phaseTimer <= 0) exitCockpitGame();
+  }
+}
+animated.push(updateCockpitGame); // no-ops while GAME.phase === 'idle'
 
 // ---------- Scroll-driven camera path ----------
 // One keyframe per page section: hero, then one inside each room.
@@ -1415,16 +1815,32 @@ function pick(clientX, clientY) {
 window.addEventListener('pointermove', (e) => {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
+
+  if (GAME.phase === 'playing') {
+    // the crosshair replaces the native cursor while manning the guns
+    document.body.style.cursor = 'none';
+    if (crosshairEl) { crosshairEl.style.left = e.clientX + 'px'; crosshairEl.style.top = e.clientY + 'px'; }
+    return;
+  }
+
   const prev = hovered;
   hovered = pick(e.clientX, e.clientY);
   if (hovered && hovered !== prev) sfx.hover();
   document.body.style.cursor = hovered ? 'pointer' : '';
+  // Hover-only hint on the steering yoke (not a permanent label like the door signs elsewhere).
+  if (hintEl) {
+    const show = mode === 'scroll' && !!hovered && hovered.userData.isGame;
+    hintEl.classList.toggle('show', show);
+    if (show) { hintEl.style.left = e.clientX + 'px'; hintEl.style.top = (e.clientY - 46) + 'px'; }
+  }
 });
 window.addEventListener('click', (e) => {
-  if (e.target.closest('a, button')) return; // let normal links work
+  if (e.target.closest('a, button')) return; // let normal links (and the HUD exit button) work
+  if (GAME.phase === 'playing') { handleGameShot(e.clientX, e.clientY); return; }
   const b = pick(e.clientX, e.clientY);
   if (!b) return;
   sfx.click();
+  if (b.userData.isGame) { openCockpitGame(); return; } // before the TARGETS check: no href to match
   if (TARGETS[b.userData.href]) openRoom(b.userData.href);
   else window.location.href = routes[b.userData.href] || b.userData.href;
 });
@@ -1454,6 +1870,9 @@ const TARGETS = {
   contact: { pos: new THREE.Vector3(0, -0.15, -19.4), look: new THREE.Vector3(0, -0.7, -20.7) }, // main console screen, command bridge
   cases: { pos: new THREE.Vector3(0.5, 0.8, -10), look: new THREE.Vector3(2.3, 0.95, -10) }, // wall monitor, computer room
   services: { pos: new THREE.Vector3(-0.2, 0.6, -2.4), look: new THREE.Vector3(2.2, 0.5, -2.2) }, // gears and pistons, engine room
+  // sitting behind a yoke looking out the bridge window (distinct from `contact`, which looks
+  // down at the console screen instead)
+  cockpitGame: { pos: new THREE.Vector3(0, 0.9, -19.0), look: new THREE.Vector3(0, 0.55, -24) },
 };
 let mode = 'scroll'; // scroll | flying | hold
 let fly = null;
@@ -1488,6 +1907,47 @@ function openRoom(key) {
     hold = target;
     setTimeout(() => { window.location.href = routes[key]; }, 300);
   });
+}
+
+// Same intermediate-doorway logic as openRoom(), duplicated rather than extracted so openRoom()
+// itself is never touched (avoids any regression risk to existing room navigation).
+function buildDoorwayWaypoints(start, targetPos) {
+  const pts = [start.clone()];
+  if (start.z > 11 && targetPos.z < 11) pts.push(new THREE.Vector3(0, 0.3, 12.5));
+  if (start.z > 8.5 && targetPos.z < 8) pts.push(new THREE.Vector3(0, 0.2, 8));
+  if (start.z > 4 && targetPos.z < 1) pts.push(new THREE.Vector3(0, 0.2, 3.5));
+  if (start.z < 5 && targetPos.z > 3) pts.push(new THREE.Vector3(0, 0.2, 7));
+  pts.push(targetPos.clone());
+  return pts;
+}
+
+function openCockpitGame() {
+  if (mode !== 'scroll') return;
+  mode = 'flying';
+  const start = camera.position.clone();
+  const target = TARGETS.cockpitGame;
+  const pts = buildDoorwayWaypoints(start, target.pos);
+  const looks = [lookSmooth.clone(), new THREE.Vector3(0, 0.3, target.pos.z - 3), target.look.clone()];
+  const dist = start.distanceTo(target.pos);
+  const flyDur = Math.min(5.5, 1.6 + dist * 0.06);
+  sfx.whoosh(flyDur);
+  startFly(pts, looks, flyDur, () => {
+    mode = 'hold';
+    hold = target;
+    startAsteroidAttack();
+  });
+}
+
+function exitCockpitGame() {
+  if (!GAME.active && GAME.phase === 'idle') return; // guard against double-fire (manual exit + auto-exit)
+  stopAsteroidAttack();
+  mode = 'flying';
+  const start = camera.position.clone();
+  const endPos = new THREE.Vector3(), endLook = new THREE.Vector3();
+  const u = curveParam(progress);
+  camPath.getPoint(u, endPos);
+  lookPath.getPoint(u, endLook);
+  startFly([start, endPos], [lookSmooth.clone(), endLook], 1.8, () => { mode = 'scroll'; });
 }
 
 document.addEventListener('click', (e) => {

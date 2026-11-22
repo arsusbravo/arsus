@@ -197,6 +197,23 @@ export function createAudio() {
       hiss(2400, 500, 0.12, 0.22 * vol, 1.1, 0.005);
     },
 
+    // cockpit minigame: laser bolt fired at an asteroid
+    laser(vol = 1) {
+      if (!enabled || !ctx || vol <= 0.02) return;
+      tone('sawtooth', 1800, 180, 0.09, 0.22 * vol);
+      tone('square', 2600, 300, 0.06, 0.1 * vol, 0.01);
+      hiss(5200, 1200, 0.07, 0.08 * vol, 1.4, 0.005);
+    },
+
+    // cockpit minigame: asteroid destroyed
+    explosion(vol = 1) {
+      if (!enabled || !ctx || vol <= 0.02) return;
+      tone('sine', 140, 35, 0.5, 0.6 * vol);
+      tone('triangle', 220, 60, 0.3, 0.22 * vol, 0.02);
+      hiss(3200, 300, 0.5, 0.4 * vol, 0.8, 0.01);
+      hiss(1200, 150, 0.35, 0.22 * vol, 1.1, 0.08);
+    },
+
     whoosh(dur) {
       if (!enabled || !ctx) return;
       const t0 = ctx.currentTime;

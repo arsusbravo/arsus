@@ -244,4 +244,16 @@ return [
         'server_too_many' => 'Terlalu banyak transmisi. Silakan coba lagi dalam :minutes menit.',
         'server_failed' => 'Terjadi kesalahan saat mengirim. Silakan coba lagi.',
     ],
+
+    'game' => [
+        'hint' => 'Ambil alih kendali',
+        'alert_title' => 'Peringatan asteroid',
+        'alert_sub' => 'Asteroid mendekat — siapkan senjata!',
+        'score_label' => 'Skor',
+        'time_label' => 'Waktu',
+        'exit' => 'Kembali ke kursi kemudi',
+        'round_complete_title' => 'AMAN',
+        'round_complete_text' => 'Tembakan bagus, pilot.',
+        'destroyed_label' => 'Dihancurkan',
+    ],
 ];
