@@ -20,6 +20,10 @@ return [
         'contact_description' => 'Send a transmission: tell me about your idea and I will get back to you.',
     ],
 
+    'boot' => [
+        'label' => 'Booting shuttle OS',
+    ],
+
     'nav' => [
         'crew' => 'Crew',
         'engine' => 'Engine',
@@ -224,6 +228,7 @@ return [
         'radar_scan' => 'SCANNING FOR SIGNALS…',
         'radar_sent' => 'TRANSMISSION SENT',
         'signal' => 'SIGNAL',
+        'reveal_email' => 'Click to reveal email',
         'direct_line' => 'Direct line',
         'home_base' => 'Home base',
         'home_base_value' => 'The Netherlands',
@@ -240,6 +245,6 @@ return [
         // server responses
         'server_sent' => 'Message received on the bridge. I\'ll get back to you soon.',
         'server_too_many' => 'Too many transmissions. Please try again in :minutes minutes.',
-        'server_failed' => 'Something went wrong while sending. Please try again or email info@arsus.nl directly.',
+        'server_failed' => 'Something went wrong while sending. Please try again.',
     ],
 ];

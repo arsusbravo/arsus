@@ -5,6 +5,11 @@
 
 @section('before')
     <canvas id="engine" aria-hidden="true"></canvas>
+    <div class="boot-loader" id="boot-loader" aria-hidden="true">
+        <div class="boot-ring"></div>
+        <p>{{ __('shuttle.boot.label') }}</p>
+    </div>
+    <script>setTimeout(function () { var l = document.getElementById('boot-loader'); if (l) l.classList.add('hide'); }, 8000);</script>
 @endsection
 
 @php

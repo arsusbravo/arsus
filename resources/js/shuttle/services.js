@@ -1,6 +1,7 @@
 import { initUISound } from './ui-sound.js';
 import { initNav } from './nav.js';
 import { routes } from './config.js';
+import { hideBootLoader } from './boot.js';
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
@@ -244,7 +245,7 @@ window.addEventListener('pointermove', (e) => {
 });
 
 const clock = new THREE.Clock();
-let smoothScroll = 0, mx = 0, my = 0;
+let smoothScroll = 0, mx = 0, my = 0, booted = false;
 renderer.setAnimationLoop(() => {
   const t = clock.getElapsedTime();
   const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
@@ -272,6 +273,7 @@ renderer.setAnimationLoop(() => {
   coreLight.intensity = 40 + Math.sin(t * 2.4) * 8;
 
   composer.render();
+  if (!booted) { booted = true; hideBootLoader(); }
 });
 
 // ---------- Smooth return to the ship ----------

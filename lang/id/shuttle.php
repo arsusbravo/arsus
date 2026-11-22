@@ -20,6 +20,10 @@ return [
         'contact_description' => 'Kirim transmisi: ceritakan ide Anda dan saya akan segera menghubungi Anda.',
     ],
 
+    'boot' => [
+        'label' => 'Memulai Shuttle OS',
+    ],
+
     'nav' => [
         'crew' => 'Kru',
         'engine' => 'Mesin',
@@ -222,6 +226,7 @@ return [
         'radar_scan' => 'MEMINDAI SINYAL…',
         'radar_sent' => 'TRANSMISI TERKIRIM',
         'signal' => 'SINYAL',
+        'reveal_email' => 'Klik untuk menampilkan email',
         'direct_line' => 'Jalur langsung',
         'home_base' => 'Markas',
         'home_base_value' => 'Belanda',
@@ -237,6 +242,6 @@ return [
         'error_too_fast' => 'Luangkan waktu untuk mengisi formulir ini.',
         'server_sent' => 'Pesan diterima di anjungan. Saya akan segera menghubungi Anda.',
         'server_too_many' => 'Terlalu banyak transmisi. Silakan coba lagi dalam :minutes menit.',
-        'server_failed' => 'Terjadi kesalahan saat mengirim. Silakan coba lagi atau kirim email langsung ke info@arsus.nl.',
+        'server_failed' => 'Terjadi kesalahan saat mengirim. Silakan coba lagi.',
     ],
 ];

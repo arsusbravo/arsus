@@ -10,6 +10,7 @@ import { createAudio } from './audio.js';
 import { initUISound } from './ui-sound.js';
 import { initNav } from './nav.js';
 import { routes, t } from './config.js';
+import { hideBootLoader } from './boot.js';
 
 const sfx = createAudio();
 
@@ -1397,6 +1398,7 @@ document.addEventListener('click', (e) => {
 // Coming back with the browser's back button: reset the camera state
 window.addEventListener('pageshow', (e) => { if (e.persisted) { mode = 'scroll'; fly = null; hold = null; } });
 
+let booted = false;
 renderer.setAnimationLoop(() => {
   const t = clock.getElapsedTime();
   const scrollMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
@@ -1474,6 +1476,7 @@ renderer.setAnimationLoop(() => {
 
   if (camera.position.z < -11) renderWindowView(); // only when the bridge window can be seen
   composer.render();
+  if (!booted) { booted = true; hideBootLoader(); }
 });
 
 // Landing with a hash or restored scroll (e.g. back from a room page): start in place, no fly-in from the hero

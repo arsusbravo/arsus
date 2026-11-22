@@ -6,8 +6,24 @@ initMonitor('contact');
 
 // The form posts to the Laravel contact route (HomeController@submitContact), which validates,
 // rate-limits (3 per hour), checks the "website" honeypot and mails ContactFormMail.
-const CONTACT_EMAIL = 'info@arsus.nl';
+// The address itself is assembled at runtime (never written as one literal string) so it
+// isn't a plain scrape target for bots that only read the HTML/JS source.
+const EMAIL_USER = 'info';
+const EMAIL_DOMAIN = 'arsus.nl';
+const CONTACT_EMAIL = EMAIL_USER + '@' + EMAIL_DOMAIN;
 const csrf = document.querySelector('meta[name="csrf-token"]')?.content || '';
+
+const directEmail = document.querySelector('#direct-email');
+if (directEmail) {
+  directEmail.addEventListener('click', (e) => {
+    if (directEmail.href.startsWith('mailto:')) return; // already revealed, let the click through
+    e.preventDefault();
+    const addr = (directEmail.dataset.user || '') + '@' + (directEmail.dataset.domain || '');
+    directEmail.href = 'mailto:' + addr;
+    directEmail.textContent = addr;
+    window.location.href = directEmail.href;
+  });
+}
 
 // Time-based spam check: a human needs at least a few seconds to fill the form.
 // Reset whenever the form becomes fillable again (first load, or after "Send another").

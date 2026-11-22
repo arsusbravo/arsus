@@ -264,6 +264,17 @@ body::after { content: ''; position: fixed; inset: 0; background: #050812; opaci
 .arriving body::after { opacity: 1; transition: none; }
 .leaving body::after { opacity: 1; transition: opacity 0.45s ease-in; }
 
+/* Boot loader: covers the 3D scene pages while the WebGL scene is built on the main thread */
+.boot-loader {
+  position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.1rem;
+  background: var(--bg-dark); opacity: 1; transition: opacity 0.5s ease;
+}
+.boot-loader.hide { opacity: 0; pointer-events: none; }
+.boot-ring { width: 54px; height: 54px; border-radius: 50%; border: 2px solid rgba(254, 116, 43, 0.25); border-top-color: var(--accent); animation: boot-spin 0.9s linear infinite; }
+.boot-loader p { margin: 0; font: 600 0.72rem ui-monospace, Menlo, monospace; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+@keyframes boot-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .boot-ring { animation: none; border-top-color: rgba(254, 116, 43, 0.25); } }
+
 /* ---------- Comms page ---------- */
 .comms { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: clamp(1.5rem, 4vw, 3.5rem); padding: clamp(1rem, 3vw, 2.5rem); max-width: 1200px; margin: 0 auto; align-items: start; }
 .tx h1 { font-family: 'Orbitron', system-ui, sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; color: #fff; margin: 0; }

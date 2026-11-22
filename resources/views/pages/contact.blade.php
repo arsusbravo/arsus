@@ -82,7 +82,7 @@
                         </div>
                         <div class="signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b>{{ __('shuttle.comms.signal') }}</b></div>
                         <dl class="facts one">
-                            <div><dt>{{ __('shuttle.comms.direct_line') }}</dt><dd><a href="mailto:info@arsus.nl">info@arsus.nl</a></dd></div>
+                            <div><dt>{{ __('shuttle.comms.direct_line') }}</dt><dd><a href="#" id="direct-email" data-user="info" data-domain="arsus.nl" rel="nofollow">{{ __('shuttle.comms.reveal_email') }}</a></dd></div>
                             <div><dt>{{ __('shuttle.comms.home_base') }}</dt><dd>{{ __('shuttle.comms.home_base_value') }}</dd></div>
                             <div><dt>{{ __('shuttle.comms.open_for') }}</dt><dd>{{ __('shuttle.comms.open_for_value') }}</dd></div>
                         </dl>

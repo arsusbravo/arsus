@@ -1,7 +1,7 @@
 {
-  "_OutputPass-BIXVRVBT.js": {
-    "file": "assets/OutputPass-BIXVRVBT.js",
-    "name": "OutputPass"
+  "_boot-BoIRuykk.js": {
+    "file": "assets/boot-BoIRuykk.js",
+    "name": "boot"
   },
   "_monitor-BqDalkrT.js": {
     "file": "assets/monitor-BqDalkrT.js",
@@ -19,7 +19,7 @@
     "name": "ui-sound"
   },
   "resources/css/shuttle.css": {
-    "file": "assets/shuttle-DhtwVdQ1.css",
+    "file": "assets/shuttle-Bqu8Dp45.css",
     "src": "resources/css/shuttle.css",
     "isEntry": true,
     "name": "shuttle",
@@ -48,7 +48,7 @@
     ]
   },
   "resources/js/shuttle/contact.js": {
-    "file": "assets/contact-DxDZwLdw.js",
+    "file": "assets/contact-C4-kQCNB.js",
     "name": "contact",
     "src": "resources/js/shuttle/contact.js",
     "isEntry": true,
@@ -58,25 +58,25 @@
     ]
   },
   "resources/js/shuttle/main.js": {
-    "file": "assets/main-DvKzuTg4.js",
+    "file": "assets/main-BU5ApaTv.js",
     "name": "main",
     "src": "resources/js/shuttle/main.js",
     "isEntry": true,
     "imports": [
-      "_OutputPass-BIXVRVBT.js",
+      "_boot-BoIRuykk.js",
       "_ui-sound-6vNRWnT3.js",
       "_nav-0FYYIBlH.js"
     ]
   },
   "resources/js/shuttle/services.js": {
-    "file": "assets/services-DtwKHkf7.js",
+    "file": "assets/services-DMtTAv_S.js",
     "name": "services",
     "src": "resources/js/shuttle/services.js",
     "isEntry": true,
     "imports": [
       "_ui-sound-6vNRWnT3.js",
       "_nav-0FYYIBlH.js",
-      "_OutputPass-BIXVRVBT.js"
+      "_boot-BoIRuykk.js"
     ]
   }
 }

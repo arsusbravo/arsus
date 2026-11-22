@@ -20,6 +20,10 @@ return [
         'contact_description' => 'Stuur een transmissie: vertel over je idee en ik neem contact met je op.',
     ],
 
+    'boot' => [
+        'label' => 'Shuttle-OS opstarten',
+    ],
+
     'nav' => [
         'crew' => 'Crew',
         'engine' => 'Motor',
@@ -222,6 +226,7 @@ return [
         'radar_scan' => 'ZOEKEN NAAR SIGNALEN…',
         'radar_sent' => 'TRANSMISSIE VERZONDEN',
         'signal' => 'SIGNAAL',
+        'reveal_email' => 'Klik om e-mail te tonen',
         'direct_line' => 'Directe lijn',
         'home_base' => 'Thuisbasis',
         'home_base_value' => 'Nederland',
@@ -237,6 +242,6 @@ return [
         'error_too_fast' => 'Neem de tijd om het formulier in te vullen.',
         'server_sent' => 'Bericht ontvangen op de brug. Ik neem snel contact met je op.',
         'server_too_many' => 'Te veel transmissies. Probeer het over :minutes minuten opnieuw.',
-        'server_failed' => 'Er ging iets mis bij het verzenden. Probeer het opnieuw of mail direct naar info@arsus.nl.',
+        'server_failed' => 'Er ging iets mis bij het verzenden. Probeer het opnieuw.',
     ],
 ];
