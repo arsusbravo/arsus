@@ -10,15 +10,15 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import {
   siPhp, siLaravel, siMysql, siPostgresql, siVuedotjs, siReact, siPython, siWordpress,
-  siJavascript, siTailwindcss, siNodedotjs, siAndroid, siApple, siDocker, siGit,
+  siJavascript, siTailwindcss, siNodedotjs, siAndroid, siApple, siDocker, siGit, siClaude
 } from 'simple-icons';
 
 // ---------- Tech stack rail (fuel cells) ----------
 const TECH = [
   ['PHP', siPhp], ['Laravel', siLaravel], ['MySQL', siMysql], ['PostgreSQL', siPostgresql],
-  ['Vue.js', siVuedotjs], ['React', siReact], ['Python', siPython], ['WordPress', siWordpress],
+  ['Vue.js', siVuedotjs], ['React', siReact], ['Claude', siClaude], ['Python', siPython], ['WordPress', siWordpress],
   ['JavaScript', siJavascript], ['Tailwind', siTailwindcss], ['Node.js', siNodedotjs],
-  ['Android', siAndroid], ['iOS', siApple], ['Docker', siDocker], ['Git', siGit],
+  ['Android', siAndroid], ['iOS', siApple], ['Docker', siDocker], ['Git', siGit]
 ];
 
 function brandColor(hex) {
