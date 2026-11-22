@@ -793,15 +793,45 @@ ROOMS.forEach((room) => {
   }
 
   // --- viewport window: live view of space (see "Window view") ---
-  const win = new THREE.Mesh(new THREE.PlaneGeometry(4.4, 2.5), new THREE.MeshBasicMaterial({ map: portalRT.texture, toneMapped: false }));
+  const WIN_W = 4.4, WIN_H = 2.5;
+  const win = new THREE.Mesh(new THREE.PlaneGeometry(WIN_W, WIN_H), new THREE.MeshBasicMaterial({ map: portalRT.texture, toneMapped: false }));
   win.position.set(0, 0.5, INT_REAR + 0.05);
-  const sheen = new THREE.Mesh(new THREE.PlaneGeometry(4.4, 2.5), new THREE.MeshBasicMaterial({ map: TX.glassSheen(), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
+  const sheen = new THREE.Mesh(new THREE.PlaneGeometry(WIN_W, WIN_H), new THREE.MeshBasicMaterial({ map: TX.glassSheen(), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
   sheen.position.set(0, 0.5, INT_REAR + 0.07);
-  ship.add(win, sheen);
-  [[4.6, 0.15, 0, 1.8], [4.6, 0.15, 0, -0.8], [0.15, 2.6, -2.3, 0.5], [0.15, 2.6, 2.3, 0.5], [0.1, 2.5, 0, 0.5]].forEach(([w, h, x, y]) => {
-    const f = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.2), hullMat);
-    f.position.set(x, y, INT_REAR + 0.1);
+  const hud = new THREE.Mesh(new THREE.PlaneGeometry(WIN_W, WIN_H), new THREE.MeshBasicMaterial({ map: TX.viewportHud(), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
+  hud.position.set(0, 0.5, INT_REAR + 0.08);
+  ship.add(win, sheen, hud);
+
+  // Thick beveled cockpit bezel around the glass (no center mullion: that read as a house window)
+  [[WIN_W + 0.55, 0.42, 0, WIN_H / 2 + 0.71], [WIN_W + 0.55, 0.42, 0, -WIN_H / 2 + 0.29],
+   [0.42, WIN_H + 0.3, -(WIN_W / 2 + 0.71), 0.5], [0.42, WIN_H + 0.3, WIN_W / 2 + 0.71, 0.5]].forEach(([w, h, x, y]) => {
+    const f = new THREE.Mesh(new RoundedBoxGeometry(w, h, 0.35, 2, 0.08), hullDarkMat);
+    f.position.set(x, y, INT_REAR + 0.15);
     ship.add(f);
+  });
+  // glowing seam right at the edge of the glass
+  [[WIN_W + 0.08, 0.05, 0, WIN_H / 2 + 0.52], [WIN_W + 0.08, 0.05, 0, -WIN_H / 2 + 0.48],
+   [0.05, WIN_H + 0.08, -(WIN_W / 2 + 0.02), 0.5], [0.05, WIN_H + 0.08, WIN_W / 2 + 0.02, 0.5]].forEach(([w, h, x, y]) => {
+    const f = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.03), glowMat);
+    f.position.set(x, y, INT_REAR + 0.09);
+    ship.add(f);
+  });
+  // diagonal corner gussets: structural braces instead of a flat center divider
+  [[-1, 1], [1, 1], [-1, -1], [1, -1]].forEach(([sx, sy]) => {
+    const gusset = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.16, 0.3), hullMat);
+    gusset.position.set(sx * (WIN_W / 2 - 0.15), 0.5 + sy * (WIN_H / 2 - 0.15), INT_REAR + 0.14);
+    gusset.rotation.z = sx * sy * Math.PI / 4;
+    ship.add(gusset);
+  });
+  // rivets along the bezel
+  const rivetGeo = new THREE.CylinderGeometry(0.035, 0.035, 0.1, 8);
+  [-1.8, -0.9, 0.9, 1.8].forEach((x) => {
+    [WIN_H / 2 + 0.71, -WIN_H / 2 + 0.29].forEach((y) => {
+      const r = new THREE.Mesh(rivetGeo, hullMat);
+      r.rotation.x = Math.PI / 2;
+      r.position.set(x, y, INT_REAR + 0.33);
+      ship.add(r);
+    });
   });
 
   // --- console blocks with tilted live screens and button rows ---
@@ -1158,6 +1188,53 @@ animated.push((t, dt) => {
   });
   meteorGeo.attributes.position.needsUpdate = true;
   meteorGeo.attributes.color.needsUpdate = true;
+});
+
+// ---------- Easter egg: a UFO that occasionally cruises past ----------
+const ufo = new THREE.Group();
+const ufoHullMat = new THREE.MeshStandardMaterial({ color: 0x9aa0b4, metalness: 0.85, roughness: 0.25 });
+const ufoDomeMat = new THREE.MeshPhysicalMaterial({ color: 0x8fffe0, metalness: 0, roughness: 0.08, transparent: true, opacity: 0.55, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 0.6 });
+const ufoBody = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 16), ufoHullMat);
+ufoBody.scale.set(1.8, 0.4, 1.8);
+const ufoRim = new THREE.Mesh(new THREE.TorusGeometry(1.75, 0.18, 10, 28), ufoHullMat);
+ufoRim.rotation.x = Math.PI / 2;
+const ufoDome = new THREE.Mesh(new THREE.SphereGeometry(0.75, 20, 14, 0, Math.PI * 2, 0, Math.PI / 2), ufoDomeMat);
+ufoDome.position.y = 0.22;
+const UFO_LIGHTS = 8;
+const ufoLights = Array.from({ length: UFO_LIGHTS }, (_, i) => {
+  const l = new THREE.Mesh(new THREE.SphereGeometry(0.11, 8, 8), new THREE.MeshStandardMaterial({ color: ORANGE, emissive: ORANGE, emissiveIntensity: 2, toneMapped: false }));
+  const a = (i / UFO_LIGHTS) * Math.PI * 2;
+  l.position.set(Math.cos(a) * 1.75, -0.12, Math.sin(a) * 1.75);
+  return l;
+});
+ufo.add(ufoBody, ufoRim, ufoDome, ...ufoLights);
+ufo.visible = false;
+ufo.traverse((o) => o.layers.enable(1)); // also visible through the bridge window
+ufo.userData = { vel: new THREE.Vector3(), next: 6 + Math.random() * 6, bobSeed: 0, seen: false };
+scene.add(ufo);
+
+animated.push((t, dt) => {
+  const u = ufo.userData;
+  if (!ufo.visible) {
+    if (t > u.next) {
+      const dir = Math.random() < 0.5 ? 1 : -1;
+      // guaranteed on the first pass so it's easy to spot; a rare surprise after that
+      if (!u.seen || Math.random() < 0.6) {
+        ufo.position.set(-dir * 95, 6 + Math.random() * 18, -30 - Math.random() * 50);
+        u.vel.set(dir * (9 + Math.random() * 5), 0, 0);
+        u.bobSeed = Math.random() * 100;
+        ufo.visible = true;
+        u.seen = true;
+      }
+      u.next = t + 45 + Math.random() * 70;
+    }
+    return;
+  }
+  ufo.position.x += u.vel.x * dt;
+  ufo.position.y += Math.sin((t + u.bobSeed) * 1.6) * dt * 1.8;
+  ufo.rotation.y += dt * 0.6;
+  ufoLights.forEach((l, i) => { l.material.emissiveIntensity = 1.6 + Math.sin(t * 6 + i) * 1.2; });
+  if (Math.abs(ufo.position.x) > 100) ufo.visible = false;
 });
 
 // ---------- Starfield ----------

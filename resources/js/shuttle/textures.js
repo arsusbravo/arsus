@@ -454,3 +454,32 @@ export function glassSheen() {
   t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
   return t;
 }
+
+// Cockpit HUD painted over the viewport glass: amber corner brackets + a center reticle,
+// so the window reads as a ship's targeting viewport rather than plain glass.
+export function viewportHud() {
+  const [c, g] = makeCanvas(512, 292);
+  g.clearRect(0, 0, 512, 292);
+  g.strokeStyle = 'rgba(254,116,43,0.85)';
+  g.lineWidth = 3;
+  const m = 18, L = 46;
+  [[m, m, 1, 1], [512 - m, m, -1, 1], [m, 292 - m, 1, -1], [512 - m, 292 - m, -1, -1]].forEach(([x, y, dx, dy]) => {
+    g.beginPath();
+    g.moveTo(x, y + L * dy); g.lineTo(x, y); g.lineTo(x + L * dx, y);
+    g.stroke();
+  });
+  const cx = 256, cy = 146;
+  g.lineWidth = 2;
+  g.beginPath();
+  g.moveTo(cx - 14, cy); g.lineTo(cx - 4, cy); g.moveTo(cx + 4, cy); g.lineTo(cx + 14, cy);
+  g.moveTo(cx, cy - 14); g.lineTo(cx, cy - 4); g.moveTo(cx, cy + 4); g.lineTo(cx, cy + 14);
+  g.stroke();
+  g.strokeStyle = 'rgba(254,116,43,0.4)';
+  g.beginPath(); g.arc(cx, cy, 22, 0, Math.PI * 2); g.stroke();
+  g.fillStyle = 'rgba(254,116,43,0.8)'; g.font = '600 13px ui-monospace, Menlo, monospace';
+  g.fillText('VIEW // FWD', m, 292 - 6);
+  g.textAlign = 'right'; g.fillText('SEC-7', 512 - m, 292 - 6); g.textAlign = 'left';
+  const ht = tex(c, true);
+  ht.wrapS = ht.wrapT = THREE.ClampToEdgeWrapping;
+  return ht;
+}
