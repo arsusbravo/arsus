@@ -79,6 +79,10 @@ const ship = new THREE.Group();
 scene.add(ship);
 const animated = []; // functions (t) => void
 
+// Camera shake: triggered when an asteroid bounces off the hull (see the flybys collision below)
+let shakeMag = 0;
+function triggerShake(mag) { shakeMag = Math.max(shakeMag, mag); }
+
 // Deterministic pseudo-random so the ship looks the same on every load
 let seed = 7;
 const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
@@ -1125,7 +1129,7 @@ for (let i = 0; i < 28; i++) {
 const flybys = [0, 1].map((k) => {
   const m = new THREE.Mesh(rockGeos[(k + 2) % rockGeos.length], rockMat);
   m.visible = false;
-  m.userData = { vel: new THREE.Vector3(), spin: new THREE.Vector3(), next: 4 + k * 9 };
+  m.userData = { vel: new THREE.Vector3(), spin: new THREE.Vector3(), next: 4 + k * 9, hit: false };
   scene.add(m);
   return m;
 });
@@ -1163,6 +1167,20 @@ animated.push((t, dt) => {
     }
     m.position.addScaledVector(u.vel, dt);
     m.rotation.x += u.spin.x * dt; m.rotation.y += u.spin.y * dt; m.rotation.z += u.spin.z * dt;
+    // deflect off the hull instead of tumbling straight through it
+    if (m.position.z > Z_REAR - 3 && m.position.z < Z_FRONT + 3) {
+      const r = Math.hypot(m.position.x, m.position.y);
+      const safeR = HULL_R * 1.2 + m.scale.x;
+      if (r < safeR) {
+        if (!u.hit) { u.hit = true; triggerShake(0.05 + m.scale.x * 0.045); }
+        const nx = r > 0.001 ? m.position.x / r : 1, ny = r > 0.001 ? m.position.y / r : 0;
+        const vDotN = u.vel.x * nx + u.vel.y * ny;
+        if (vDotN < 0) { u.vel.x -= 2 * vDotN * nx; u.vel.y -= 2 * vDotN * ny; }
+        m.position.x = nx * safeR; m.position.y = ny * safeR;
+      } else {
+        u.hit = false;
+      }
+    }
     if (m.position.x > 90) { m.visible = false; u.next = t + 6 + Math.random() * 14; }
   });
 
@@ -1220,7 +1238,8 @@ animated.push((t, dt) => {
       const dir = Math.random() < 0.5 ? 1 : -1;
       // guaranteed on the first pass so it's easy to spot; a rare surprise after that
       if (!u.seen || Math.random() < 0.6) {
-        ufo.position.set(-dir * 95, 6 + Math.random() * 18, -30 - Math.random() * 50);
+        // kept well behind the asteroid flybys (which sit at z -25 to -70) so it reads as distant and passes behind them
+        ufo.position.set(-dir * 95, 6 + Math.random() * 18, -90 - Math.random() * 50);
         u.vel.set(dir * (9 + Math.random() * 5), 0, 0);
         u.bobSeed = Math.random() * 100;
         ufo.visible = true;
@@ -1508,6 +1527,16 @@ renderer.setAnimationLoop(() => {
     camera.position.set(tmpPos.x + par.x, tmpPos.y + par.y, tmpPos.z);
     lookSmooth.lerp(tmpLook, 0.2);
     camera.lookAt(lookSmooth);
+  }
+
+  // Impact shake: a brief rumble when an asteroid bounces off the hull
+  if (shakeMag > 0.001) {
+    camera.position.x += (Math.random() - 0.5) * shakeMag;
+    camera.position.y += (Math.random() - 0.5) * shakeMag;
+    camera.position.z += (Math.random() - 0.5) * shakeMag * 0.4;
+    shakeMag *= 0.86;
+  } else {
+    shakeMag = 0;
   }
 
   // Idle motion (only visible from outside)
