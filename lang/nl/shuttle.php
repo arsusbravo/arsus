@@ -85,7 +85,7 @@ return [
         'photo_alt' => 'Portret van Ario met camouflagepet en zonnebril, met een sterrenhemel op de achtergrond',
         'scan' => 'SCAN VOLTOOID — IDENTITEIT BEVESTIGD',
         'prompt' => '> access crew-file --id 001 --clearance all',
-        'name' => 'Ario Susmaryono',
+        'name' => 'Lt. Ario Susmaryono',
         'role' => 'Web- & applicatieontwikkelaar',
         'status' => 'ONLINE · MISSIEKLAAR',
         'origin_label' => 'Afkomst',

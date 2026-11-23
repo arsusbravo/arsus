@@ -86,7 +86,7 @@ return [
         'photo_alt' => 'Portrait of Ario in camouflage cap and sunglasses, with a starry sky behind',
         'scan' => 'SCAN COMPLETE — IDENTITY VERIFIED',
         'prompt' => '> access crew-file --id 001 --clearance all',
-        'name' => 'Ario Susmaryono',
+        'name' => 'Lt. Ario Susmaryono',
         'role' => 'Web & Application Developer',
         'status' => 'ONLINE · MISSION-READY',
         'origin_label' => 'Origin',

@@ -85,7 +85,7 @@ return [
         'photo_alt' => 'Potret Ario dengan topi loreng dan kacamata hitam, berlatar langit berbintang',
         'scan' => 'PEMINDAIAN SELESAI — IDENTITAS TERVERIFIKASI',
         'prompt' => '> access crew-file --id 001 --clearance all',
-        'name' => 'Ario Susmaryono',
+        'name' => 'Lt. Ario Susmaryono',
         'role' => 'Pengembang Web & Aplikasi',
         'status' => 'ONLINE · SIAP MISI',
         'origin_label' => 'Asal',
