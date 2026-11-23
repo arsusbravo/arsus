@@ -1777,13 +1777,21 @@ animated.push(updateCockpitGame); // no-ops while GAME.phase === 'idle'
 
 // ---------- Scroll-driven camera path ----------
 // One keyframe per page section: hero, then one inside each room.
+// Six scroll stops now (one per section, including the extra "door-approach" section in
+// index.blade.php): hero, outside door 01, inside crew quarters, engine room, mission control,
+// bridge — evenly spaced at 0, 0.2, 0.4, 0.6, 0.8, 1.0, matching six 100vh sections.
 const keys = [
   { s: 0.0, pos: [15, 6, 36], look: [0, 0, -4] },
-  { s: 0.09, pos: [8, 3, 28], look: [0, 0, -2] },
-  { s: 0.17, pos: [1.5, 1, 18], look: [0, 0.5, 6] },
-  { s: 0.25, pos: [0, 0.2, 7.5], look: [0, -0.3, -1] },
-  { s: 0.5, pos: [0, 0.2, -0.5], look: [0, -0.3, -8] },
-  { s: 0.75, pos: [0, 0.2, -8.5], look: [0, -0.3, -16] },
+  { s: 0.07, pos: [8, 3, 28], look: [0, 0, -2] },
+  { s: 0.14, pos: [1.5, 1, 18], look: [0, 0.5, 6] },
+  // outside door 01 (z=10) with enough clearance (>5 units) that it stays shut — doors only
+  // start sliding open once the camera gets within 5 units (see the door-animation code below).
+  // Facing the "Meet the crew" sign above it, which is clickable from here.
+  { s: 0.2, pos: [0, 0.5, 16], look: [0, 1.0, 10] },
+  // through the (now open) door and inside crew quarters
+  { s: 0.4, pos: [0, 0.2, 7.5], look: [0, -0.3, -1] },
+  { s: 0.6, pos: [0, 0.2, -0.5], look: [0, -0.3, -8] },
+  { s: 0.8, pos: [0, 0.2, -8.5], look: [0, -0.3, -16] },
   { s: 1.0, pos: [0, 0.2, -16.5], look: [0, -0.2, -23] },
 ];
 const camPath = new THREE.CatmullRomCurve3(keys.map((k) => new THREE.Vector3(...k.pos)), false, 'catmullrom', 0.3);
@@ -1971,7 +1979,7 @@ renderer.setAnimationLoop(() => {
   const target = Math.min(1, Math.max(0, window.scrollY / scrollMax));
   progress += (target - progress) * 0.06;
 
-  document.body.classList.toggle('in-rooms', progress > 0.12);
+  document.body.classList.toggle('in-rooms', progress > 0.1);
   const u = curveParam(progress);
   camPath.getPoint(u, tmpPos);
   lookPath.getPoint(u, tmpLook);

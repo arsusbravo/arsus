@@ -70,6 +70,11 @@
             <p>{{ __('shuttle.home.hero_text') }}</p>
         </section>
 
+        {{-- A dedicated stop right outside door 01, closed, before stepping inside (see the
+             camera keyframes in main.js) — no text here on purpose: the door's own "Meet the
+             crew" sign is already clickable from this distance. --}}
+        <section class="door-approach" aria-hidden="true"></section>
+
         @foreach ([
             ['id' => 'about', 'room' => 'crew', 'route' => 'about'],
             ['id' => 'services', 'room' => 'engine', 'route' => 'services'],
