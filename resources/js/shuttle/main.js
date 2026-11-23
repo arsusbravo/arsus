@@ -22,7 +22,9 @@ const NAVY_DARK = 0x050812;
 const canvas = document.querySelector('#scene');
 
 // ---------- Renderer / scene / camera ----------
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+// MSAA is redundant once we're already supersampling via devicePixelRatio >= 2, so skip it there
+// to save GPU bandwidth on high-DPI screens (phones especially) without losing visible sharpness.
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: window.devicePixelRatio < 2 });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -1084,10 +1086,12 @@ const earthMat = new THREE.ShaderMaterial({
       #include <colorspace_fragment>
     }`,
 });
-const earthMesh = new THREE.Mesh(new THREE.SphereGeometry(EARTH_R, 128, 96), earthMat);
+// 64x48 (not 128x96): a plain smooth sphere doesn't need 4x the triangles to look round at the
+// distance it's viewed from — the shader detail (clouds/night lights/limb glow) is unaffected.
+const earthMesh = new THREE.Mesh(new THREE.SphereGeometry(EARTH_R, 64, 48), earthMat);
 // thin glowing atmosphere shell, bright on the day side, fading into the night side
 const atmosphere = new THREE.Mesh(
-  new THREE.SphereGeometry(EARTH_R * 1.025, 128, 96),
+  new THREE.SphereGeometry(EARTH_R * 1.025, 64, 48),
   new THREE.ShaderMaterial({
     uniforms: { sunDir: { value: SUN_DIR } },
     vertexShader: `
@@ -1114,7 +1118,9 @@ earth.add(earthMesh, atmosphere);
 const rockTex = TX.rockTextures();
 const rockMat = new THREE.MeshStandardMaterial({ map: rockTex.map, normalMap: rockTex.normalMap, normalScale: new THREE.Vector2(1.4, 1.4), roughness: 0.95, metalness: 0.05 });
 function rockGeometry(seedN) {
-  const geo = new THREE.IcosahedronGeometry(1, 4);
+  // detail 3 (not 4): the normal map carries the crater/lump detail at pixel scale anyway, so the
+  // base mesh doesn't need 4x the triangles — same look, much cheaper across ~50 asteroid meshes.
+  const geo = new THREE.IcosahedronGeometry(1, 3);
   const p = geo.attributes.position, v = new THREE.Vector3();
   const lumps = Array.from({ length: 6 }, (_, k) => new THREE.Vector3(Math.sin(seedN * 3.1 + k * 1.7), Math.cos(seedN * 1.3 + k * 2.3), Math.sin(seedN * 2.2 + k)).normalize());
   for (let i = 0; i < p.count; i++) {
@@ -1810,7 +1816,9 @@ function curveParam(s) {
 // ---------- Post-processing ----------
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.35, 0.5, 0.95);
+// Bloom is an inherently blurred effect, so running it at half resolution costs ~1/4 the GPU time
+// with no visible softening — runs every frame, so this is the single biggest win available here.
+const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2), 0.35, 0.5, 0.95);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
 
@@ -1866,7 +1874,7 @@ window.addEventListener('resize', () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   composer.setSize(window.innerWidth, window.innerHeight);
-  bloom.resolution.set(window.innerWidth, window.innerHeight);
+  bloom.resolution.set(window.innerWidth / 2, window.innerHeight / 2);
 });
 
 // ---------- Loop ----------

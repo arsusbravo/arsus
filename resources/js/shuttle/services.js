@@ -45,7 +45,8 @@ const ORANGE = 0xfe742b;
 const ORANGE_LIGHT = 0xff8c4d;
 const canvas = document.querySelector('#engine');
 
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+// MSAA is redundant once we're already supersampling via devicePixelRatio >= 2.
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: window.devicePixelRatio < 2 });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -219,7 +220,7 @@ scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ size: 0.15, color
 // Post-processing
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.5, 0.6, 0.9);
+const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2), 0.5, 0.6, 0.9);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
 
@@ -233,7 +234,7 @@ function layout() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(w, h);
   composer.setSize(w, h);
-  bloom.resolution.set(w, h);
+  bloom.resolution.set(w / 2, h / 2);
 }
 layout();
 window.addEventListener('resize', layout);
