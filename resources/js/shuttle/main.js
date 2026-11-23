@@ -1679,6 +1679,11 @@ function startAsteroidAttack() {
   updateHudScore();
   hudSetAlert();
   if (cockpitHudMesh) cockpitHudMesh.visible = false; // avoid doubling up with the real crosshair
+  // Hide the scrolling page content (whichever room section happens to be in view behind the
+  // canvas) so it doesn't overlap the HUD/crosshair, especially cramped on mobile. visibility
+  // (not display) so document.documentElement.scrollHeight is unaffected — exitCockpitGame()
+  // relies on the scroll position being intact to fly back to the right spot.
+  document.documentElement.classList.add('game-active');
 }
 
 function stopAsteroidAttack() {
@@ -1693,6 +1698,7 @@ function stopAsteroidAttack() {
   if (emergencyFlashEl) emergencyFlashEl.classList.remove('on');
   hudHideAll();
   if (cockpitHudMesh) cockpitHudMesh.visible = true;
+  document.documentElement.classList.remove('game-active');
 }
 
 function updateCockpitGame(t, dt) {

@@ -17,7 +17,7 @@ foreach ($locales as $prefix => $locale) {
 
             $response->assertOk();
             $html = $response->getContent();
-            expect($html)->toContain('<html lang="' . $locale . '">')
+            expect($html)->toContain('<html lang="' . $locale . '"')
                 ->toContain('id="shuttle-config"')
                 ->not->toMatch(RAW_KEY);
         }

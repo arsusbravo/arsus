@@ -19,7 +19,7 @@
     "name": "ui-sound"
   },
   "resources/css/shuttle.css": {
-    "file": "assets/shuttle-CNqw9N6q.css",
+    "file": "assets/shuttle-BDYiYUvs.css",
     "src": "resources/css/shuttle.css",
     "isEntry": true,
     "name": "shuttle",
@@ -58,7 +58,7 @@
     ]
   },
   "resources/js/shuttle/main.js": {
-    "file": "assets/main-Dx-22uZG.js",
+    "file": "assets/main-DsiwlYYY.js",
     "name": "main",
     "src": "resources/js/shuttle/main.js",
     "isEntry": true,

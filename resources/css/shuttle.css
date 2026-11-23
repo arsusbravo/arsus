@@ -9,6 +9,14 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+/* Home page only (the 'snap-rooms' class is added to <html> for homeNav pages, see
+   layouts/shuttle.blade.php): one scroll gesture
+   (wheel flick, trackpad swipe, touch fling) advances exactly one room, no matter how hard —
+   "stop: always" keeps the browser from skipping past a section even with a lot of scroll
+   momentum behind it. Scoped to the home page's full-viewport room sections specifically, since
+   other pages use <section> for normal flowing content that should scroll continuously. */
+html.snap-rooms { scroll-snap-type: y mandatory; }
+html.snap-rooms section { scroll-snap-align: start; scroll-snap-stop: always; }
 body {
   background: linear-gradient(-45deg, #050812, #0a0e27, #1a1f3a, #0a0e27);
   background-attachment: fixed;
@@ -332,6 +340,12 @@ body::after { content: ''; position: fixed; inset: 0; background: #050812; opaci
   background: radial-gradient(ellipse at center, rgba(255, 59, 48, 0) 35%, rgba(255, 59, 48, 0.35) 100%);
 }
 .emergency-flash.on { opacity: 1; }
+
+/* While the minigame is active, hide whichever page section happens to be scrolled into view
+   behind the canvas (it otherwise overlaps the HUD/crosshair — cramped on mobile especially).
+   visibility, not display: must not change document.documentElement.scrollHeight, since
+   exitCockpitGame() relies on the scroll position being intact to fly back to the right spot. */
+html.game-active main { visibility: hidden; }
 
 .cockpit-hud[hidden] { display: none; }
 .cockpit-hud {
